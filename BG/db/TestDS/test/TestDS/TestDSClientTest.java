@@ -13,9 +13,13 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -37,7 +41,11 @@ public class TestDSClientTest {
     @Before
     public void setUp() throws Exception {
         JsonParser jsonParser = new JsonParser();
-        jsonObject = jsonParser.parse("{\"a\":\"test\"}").getAsJsonObject();
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\"," +
+                "\"gender\":\"\"," +
+                "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"}")
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
 
         whenNew(TransactionHelper.class).withAnyArguments().thenReturn(transactionHelper);
         doNothing().when(transactionHelper).writeUser(anyString(), any(JsonObject.class));
@@ -165,7 +173,32 @@ public class TestDSClientTest {
 
     @Test
     public void testListFriends() throws Exception {
-        assertTrue(true);
+        int requesterID = 1;
+        int profileOwnerID = 1;
+        Vector<HashMap<String, ByteIterator>> result = new Vector<>();
+        int exitCode = testDSClient.listFriends(requesterID, profileOwnerID, null, result, false, false);
+
+        result.forEach(hashMap -> {
+            jsonObject.entrySet().forEach(entry -> {
+                assertTrue(hashMap.containsKey(entry.getKey()));
+            });
+        });
+        assertThat(exitCode, is(0));
+
+        Set<String> fields = new HashSet<>();
+        fields.add("userid");
+        fields.add("username");
+
+        exitCode = testDSClient.listFriends(requesterID, profileOwnerID, fields, result, false, false);
+
+        result.forEach(hashMap -> {
+            assertTrue(hashMap.containsKey("userid"));
+            assertTrue(hashMap.containsKey("username"));
+            assertFalse(hashMap.containsKey("fname"));
+            assertFalse(hashMap.containsKey("lname"));
+            assertFalse(hashMap.containsKey("gender"));
+        });
+        assertThat(exitCode, is(0));
     }
 
     @Test
