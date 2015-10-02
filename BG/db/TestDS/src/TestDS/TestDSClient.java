@@ -1,14 +1,72 @@
 package TestDS;
 
-import edu.usc.bg.base.ByteIterator;
-import edu.usc.bg.base.DB;
+import com.google.gson.*;
+import de.zib.scalaris.*;
+import edu.usc.bg.base.*;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
 
 public class TestDSClient extends DB {
+    private Gson gson;
+    private JsonParser jsonParser;
+
+    private static final String PENDING_FRIENDS = "pendingFriends";
+    private static final String CONFIRMED_FRIENDS = "confirmedFriends";
+    private static final String FRIEND_COUNT = "friendcount";
+    private static final String RESOURCE_COUNT = "resourcecount";
+    private static final String PENDING_COUNT = "pendingcount";
+    private static final String USERS = "users";
+    private static final String RESOURCES = "resources";
+    private static final String WALL_USER_ID = "walluserid";
+
+    /**
+     * Initialize any state for this DB. Called once per DB instance; there is one DB instance per client thread. This
+     * method should be called once by any thread to start communication with the database. The code written for this
+     * function should initiate the thread's communication with the database.
+     *
+     * @return true if the connection to the data store was successful.
+     */
+    @Override
+    public boolean init() throws DBException {
+        final HashMap<String, ByteIterator> jsonTypeToken = new HashMap<>();
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(jsonTypeToken.getClass(), new JsonSerializer<HashMap<String, ByteIterator>>() {
+                    @Override
+                    public JsonElement serialize(HashMap<String, ByteIterator> hashMap, Type type,
+                                                 JsonSerializationContext jsonSerializationContext) {
+                        JsonObject jsonObject = new JsonObject();
+                        hashMap.forEach((k, v) -> {
+                            if (!k.equalsIgnoreCase("pic") && !k.equalsIgnoreCase("tpic"))
+                                jsonObject.add(k, new JsonPrimitive(v.toString()));
+                        });
+                        return jsonObject;
+                    }
+                })
+                .create();
+        this.jsonParser = new JsonParser();
+
+        return super.init();
+    }
+
+    /**
+     * Cleanup any state for this DB.
+     *
+     * @param warmup This flag identifies if the thread calling it is in the warm up phase. In the warm up phase the
+     *               threads do not issue updates, this phase can be used for warming up caches. If the warm up is set
+     *               to true, the cache would not be restarted at the end of the warmup phase and only the warm up
+     *               thread's connections to the database will be recycled. Called once per DB instance; there is one DB
+     *               instance per client thread. This method should be called once the thread needs to end its
+     *               communication with the data store. The code written for this function should close up the
+     *               connection of the thread with the database and clean up the database instance.
+     */
+    @Override
+    public void cleanup(boolean warmup) throws DBException {
+        super.cleanup(warmup);
+    }
 
     /**
      * This function is called in the load phase which is executed using the -load or -loadindex argument. It is used
@@ -31,6 +89,45 @@ public class TestDSClient extends DB {
     @Override
     public int insertEntity(String entitySet, String entityPK, HashMap<String, ByteIterator> values, boolean
             insertImage) {
+        /**
+         * Insert Users and Resources data using JSON-like data model.
+         */
+        final String jsonValues = gson.toJson(values);
+        try {
+            TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
+            transactionSingleOp.write(entityPK, jsonValues);
+        } catch (ConnectionException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        /**
+         * Update Users data after inserting Resources.
+         */
+        if (entitySet.equals(RESOURCES)) {
+            try {
+                ByteIterator wallUserID = values.get(WALL_USER_ID);
+                TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
+                ErlangValue erlangValue = transactionSingleOp.read(wallUserID.toString());
+
+                JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+                JsonArray jsonArray;
+                if (jsonObject.has(RESOURCES)) {
+                    jsonArray = jsonObject.getAsJsonArray(RESOURCES);
+                } else {
+                    jsonArray = new JsonArray();
+                }
+                jsonArray.add(new JsonPrimitive(entityPK));
+                jsonObject.add(RESOURCES, jsonArray);
+
+                transactionSingleOp.write(wallUserID.toString(), jsonObject.toString());
+            } catch (ConnectionException | NotFoundException | AbortException e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
         return 0;
     }
 
@@ -67,6 +164,58 @@ public class TestDSClient extends DB {
     @Override
     public int viewProfile(int requesterID, int profileOwnerID, HashMap<String, ByteIterator> result, boolean
             insertImage, boolean testMode) {
+        JsonObject jsonObject;
+        try {
+            TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
+            ErlangValue erlangValue = transactionSingleOp.read(String.valueOf(profileOwnerID));
+            JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
+            jsonObject = jsonElement.getAsJsonObject();
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        /**
+         * Dump data to result.
+         */
+        jsonObject.entrySet().forEach(entry -> {
+            if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS)
+                    && !entry.getKey().equals(RESOURCES)) {
+                result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+            }
+        });
+
+        /**
+         * Count friends.
+         */
+        int friendCount = 0;
+        if (jsonObject.has(CONFIRMED_FRIENDS)) {
+            JsonArray jsonArray = jsonObject.getAsJsonArray(CONFIRMED_FRIENDS);
+            friendCount = jsonArray.size();
+        }
+        result.put(FRIEND_COUNT, new ObjectByteIterator(String.valueOf(friendCount).getBytes()));
+
+        /**
+         * Count resources.
+         */
+        int resourceCount = 0;
+        if (jsonObject.has(RESOURCES)) {
+            JsonArray jsonArray = jsonObject.getAsJsonArray(RESOURCES);
+            resourceCount = jsonArray.size();
+        }
+        result.put(RESOURCE_COUNT, new ObjectByteIterator(String.valueOf(resourceCount).getBytes()));
+
+        /**
+         * Pending friendships.
+         */
+        if (requesterID == profileOwnerID) {
+            int pendingCount = 0;
+            JsonElement jsonElement = jsonObject.get(PENDING_FRIENDS);
+            if (!jsonElement.isJsonNull()) {
+                pendingCount = jsonElement.getAsJsonArray().size();
+            }
+            result.put(PENDING_COUNT, new ObjectByteIterator(String.valueOf(pendingCount).getBytes()));
+        }
         return 0;
     }
 
@@ -351,7 +500,6 @@ public class TestDSClient extends DB {
      */
     @Override
     public void createSchema(Properties props) {
-
     }
 
     /**

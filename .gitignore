@@ -4,6 +4,7 @@
 # IntelliJ
 *.iml
 .idea/
+BG/out/
 
 # Ant
 BG/build
