@@ -2,7 +2,6 @@ package TestDS;
 
 import com.google.gson.*;
 import de.zib.scalaris.ErlangValue;
-import de.zib.scalaris.TransactionSingleOp;
 import edu.usc.bg.base.ByteIterator;
 import edu.usc.bg.base.StringByteIterator;
 import org.junit.Before;
@@ -19,12 +18,12 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.powermock.api.mockito.PowerMockito.*;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(TestDSClient.class)
+@PrepareForTest({TestDSClient.class, TransactionHelper.class})
 public class TestDSClientTest {
     private static final String FRIEND_COUNT = "friendcount";
     private static final String RESOURCE_COUNT = "resourcecount";
@@ -32,21 +31,20 @@ public class TestDSClientTest {
 
     TestDSClient testDSClient;
     @Mock
-    TransactionSingleOp transactionSingleOp;
-    @Mock
-    ErlangValue erlangValue;
+    TransactionHelper transactionHelper;
+    JsonObject jsonObject;
 
     @Before
     public void setUp() throws Exception {
+        JsonParser jsonParser = new JsonParser();
+        jsonObject = jsonParser.parse("{\"a\":\"test\"}").getAsJsonObject();
+
+        whenNew(TransactionHelper.class).withAnyArguments().thenReturn(transactionHelper);
+        doNothing().when(transactionHelper).writeUser(anyString(), any(JsonObject.class));
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
+
         testDSClient = new TestDSClient();
         testDSClient.init();
-
-        whenNew(TransactionSingleOp.class).withAnyArguments().thenReturn(transactionSingleOp);
-
-        doNothing().when(transactionSingleOp).write(anyString(), anyObject());
-        doReturn(erlangValue).when(transactionSingleOp).read(anyString());
-
-        doReturn("{\"a\":\"test\"}").when(erlangValue).stringValue();
     }
 
     @Test
@@ -128,30 +126,36 @@ public class TestDSClientTest {
         int profileOwnerID = 1;
         HashMap<String, ByteIterator> result = new HashMap<>();
 
-        doReturn("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
+        JsonParser jsonParser = new JsonParser();
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
                 "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"," +
                 "\"confirmedFriends\":[\"3\",\"4\"],\"pendingFriends\":[\"5\"],\"resources\":[\"1\"]}")
-                .when(erlangValue).stringValue();
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
 
         testDSClient.viewProfile(requesterID, profileOwnerID, result, false, false);
         assertTrue(result.containsKey(FRIEND_COUNT));
         assertTrue(result.containsKey(RESOURCE_COUNT));
         assertTrue(result.containsKey(PENDING_COUNT));
 
-        doReturn("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\"," +
+                "\"gender\":\"\"," +
                 "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"," +
                 "\"confirmedFriends\":[],\"pendingFriends\":[\"5\"],\"resources\":[]}")
-                .when(erlangValue).stringValue();
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
 
         testDSClient.viewProfile(requesterID, profileOwnerID, result, false, false);
         assertTrue(result.containsKey(FRIEND_COUNT));
         assertTrue(result.containsKey(RESOURCE_COUNT));
         assertTrue(result.containsKey(PENDING_COUNT));
 
-        doReturn("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\"," +
+                "\"gender\":\"\"," +
                 "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"," +
                 "\"confirmedFriends\":[\"3\",\"4\"],\"pendingFriends\":[],\"resources\":[]}")
-                .when(erlangValue).stringValue();
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
 
         testDSClient.viewProfile(requesterID, profileOwnerID, result, false, false);
         assertTrue(result.containsKey(FRIEND_COUNT));

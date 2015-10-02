@@ -1,18 +1,18 @@
 package TestDS;
 
-import com.google.gson.*;
-import de.zib.scalaris.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import de.zib.scalaris.AbortException;
+import de.zib.scalaris.ConnectionException;
+import de.zib.scalaris.NotFoundException;
 import edu.usc.bg.base.*;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Properties;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 public class TestDSClient extends DB {
-    private Gson gson;
-    private JsonParser jsonParser;
+    private TransactionHelper transactionHelper;
 
     private static final String PENDING_FRIENDS = "pendingFriends";
     private static final String CONFIRMED_FRIENDS = "confirmedFriends";
@@ -32,23 +32,12 @@ public class TestDSClient extends DB {
      */
     @Override
     public boolean init() throws DBException {
-        final HashMap<String, ByteIterator> jsonTypeToken = new HashMap<>();
-        this.gson = new GsonBuilder()
-                .registerTypeAdapter(jsonTypeToken.getClass(), new JsonSerializer<HashMap<String, ByteIterator>>() {
-                    @Override
-                    public JsonElement serialize(HashMap<String, ByteIterator> hashMap, Type type,
-                                                 JsonSerializationContext jsonSerializationContext) {
-                        JsonObject jsonObject = new JsonObject();
-                        hashMap.forEach((k, v) -> {
-                            if (!k.equalsIgnoreCase("pic") && !k.equalsIgnoreCase("tpic"))
-                                jsonObject.add(k, new JsonPrimitive(v.toString()));
-                        });
-                        return jsonObject;
-                    }
-                })
-                .create();
-        this.jsonParser = new JsonParser();
-
+        try {
+            transactionHelper = new TransactionHelper();
+        } catch (ConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
         return super.init();
     }
 
@@ -92,10 +81,15 @@ public class TestDSClient extends DB {
         /**
          * Insert Users and Resources data using JSON-like data model.
          */
-        final String jsonValues = gson.toJson(values);
+        JsonObject jsonObject = new JsonObject();
+        for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
+            if (!entry.getKey().equals("pic") && !entry.getKey().equals("tpic")) {
+                jsonObject.add(entry.getKey(), new JsonPrimitive(entry.getValue().toString()));
+            }
+        }
+
         try {
-            TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
-            transactionSingleOp.write(entityPK, jsonValues);
+            transactionHelper.writeUser(entityPK, jsonObject);
         } catch (ConnectionException | AbortException e) {
             e.printStackTrace();
             return -1;
@@ -107,11 +101,7 @@ public class TestDSClient extends DB {
         if (entitySet.equals(RESOURCES)) {
             try {
                 ByteIterator wallUserID = values.get(WALL_USER_ID);
-                TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
-                ErlangValue erlangValue = transactionSingleOp.read(wallUserID.toString());
-
-                JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
-                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                jsonObject = transactionHelper.readUser(wallUserID.toString());
 
                 JsonArray jsonArray;
                 if (jsonObject.has(RESOURCES)) {
@@ -122,7 +112,7 @@ public class TestDSClient extends DB {
                 jsonArray.add(new JsonPrimitive(entityPK));
                 jsonObject.add(RESOURCES, jsonArray);
 
-                transactionSingleOp.write(wallUserID.toString(), jsonObject.toString());
+                transactionHelper.writeUser(wallUserID.toString(), jsonObject);
             } catch (ConnectionException | NotFoundException | AbortException e) {
                 e.printStackTrace();
                 return -1;
@@ -166,10 +156,7 @@ public class TestDSClient extends DB {
             insertImage, boolean testMode) {
         JsonObject jsonObject;
         try {
-            TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
-            ErlangValue erlangValue = transactionSingleOp.read(String.valueOf(profileOwnerID));
-            JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
-            jsonObject = jsonElement.getAsJsonObject();
+            jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
         } catch (ConnectionException | NotFoundException e) {
             e.printStackTrace();
             return -1;
@@ -211,7 +198,7 @@ public class TestDSClient extends DB {
         if (requesterID == profileOwnerID) {
             int pendingCount = 0;
             JsonElement jsonElement = jsonObject.get(PENDING_FRIENDS);
-            if (!jsonElement.isJsonNull()) {
+            if (jsonElement != null) {
                 pendingCount = jsonElement.getAsJsonArray().size();
             }
             result.put(PENDING_COUNT, new ObjectByteIterator(String.valueOf(pendingCount).getBytes()));
@@ -245,6 +232,41 @@ public class TestDSClient extends DB {
     @Override
     public int listFriends(int requesterID, int profileOwnerID, Set<String> fields, Vector<HashMap<String,
             ByteIterator>> result, boolean insertImage, boolean testMode) {
+        try {
+            JsonObject ownerObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+
+            if (ownerObject.has(CONFIRMED_FRIENDS)) {
+                JsonArray jsonArray = ownerObject.getAsJsonArray(CONFIRMED_FRIENDS);
+                for (JsonElement element : jsonArray) {
+                    String friendId = element.getAsJsonPrimitive().getAsString();
+
+                    /**
+                     * Read all the friends.
+                     */
+                    JsonObject friendObject = transactionHelper.readUser(friendId);
+                    HashMap<String, ByteIterator> hashMap = new HashMap<>();
+
+                    if (fields == null) {
+                        for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
+                            StringByteIterator stringValue =
+                                    new StringByteIterator(entry.getValue().getAsJsonPrimitive().getAsString());
+                            hashMap.put(entry.getKey(), stringValue);
+                        }
+                    } else {
+                        for (String field : fields) {
+                            StringByteIterator stringValue =
+                                    new StringByteIterator(friendObject.get(field).getAsString());
+                            hashMap.put(field, stringValue);
+                        }
+                    }
+                    result.add(hashMap);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
         return 0;
     }
 
