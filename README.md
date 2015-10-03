@@ -3,7 +3,7 @@ Implementation of BG client for Scalaris
 http://www.bgbenchmark.org/BG/manual.html
 
 ## Schema
-* Users (key = a value of "userid") <br>
+* Users (key = a value of "userid" with a prefix "u") <br>
   {
     "userid": "",
     "username": "",
@@ -23,7 +23,7 @@ http://www.bgbenchmark.org/BG/manual.html
     "confirmedFriends": [],
     "resources": []
   }
-* Resources (key = a value of "rid") <br>
+* Resources (key = a value of "rid" with a prefix "r") <br>
   {
   "rid": "",
   "creatorid": "",
