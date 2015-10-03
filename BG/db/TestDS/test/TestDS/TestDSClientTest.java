@@ -285,11 +285,36 @@ public class TestDSClientTest {
 
     @Test
     public void testQueryPendingFriendshipIds() throws Exception {
-        assertTrue(true);
+        Vector<Integer> result = new Vector<>();
+        testDSClient.queryPendingFriendshipIds(1, result);
+        assertThat(result.size(), is(0));
+
+        JsonParser jsonParser = new JsonParser();
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
+                "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"," +
+                "\"confirmedFriends\":[\"3\",\"4\"],\"pendingFriends\":[\"5\"],\"resources\":[\"1\"]}")
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
+        testDSClient.queryPendingFriendshipIds(1, result);
+        assertThat(result.size(), is(1));
+        assertTrue(result.contains(5));
     }
 
     @Test
     public void testQueryConfirmedFriendshipIds() throws Exception {
-        assertTrue(true);
+        Vector<Integer> result = new Vector<>();
+        testDSClient.queryConfirmedFriendshipIds(1, result);
+        assertThat(result.size(), is(0));
+
+        JsonParser jsonParser = new JsonParser();
+        jsonObject = jsonParser.parse("{\"userid\":\"\",\"username\":\"\",\"pw\":\"\",\"fname\":\"\",\"lname\":\"\",\"gender\":\"\"," +
+                "\"dob\":\"\",\"jdate\":\"\",\"ldate\":\"\",\"address\":\"\",\"email\":\"\",\"tel\":\"\"," +
+                "\"confirmedFriends\":[\"3\",\"4\"],\"pendingFriends\":[\"5\"],\"resources\":[\"1\"]}")
+                .getAsJsonObject();
+        doReturn(jsonObject).when(transactionHelper).readUser(anyString());
+        testDSClient.queryConfirmedFriendshipIds(1, result);
+        assertThat(result.size(), is(2));
+        assertTrue(result.contains(3));
+        assertTrue(result.contains(4));
     }
 }

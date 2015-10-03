@@ -557,6 +557,19 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryPendingFriendshipIds(int memberID, Vector<Integer> pendingIds) {
+        try {
+            JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
+            if (jsonObject.has(PENDING_FRIENDS)) {
+                JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
+                for (JsonElement jsonElement : jsonArray) {
+                    int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                    pendingIds.add(friendId);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
@@ -572,6 +585,19 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryConfirmedFriendshipIds(int memberID, Vector<Integer> confirmedIds) {
+        try {
+            JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
+            if (jsonObject.has(CONFIRMED_FRIENDS)) {
+                JsonArray jsonArray = jsonObject.get(CONFIRMED_FRIENDS).getAsJsonArray();
+                for (JsonElement jsonElement : jsonArray) {
+                    int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                    confirmedIds.add(friendId);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 }
