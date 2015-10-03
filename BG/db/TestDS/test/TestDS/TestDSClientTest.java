@@ -203,7 +203,24 @@ public class TestDSClientTest {
 
     @Test
     public void testViewFriendReq() throws Exception {
-        assertTrue(true);
+        int profileOwnerID = 1;
+        Vector<HashMap<String, ByteIterator>> result = new Vector<>();
+        int exitCode = testDSClient.viewFriendReq(profileOwnerID, result, false, false);
+
+        result.forEach(hashMap -> {
+            assertTrue(hashMap.containsKey("userid"));
+            assertTrue(hashMap.containsKey("username"));
+            assertTrue(hashMap.containsKey("fname"));
+            assertTrue(hashMap.containsKey("lname"));
+            assertTrue(hashMap.containsKey("gender"));
+            assertTrue(hashMap.containsKey("dob"));
+            assertTrue(hashMap.containsKey("jdate"));
+            assertTrue(hashMap.containsKey("ldate"));
+            assertTrue(hashMap.containsKey("address"));
+            assertTrue(hashMap.containsKey("email"));
+            assertTrue(hashMap.containsKey("tel"));
+        });
+        assertThat(exitCode, is(0));
     }
 
     @Test

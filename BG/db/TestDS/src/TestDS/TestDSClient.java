@@ -293,6 +293,27 @@ public class TestDSClient extends DB {
     @Override
     public int viewFriendReq(int profileOwnerID, Vector<HashMap<String, ByteIterator>> results, boolean insertImage,
                              boolean testMode) {
+        try {
+            JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+            if (jsonObject.has(PENDING_FRIENDS)) {
+                JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
+                for (JsonElement jsonElement : jsonArray) {
+                    String requesterId = jsonElement.getAsJsonPrimitive().getAsString();
+                    JsonObject requesterObject = transactionHelper.readUser(requesterId);
+
+                    HashMap<String, ByteIterator> hashMap = new HashMap<>();
+                    for (Map.Entry<String, JsonElement> entry : requesterObject.entrySet()) {
+                        StringByteIterator stringValue =
+                                new StringByteIterator(entry.getValue().getAsJsonPrimitive().getAsString());
+                        hashMap.put(entry.getKey(), stringValue);
+                    }
+                    results.add(hashMap);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
