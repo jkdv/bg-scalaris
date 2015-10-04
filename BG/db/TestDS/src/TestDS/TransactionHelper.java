@@ -9,10 +9,12 @@ import de.zib.scalaris.*;
  * Wrapper class of TransactionSingleOp.
  */
 public class TransactionHelper {
-    private TransactionSingleOp transactionSingleOp;
+    private final TransactionSingleOp transactionSingleOp;
+    private final Transaction transaction;
     private JsonParser jsonParser;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
+    private static final String USER_LIST = "user_list";
 
     /**
      * Constructor.
@@ -21,6 +23,7 @@ public class TransactionHelper {
      */
     public TransactionHelper() throws ConnectionException {
         transactionSingleOp = new TransactionSingleOp();
+        transaction = new Transaction();
         jsonParser = new JsonParser();
     }
 

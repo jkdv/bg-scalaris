@@ -525,6 +525,29 @@ public class TestDSClient extends DB {
      */
     @Override
     public int CreateFriendship(int friendid1, int friendid2) {
+        try {
+            JsonObject friendObject1 = transactionHelper.readUser(String.valueOf(friendid1));
+            JsonObject friendObject2 = transactionHelper.readUser(String.valueOf(friendid2));
+
+            if (!friendObject1.has(CONFIRMED_FRIENDS)) {
+                friendObject1.add(CONFIRMED_FRIENDS, new JsonArray());
+            }
+            if (!friendObject2.has(CONFIRMED_FRIENDS)) {
+                friendObject2.add(CONFIRMED_FRIENDS, new JsonArray());
+            }
+
+            JsonArray friendArray1 = friendObject1.get(CONFIRMED_FRIENDS).getAsJsonArray();
+            JsonArray friendArray2 = friendObject2.get(CONFIRMED_FRIENDS).getAsJsonArray();
+
+            friendArray1.add(new JsonPrimitive(friendid2));
+            friendArray2.add(new JsonPrimitive(friendid1));
+
+            transactionHelper.writeUser(String.valueOf(friendid1), friendObject1);
+            transactionHelper.writeUser(String.valueOf(friendid2), friendObject2);
+        } catch (ConnectionException | NotFoundException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 

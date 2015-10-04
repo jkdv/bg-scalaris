@@ -275,12 +275,7 @@ public class TestDSClientTest {
 
     @Test
     public void testCreateFriendship() throws Exception {
-        assertTrue(true);
-    }
-
-    @Test
-    public void testCreateSchema() throws Exception {
-        assertTrue(true);
+        testDSClient.CreateFriendship(1, 2);
     }
 
     @Test
