@@ -532,8 +532,11 @@ public class TestDSClient extends DB {
     @Override
     public int thawFriendship(int friendid1, int friendid2) {
         try {
-            JsonObject friendObject1 = transactionHelper.readUser(String.valueOf(friendid1));
-            JsonObject friendObject2 = transactionHelper.readUser(String.valueOf(friendid2));
+            final String strFriendId1 = String.valueOf(friendid1);
+            final String strFriendId2 = String.valueOf(friendid2);
+
+            JsonObject friendObject1 = transactionHelper.readUser(strFriendId1);
+            JsonObject friendObject2 = transactionHelper.readUser(strFriendId2);
 
             if (!friendObject1.has(CONFIRMED_FRIENDS) || !friendObject2.has(CONFIRMED_FRIENDS)) {
                 return -1;
@@ -543,21 +546,21 @@ public class TestDSClient extends DB {
             JsonArray friendArray2 = friendObject2.get(CONFIRMED_FRIENDS).getAsJsonArray();
 
             for (JsonElement jsonElement : friendArray1) {
-                int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
-                if (friendId == friendid2) {
+                String friendId = jsonElement.getAsJsonPrimitive().getAsString();
+                if (friendId.equals(strFriendId2)) {
                     friendArray1.remove(jsonElement);
                 }
             }
 
             for (JsonElement jsonElement : friendArray2) {
-                int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
-                if (friendId == friendid1) {
+                String friendId = jsonElement.getAsJsonPrimitive().getAsString();
+                if (friendId.equals(strFriendId1)) {
                     friendArray2.remove(jsonElement);
                 }
             }
 
-            transactionHelper.writeUser(String.valueOf(friendid1), friendObject1);
-            transactionHelper.writeUser(String.valueOf(friendid2), friendObject2);
+            transactionHelper.writeUser(strFriendId1, friendObject1);
+            transactionHelper.writeUser(strFriendId2, friendObject2);
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
@@ -597,8 +600,11 @@ public class TestDSClient extends DB {
     @Override
     public int CreateFriendship(int friendid1, int friendid2) {
         try {
-            JsonObject friendObject1 = transactionHelper.readUser(String.valueOf(friendid1));
-            JsonObject friendObject2 = transactionHelper.readUser(String.valueOf(friendid2));
+            final String strFriendId1 = String.valueOf(friendid1);
+            final String strFriendId2 = String.valueOf(friendid2);
+
+            JsonObject friendObject1 = transactionHelper.readUser(strFriendId1);
+            JsonObject friendObject2 = transactionHelper.readUser(strFriendId2);
 
             if (!friendObject1.has(CONFIRMED_FRIENDS)) {
                 friendObject1.add(CONFIRMED_FRIENDS, new JsonArray());
@@ -613,8 +619,8 @@ public class TestDSClient extends DB {
             friendArray1.add(new JsonPrimitive(friendid2));
             friendArray2.add(new JsonPrimitive(friendid1));
 
-            transactionHelper.writeUser(String.valueOf(friendid1), friendObject1);
-            transactionHelper.writeUser(String.valueOf(friendid2), friendObject2);
+            transactionHelper.writeUser(strFriendId1, friendObject1);
+            transactionHelper.writeUser(strFriendId2, friendObject2);
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
