@@ -1,8 +1,6 @@
 package TestDS;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import de.zib.scalaris.*;
 
 /**
@@ -40,6 +38,16 @@ public class TransactionHelper {
     }
 
     /**
+     * Returns a list of user IDs.
+     * @return JsonObject instance.
+     * @throws ConnectionException
+     * @throws NotFoundException
+     */
+    public JsonObject readUserList() throws ConnectionException, NotFoundException {
+        return read(USER_LIST);
+    }
+
+    /**
      * Write a user value as a JSON object. A key will be the given user ID.
      *
      * @param userId User ID given by BG.
@@ -49,6 +57,16 @@ public class TransactionHelper {
      */
     public void writeUser(String userId, JsonObject value) throws ConnectionException, AbortException {
         write(String.format("%s%s", USER_ID_PREFIX, userId), value);
+
+        JsonObject userListObject;
+        try {
+            userListObject = read(USER_LIST);
+        } catch (NotFoundException e) {
+            userListObject = new JsonObject();
+        }
+
+        userListObject.addProperty(userId, userId);
+        write(USER_LIST, userListObject);
     }
 
     /**
@@ -67,7 +85,8 @@ public class TransactionHelper {
 
     /**
      * Write a value with they key.
-     * @param key Unique key.
+     *
+     * @param key   Unique key.
      * @param value JsonObject instance.
      * @throws ConnectionException
      * @throws AbortException
