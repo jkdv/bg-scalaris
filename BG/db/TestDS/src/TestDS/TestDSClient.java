@@ -165,12 +165,13 @@ public class TestDSClient extends DB {
         /**
          * Dump data to result.
          */
-        jsonObject.entrySet().forEach(entry -> {
+        //jsonObject.entrySet().forEach(entry -> {
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
             if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS)
                     && !entry.getKey().equals(RESOURCES)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
             }
-        });
+        };
 
         /**
          * Count friends.
@@ -293,7 +294,8 @@ public class TestDSClient extends DB {
     @Override
     public int viewFriendReq(int profileOwnerID, Vector<HashMap<String, ByteIterator>> results, boolean insertImage,
                              boolean testMode) {
-        try {
+    	
+    	try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (jsonObject.has(PENDING_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
@@ -333,7 +335,24 @@ public class TestDSClient extends DB {
      */
     @Override
     public int acceptFriend(int inviterID, int inviteeID) {
-        return 0;
+    	
+    	try {
+        	JsonObject inviterObject = transactionHelper.readUser(String.valueOf(inviterID));
+        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+
+        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
+
+        	inviterObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviteeID));
+        	inviteeObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviterID));
+
+        	transactionHelper.writeUser(Integer.toString(inviterID), inviterObject);
+        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+
+        } catch (ConnectionException | NotFoundException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    	return 0;
     }
 
     /**
@@ -351,7 +370,18 @@ public class TestDSClient extends DB {
      */
     @Override
     public int rejectFriend(int inviterID, int inviteeID) {
-        return 0;
+    	try {
+        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+
+        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
+        	
+        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+
+        } catch (ConnectionException | NotFoundException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    	return 0;
     }
 
     /**
@@ -370,7 +400,18 @@ public class TestDSClient extends DB {
      */
     @Override
     public int inviteFriend(int inviterID, int inviteeID) {
-        return 0;
+    	try {
+        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+
+        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).add(new JsonPrimitive(inviterID));
+        	
+        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+
+        } catch (ConnectionException | NotFoundException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    	return 0;
     }
 
     /**
@@ -580,8 +621,8 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryPendingFriendshipIds(int memberID, Vector<Integer> pendingIds) {
-        try {
-            JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
+    	try {
+    		JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(PENDING_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
                 for (JsonElement jsonElement : jsonArray) {
@@ -593,7 +634,7 @@ public class TestDSClient extends DB {
             e.printStackTrace();
             return -1;
         }
-        return 0;
+    	return 0;
     }
 
     /**
@@ -608,7 +649,7 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryConfirmedFriendshipIds(int memberID, Vector<Integer> confirmedIds) {
-        try {
+    	try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(CONFIRMED_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(CONFIRMED_FRIENDS).getAsJsonArray();
@@ -621,6 +662,6 @@ public class TestDSClient extends DB {
             e.printStackTrace();
             return -1;
         }
-        return 0;
+    	return 0;
     }
 }
