@@ -165,13 +165,12 @@ public class TestDSClient extends DB {
         /**
          * Dump data to result.
          */
-        //jsonObject.entrySet().forEach(entry -> {
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
             if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS)
                     && !entry.getKey().equals(RESOURCES)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
             }
-        };
+        }
 
         /**
          * Count friends.
@@ -532,6 +531,37 @@ public class TestDSClient extends DB {
      */
     @Override
     public int thawFriendship(int friendid1, int friendid2) {
+        try {
+            JsonObject friendObject1 = transactionHelper.readUser(String.valueOf(friendid1));
+            JsonObject friendObject2 = transactionHelper.readUser(String.valueOf(friendid2));
+
+            if (!friendObject1.has(CONFIRMED_FRIENDS) || !friendObject2.has(CONFIRMED_FRIENDS)) {
+                return -1;
+            }
+
+            JsonArray friendArray1 = friendObject1.get(CONFIRMED_FRIENDS).getAsJsonArray();
+            JsonArray friendArray2 = friendObject2.get(CONFIRMED_FRIENDS).getAsJsonArray();
+
+            for (JsonElement jsonElement : friendArray1) {
+                int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                if (friendId == friendid2) {
+                    friendArray1.remove(jsonElement);
+                }
+            }
+
+            for (JsonElement jsonElement : friendArray2) {
+                int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                if (friendId == friendid1) {
+                    friendArray2.remove(jsonElement);
+                }
+            }
+
+            transactionHelper.writeUser(String.valueOf(friendid1), friendObject1);
+            transactionHelper.writeUser(String.valueOf(friendid2), friendObject2);
+        } catch (ConnectionException | NotFoundException | AbortException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
