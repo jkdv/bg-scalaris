@@ -21,7 +21,8 @@ http://www.bgbenchmark.org/BG/manual.html
     "pic": "",
     "pendingFriends": [],
     "confirmedFriends": [],
-    "resources": []
+    "resources": [],
+    "createdResources": []
   }
 * Resources (key = a value of "rid" with a prefix "r") <br>
   {
@@ -31,16 +32,15 @@ http://www.bgbenchmark.org/BG/manual.html
     "type": "",
     "body": "",
     "doc": "",
-    "manipulation": [
-      {
-        "mid": "",
+    "manipulation": {
+      "<Manipulation ID>": {
+        "mid": "<Manipulation ID>",
         "modifierid": "",
         "type": "",
         "content": "",
         "timestamp": ""
       },
       ...
-    ]
+    }
   }
-* Manipulation <br>
-  TBD
+
