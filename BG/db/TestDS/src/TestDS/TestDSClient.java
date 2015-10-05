@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
 import de.zib.scalaris.AbortException;
 import de.zib.scalaris.ConnectionException;
 import de.zib.scalaris.NotFoundException;
@@ -461,32 +462,24 @@ public class TestDSClient extends DB {
     @Override
     public int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String, ByteIterator>>
             result) {
-//        try {
-//            JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
-//            if (userObject.has(RESOURCES)) {
-//                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
-//                int i = 0;
-//                for (JsonObject resource : resourceArray) {
-//                    i++;
-//                    String rid = null;
-//                    HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
-//                    for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource
-//                        // attributes
-//                        vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-//                        if (entry.getKey() == "rid") { // Every resource will have a rid field
-//                            rid = entry.getValue().getAsString();
-//                        }
-//                    }
-//                    result.add(vals);
-//                    if (i == k) { //stop after k resources
-//                        break;
-//                    }
-//                }
-//            }
-//        } catch (ConnectionException | NotFoundException e) {
-//            e.printStackTrace();
-//            return -1;
-//        }
+        try {
+            JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+            if (userObject.has(RESOURCES)) {
+                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
+                for(int n = 0; (n < resourceArray.size() && n < k); n++) {
+                	JsonObject resourceObject = resourceArray.get(n).getAsJsonObject();
+                    HashMap<String, ByteIterator> vals = new HashMap<>();
+                    for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) { //iterate over resource
+                        // attributes
+                        vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                    }
+                    result.add(vals);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
