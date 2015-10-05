@@ -582,7 +582,41 @@ public class TestDSClient extends DB {
      */
     @Override
     public HashMap<String, String> getInitialStats() {
-        return null;
+        HashMap<String, String> hashMap = new HashMap<>();
+        try {
+            /**
+             * Provide user count.
+             */
+            JsonObject userListObject = transactionHelper.readUserList();
+            int userCount = userListObject.entrySet().size();
+            hashMap.put("usercount", String.valueOf(userCount));
+
+            /**
+             * Provide resources per user, average friends per user, average pending friends per user.
+             */
+            int resourceCount = 0;
+            int friendCount = 0;
+            int pendingCount = 0;
+            for (Map.Entry<String, JsonElement> entry : userListObject.entrySet()) {
+                JsonObject userObject = transactionHelper.readUser(entry.getKey());
+                if (userObject.has(RESOURCES)) {
+                    resourceCount += userObject.get(RESOURCES).getAsJsonArray().size();
+                }
+                if (userObject.has(CONFIRMED_FRIENDS)) {
+                    friendCount += userObject.get(CONFIRMED_FRIENDS).getAsJsonArray().size();
+                }
+                if (userObject.has(PENDING_FRIENDS)) {
+                    pendingCount += userObject.get(PENDING_FRIENDS).getAsJsonArray().size();
+                }
+            }
+            hashMap.put("resourcesperuser", String.valueOf(resourceCount / (float) userCount));
+            hashMap.put("avgfriendsperuser", String.valueOf(friendCount / (float) userCount));
+            hashMap.put("avgpendingperuser", String.valueOf(pendingCount / (float) userCount));
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return hashMap;
     }
 
     /**
