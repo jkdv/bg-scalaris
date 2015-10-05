@@ -468,33 +468,34 @@ public class TestDSClient extends DB {
      */
     @Override
     public int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String, ByteIterator>>
-    result) {
-		try {
-		    JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
-		    if (userObject.has(RESOURCES)) {
-		        JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
-		        int i = 0;
-		        for (JsonObject resource : resourceArray) { 
-		        	i++;
-		        	String rid = null;
-		        	HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
-		        	for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource attributes
-		        		vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-		        		if (entry.getKey() == "rid") { // Every resource will have a rid field
-		        			rid = entry.getValue().getAsString();
-		        		}
-		        	}
-		        	result.put(rid, vals);
-		            if (i == k) { //stop after k resources
-		            	break; 
-		            }
-		        }
-		    }
-		} catch (ConnectionException | NotFoundException e) {
-		    e.printStackTrace();
-		    return -1;
-		}
-		return 0;
+            result) {
+        try {
+            JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+            if (userObject.has(RESOURCES)) {
+                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
+                int i = 0;
+                for (JsonObject resource : resourceArray) {
+                    i++;
+                    String rid = null;
+                    HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
+                    for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource
+                        // attributes
+                        vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                        if (entry.getKey() == "rid") { // Every resource will have a rid field
+                            rid = entry.getValue().getAsString();
+                        }
+                    }
+                    result.add(vals);
+                    if (i == k) { //stop after k resources
+                        break;
+                    }
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
     }
 
     /**
@@ -514,6 +515,24 @@ public class TestDSClient extends DB {
      */
     @Override
     public int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
+        try {
+            JsonObject creatorObject = transactionHelper.readUser(String.valueOf(creatorID));
+            if (creatorObject.has(CREATED_RESOURCE)) {
+                JsonArray resourceArray = creatorObject.getAsJsonArray(CREATED_RESOURCE);
+                for (JsonElement element : resourceArray) {
+                    String resourceId = element.getAsJsonPrimitive().getAsString();
+                    JsonObject resourceObject = transactionHelper.readResource(resourceId);
+                    HashMap<String, ByteIterator> hashMap = new HashMap<>();
+                    for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
+                        hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                    }
+                    result.add(hashMap);
+                }
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
