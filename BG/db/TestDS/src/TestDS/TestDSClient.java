@@ -7,6 +7,7 @@ import com.google.gson.JsonPrimitive;
 import de.zib.scalaris.AbortException;
 import de.zib.scalaris.ConnectionException;
 import de.zib.scalaris.NotFoundException;
+import de.zib.scalaris.TimeoutException;
 import edu.usc.bg.base.*;
 
 import java.util.*;
@@ -515,6 +516,23 @@ public class TestDSClient extends DB {
      */
     @Override
     public int delCommentOnResource(int resourceCreatorID, int resourceID, int manipulationID) {
+        try {
+            JsonObject userObject = transactionHelper.readUser(String.valueOf(resourceCreatorID));
+            if (userObject.has(RESOURCES)) {
+                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray();
+                for (JsonElement resourceElement : resourceArray) {
+                    if (String.valueOf(resourceID).equals(resourceElement.getAsJsonPrimitive().getAsString())) {
+                        resourceArray.remove(resourceElement);
+                    }
+                }
+                userObject.add(RESOURCES, resourceArray);
+            }
+            transactionHelper.writeUser(String.valueOf(resourceCreatorID), userObject);
+            transactionHelper.deleteResource(String.valueOf(resourceCreatorID));
+        } catch (ConnectionException | NotFoundException | AbortException | TimeoutException e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 

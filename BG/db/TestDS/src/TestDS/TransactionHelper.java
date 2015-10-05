@@ -1,6 +1,8 @@
 package TestDS;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.zib.scalaris.*;
 
 /**
@@ -39,6 +41,7 @@ public class TransactionHelper {
 
     /**
      * Returns a list of user IDs.
+     *
      * @return JsonObject instance.
      * @throws ConnectionException
      * @throws NotFoundException
@@ -70,6 +73,17 @@ public class TransactionHelper {
     }
 
     /**
+     * Try to delete a resource key and value.
+     *
+     * @param resourceId Resource ID given by BG.
+     * @throws ConnectionException
+     * @throws TimeoutException
+     */
+    public void deleteResource(String resourceId) throws ConnectionException, TimeoutException {
+        delete(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
+    }
+
+    /**
      * Read a value with the key.
      *
      * @param key Unique key.
@@ -93,5 +107,18 @@ public class TransactionHelper {
      */
     private void write(String key, JsonObject value) throws ConnectionException, AbortException {
         transactionSingleOp.write(key, value.toString());
+    }
+
+    /**
+     * Try to delete a key and its value.
+     *
+     * @param key Unique key.
+     * @throws ConnectionException
+     * @throws TimeoutException
+     */
+    private void delete(String key) throws ConnectionException, TimeoutException {
+        ReplicatedDHT replicatedDHT = new ReplicatedDHT();
+        replicatedDHT.delete(key);
+        replicatedDHT.closeConnection();
     }
 }
