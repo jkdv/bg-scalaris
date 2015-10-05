@@ -4,14 +4,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-
 import de.zib.scalaris.AbortException;
 import de.zib.scalaris.ConnectionException;
 import de.zib.scalaris.NotFoundException;
 import edu.usc.bg.base.*;
 
 import java.util.*;
-import javax.xml.bind.DatatypeConverter;
 
 public class TestDSClient extends DB {
     private TransactionHelper transactionHelper;
@@ -95,15 +93,12 @@ public class TestDSClient extends DB {
         for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
             if (!entry.getKey().equals(PIC) && !entry.getKey().equals(TPIC)) {
                 jsonObject.add(entry.getKey(), new JsonPrimitive(entry.getValue().toString()));
+            } else if (insertImage) {
+                byte[] byteImage = entry.getValue().toArray();
+                jsonObject.add(entry.getKey(), ImageUtils.toJsonPrimitive(byteImage));
             }
         }
-        if (entitySet.equals(USERS) && insertImage) {
-			byte[] profileImage = ((ObjectByteIterator) values.get(PIC)).toArray();
-			String profileImageString = DatatypeConverter.printBase64Binary(profileImage);
-			byte[] thumbImage = ((ObjectByteIterator) values.get(TPIC)).toArray();
-			String thumbImageString = DatatypeConverter.printBase64Binary(profileImage);
-			jsonObject.add(PIC, new JsonPrimitive(profileImageString));
-        }
+
         if (entitySet.equals(USERS)) {
             try {
                 transactionHelper.writeUser(entityPK, jsonObject);
@@ -219,6 +214,8 @@ public class TestDSClient extends DB {
                     && !entry.getKey().equals(RESOURCES) && !entry.getKey().equals(CREATED_RESOURCE)
                     && !entry.getKey().equals(PIC) && !entry.getKey().equals(TPIC)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+            } else if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
+                result.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
             }
         }
 
@@ -297,11 +294,19 @@ public class TestDSClient extends DB {
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     if (fields == null) {
                         for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
-                            hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                            if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
+                                hashMap.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
+                            } else {
+                                hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                            }
                         }
                     } else {
                         for (String field : fields) {
-                            hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
+                            if (insertImage && (field.equals(PIC) || field.equals(TPIC))) {
+                                hashMap.put(field, ImageUtils.toByteArrayByteIterator(friendObject.get(field)));
+                            } else {
+                                hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
+                            }
                         }
                     }
                     result.add(hashMap);
@@ -347,7 +352,11 @@ public class TestDSClient extends DB {
 
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : requesterObject.entrySet()) {
-                        hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                        if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
+                            hashMap.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
+                        } else {
+                            hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                        }
                     }
                     results.add(hashMap);
                 }
