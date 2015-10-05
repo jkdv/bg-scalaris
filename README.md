@@ -25,12 +25,22 @@ http://www.bgbenchmark.org/BG/manual.html
   }
 * Resources (key = a value of "rid" with a prefix "r") <br>
   {
-  "rid": "",
-  "creatorid": "",
-  "walluserid": "",
-  "type": "",
-  "body": "",
-  "doc": ""
+    "rid": "",
+    "creatorid": "",
+    "walluserid": "",
+    "type": "",
+    "body": "",
+    "doc": "",
+    "manipulation": [
+      {
+        "mid": "",
+        "modifierid": "",
+        "type": "",
+        "content": "",
+        "timestamp": ""
+      },
+      ...
+    ]
   }
 * Manipulation <br>
   TBD
