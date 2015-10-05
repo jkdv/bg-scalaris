@@ -21,7 +21,7 @@ http://www.bgbenchmark.org/BG/manual.html
     "pic": "",
     "pendingFriends": [],
     "confirmedFriends": [],
-    "wallResources": [],
+    "resources": [],
     "createdResources": []
   }
 * Resources (key = a value of "rid" with a prefix "r") <br>
