@@ -19,7 +19,10 @@ public class TestDSClient extends DB {
     private static final String FRIEND_COUNT = "friendcount";
     private static final String RESOURCE_COUNT = "resourcecount";
     private static final String PENDING_COUNT = "pendingcount";
-    private static final String USERS = "users";
+    private static final String USER_COUNT = "usercount";
+    private static final String AVG_FRIENDS_PER_USER = "avgfriendsperuser";
+    private static final String AVG_PENDING_PER_USER = "avgpendingperuser";
+    private static final String RESOURCES_PER_USER = "resourcesperuser";
     private static final String RESOURCES = "resources";
     private static final String WALL_USER_ID = "walluserid";
 
@@ -589,7 +592,7 @@ public class TestDSClient extends DB {
              */
             JsonObject userListObject = transactionHelper.readUserList();
             int userCount = userListObject.entrySet().size();
-            hashMap.put("usercount", String.valueOf(userCount));
+            hashMap.put(USER_COUNT, String.valueOf(userCount));
 
             /**
              * Provide resources per user, average friends per user, average pending friends per user.
@@ -609,9 +612,9 @@ public class TestDSClient extends DB {
                     pendingCount += userObject.get(PENDING_FRIENDS).getAsJsonArray().size();
                 }
             }
-            hashMap.put("resourcesperuser", String.valueOf(resourceCount / (float) userCount));
-            hashMap.put("avgfriendsperuser", String.valueOf(friendCount / (float) userCount));
-            hashMap.put("avgpendingperuser", String.valueOf(pendingCount / (float) userCount));
+            hashMap.put(RESOURCES_PER_USER, String.valueOf(resourceCount / (float) userCount));
+            hashMap.put(AVG_FRIENDS_PER_USER, String.valueOf(friendCount / (float) userCount));
+            hashMap.put(AVG_PENDING_PER_USER, String.valueOf(pendingCount / (float) userCount));
         } catch (ConnectionException | NotFoundException e) {
             e.printStackTrace();
             return null;
