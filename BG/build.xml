@@ -124,7 +124,11 @@
     </target>
 
     <target name="makejar" description="Create a jar for the BG project">
-        <jar jarfile="build/bg.jar" includes="**/*.class" basedir="${classes.dir}"/>
+        <jar jarfile="build/bg.jar" includes="**/*.class" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="edu.usc.bg.BGMainClass"/>
+            </manifest>
+        </jar>
     </target>
 
     <target name="clean">
