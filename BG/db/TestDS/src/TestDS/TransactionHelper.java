@@ -10,7 +10,6 @@ import de.zib.scalaris.*;
  */
 public class TransactionHelper {
     private final TransactionSingleOp transactionSingleOp;
-    private final Transaction transaction;
     private JsonParser jsonParser;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
@@ -24,7 +23,6 @@ public class TransactionHelper {
      */
     public TransactionHelper() throws ConnectionException {
         transactionSingleOp = new TransactionSingleOp();
-        transaction = new Transaction();
         jsonParser = new JsonParser();
     }
 
@@ -110,7 +108,7 @@ public class TransactionHelper {
         JsonObject manipulationObject;
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
-            manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+            manipulationObject = resourceObject.getAsJsonObject(MANIPULATION);
         } else {
             manipulationObject = new JsonObject();
         }
@@ -131,7 +129,7 @@ public class TransactionHelper {
         JsonObject manipulationObject;
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
-            manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+            manipulationObject = resourceObject.getAsJsonObject(MANIPULATION);
         } else {
             manipulationObject = new JsonObject();
         }
@@ -153,7 +151,7 @@ public class TransactionHelper {
             NotFoundException, AbortException {
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
-            JsonObject manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+            JsonObject manipulationObject = resourceObject.getAsJsonObject(MANIPULATION);
             manipulationObject.remove(manipulationId);
             resourceObject.add(MANIPULATION, manipulationObject);
             writeResource(resourceId, resourceObject);

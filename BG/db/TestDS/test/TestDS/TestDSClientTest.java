@@ -23,6 +23,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.powermock.api.mockito.PowerMockito.*;
 
@@ -95,34 +96,93 @@ public class TestDSClientTest {
     }
 
     @Test
+    public void testJsonArray() throws Exception {
+        JsonArray jsonArray = new JsonArray();
+        jsonArray.add(new JsonPrimitive("1"));
+        jsonArray.add(new JsonPrimitive("2"));
+        jsonArray.add(new JsonPrimitive("3"));
+
+        jsonArray.remove(new JsonPrimitive("2"));
+        
+        assertThat(jsonArray.size(), is(2));
+        assertTrue(jsonArray.contains(new JsonPrimitive("1")));
+        assertTrue(jsonArray.contains(new JsonPrimitive("3")));
+
+        assertFalse(jsonArray.contains(new JsonPrimitive("2")));
+    }
+
+    @Test
     public void testInsertEntity() throws Exception {
         String entitySet = "users";
         String entityPK = "1";
         HashMap<String, ByteIterator> values = new HashMap<>();
-        values.put("userid", new StringByteIterator(""));
-        values.put("username", new StringByteIterator(""));
-        values.put("pw", new StringByteIterator(""));
-        values.put("fname", new StringByteIterator(""));
-        values.put("lname", new StringByteIterator(""));
-        values.put("gender", new StringByteIterator(""));
-        values.put("dob", new StringByteIterator(""));
-        values.put("jdate", new StringByteIterator(""));
-        values.put("ldate", new StringByteIterator(""));
-        values.put("address", new StringByteIterator(""));
-        values.put("email", new StringByteIterator(""));
-        values.put("tel", new StringByteIterator(""));
+        values.put("userid", new StringByteIterator("1"));
+        values.put("username", new StringByteIterator("MyUsername"));
+        values.put("pw", new StringByteIterator("MyPassword"));
+        values.put("fname", new StringByteIterator("First"));
+        values.put("lname", new StringByteIterator("Last"));
+        values.put("gender", new StringByteIterator("Male"));
+        values.put("dob", new StringByteIterator("01/01/2015"));
+        values.put("jdate", new StringByteIterator("01/01/2015"));
+        values.put("ldate", new StringByteIterator("01/01/2015"));
+        values.put("address", new StringByteIterator("MyAddress"));
+        values.put("email", new StringByteIterator("MyEmail"));
+        values.put("tel", new StringByteIterator("213-000-0000"));
+
+        doAnswer(mock -> {
+            assertThat(mock.getArguments().length, is(2));
+            assertTrue(mock.getArguments()[0] instanceof String);
+            assertTrue(mock.getArguments()[1] instanceof JsonObject);
+
+            String entityPk = (String) mock.getArguments()[0];
+            JsonObject jsonObject = (JsonObject) mock.getArguments()[1];
+
+            assertThat(entityPk, is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("userid").getAsString(), is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("username").getAsString(), is("MyUsername"));
+            assertThat(jsonObject.getAsJsonPrimitive("pw").getAsString(), is("MyPassword"));
+            assertThat(jsonObject.getAsJsonPrimitive("fname").getAsString(), is("First"));
+            assertThat(jsonObject.getAsJsonPrimitive("lname").getAsString(), is("Last"));
+            assertThat(jsonObject.getAsJsonPrimitive("gender").getAsString(), is("Male"));
+            assertThat(jsonObject.getAsJsonPrimitive("dob").getAsString(), is("01/01/2015"));
+            assertThat(jsonObject.getAsJsonPrimitive("jdate").getAsString(), is("01/01/2015"));
+            assertThat(jsonObject.getAsJsonPrimitive("ldate").getAsString(), is("01/01/2015"));
+            assertThat(jsonObject.getAsJsonPrimitive("address").getAsString(), is("MyAddress"));
+            assertThat(jsonObject.getAsJsonPrimitive("email").getAsString(), is("MyEmail"));
+            assertThat(jsonObject.getAsJsonPrimitive("tel").getAsString(), is("213-000-0000"));
+            return null;
+        }).when(transactionHelper).writeUser(anyString(), anyObject());
 
         int result = testDSClient.insertEntity(entitySet, entityPK, values, false);
         assertThat(result, is(0));
 
         entitySet = "resource";
-        values.put("mid", new StringByteIterator(""));
-        values.put("creatorid", new StringByteIterator(""));
-        values.put("rid", new StringByteIterator(""));
-        values.put("modifierid", new StringByteIterator(""));
-        values.put("timestamp", new StringByteIterator(""));
-        values.put("type", new StringByteIterator(""));
-        values.put("content", new StringByteIterator(""));
+        values.put("mid", new StringByteIterator("1"));
+        values.put("creatorid", new StringByteIterator("1"));
+        values.put("rid", new StringByteIterator("1"));
+        values.put("modifierid", new StringByteIterator("1"));
+        values.put("timestamp", new StringByteIterator("01/01/2015"));
+        values.put("type", new StringByteIterator("Post"));
+        values.put("content", new StringByteIterator("My first post."));
+
+        doAnswer(mock -> {
+            assertThat(mock.getArguments().length, is(2));
+            assertTrue(mock.getArguments()[0] instanceof String);
+            assertTrue(mock.getArguments()[1] instanceof JsonObject);
+
+            String entityPk = (String) mock.getArguments()[0];
+            JsonObject jsonObject = (JsonObject) mock.getArguments()[1];
+
+            assertThat(entityPk, is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("mid").getAsString(), is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("creatorid").getAsString(), is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("rid").getAsString(), is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("modifierid").getAsString(), is("1"));
+            assertThat(jsonObject.getAsJsonPrimitive("timestamp").getAsString(), is("01/01/2015"));
+            assertThat(jsonObject.getAsJsonPrimitive("type").getAsString(), is("Post"));
+            assertThat(jsonObject.getAsJsonPrimitive("content").getAsString(), is("My first post."));
+            return null;
+        }).when(transactionHelper).writeResource(anyString(), anyObject());
 
         result = testDSClient.insertEntity(entitySet, entityPK, values, false);
         assertThat(result, is(0));

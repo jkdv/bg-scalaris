@@ -28,6 +28,8 @@ public class TestDSClient extends DB {
     private static final String WALL_USER_ID = "walluserid";
     private static final String CREATOR_ID = "creatorId";
     private static final String CREATED_RESOURCE = "createdResource";
+    private static final String PIC = "pic";
+    private static final String TPIC = "tpic";
 
     /**
      * Initialize any state for this DB. Called once per DB instance; there is one DB instance per client thread. This
@@ -89,7 +91,7 @@ public class TestDSClient extends DB {
          */
         JsonObject jsonObject = new JsonObject();
         for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
-            if (!entry.getKey().equals("pic") && !entry.getKey().equals("tpic")) {
+            if (!entry.getKey().equals(PIC) && !entry.getKey().equals(TPIC)) {
                 jsonObject.add(entry.getKey(), new JsonPrimitive(entry.getValue().toString()));
             }
         }
@@ -206,7 +208,8 @@ public class TestDSClient extends DB {
          */
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
             if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS)
-                    && !entry.getKey().equals(RESOURCES)) {
+                    && !entry.getKey().equals(RESOURCES) && !entry.getKey().equals(CREATED_RESOURCE)
+                    && !entry.getKey().equals(PIC) && !entry.getKey().equals(TPIC)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
             }
         }
@@ -236,9 +239,9 @@ public class TestDSClient extends DB {
          */
         if (requesterID == profileOwnerID) {
             int pendingCount = 0;
-            JsonElement jsonElement = jsonObject.get(PENDING_FRIENDS);
-            if (jsonElement != null) {
-                pendingCount = jsonElement.getAsJsonArray().size();
+            if (jsonObject.has(PENDING_FRIENDS)) {
+                JsonArray jsonArray = jsonObject.getAsJsonArray(PENDING_FRIENDS);
+                pendingCount = jsonArray.size();
             }
             result.put(PENDING_COUNT, new ObjectByteIterator(String.valueOf(pendingCount).getBytes()));
         }
@@ -275,27 +278,22 @@ public class TestDSClient extends DB {
             JsonObject ownerObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
 
             if (ownerObject.has(CONFIRMED_FRIENDS)) {
-                JsonArray jsonArray = ownerObject.getAsJsonArray(CONFIRMED_FRIENDS);
-                for (JsonElement element : jsonArray) {
-                    String friendId = element.getAsJsonPrimitive().getAsString();
+                JsonArray friendArray = ownerObject.getAsJsonArray(CONFIRMED_FRIENDS);
 
-                    /**
-                     * Read all the friends.
-                     */
-                    JsonObject friendObject = transactionHelper.readUser(friendId);
+                /**
+                 * Read all the friends.
+                 */
+                for (JsonElement element : friendArray) {
+                    JsonObject friendObject = transactionHelper.readUser(element.getAsString());
+
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
-
                     if (fields == null) {
                         for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
-                            StringByteIterator stringValue =
-                                    new StringByteIterator(entry.getValue().getAsJsonPrimitive().getAsString());
-                            hashMap.put(entry.getKey(), stringValue);
+                            hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                         }
                     } else {
                         for (String field : fields) {
-                            StringByteIterator stringValue =
-                                    new StringByteIterator(friendObject.get(field).getAsString());
-                            hashMap.put(field, stringValue);
+                            hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
                         }
                     }
                     result.add(hashMap);
@@ -335,16 +333,13 @@ public class TestDSClient extends DB {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (jsonObject.has(PENDING_FRIENDS)) {
-                JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
-                for (JsonElement jsonElement : jsonArray) {
-                    String requesterId = jsonElement.getAsJsonPrimitive().getAsString();
-                    JsonObject requesterObject = transactionHelper.readUser(requesterId);
+                JsonArray friendArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
+                for (JsonElement element : friendArray) {
+                    JsonObject requesterObject = transactionHelper.readUser(element.getAsString());
 
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : requesterObject.entrySet()) {
-                        StringByteIterator stringValue =
-                                new StringByteIterator(entry.getValue().getAsJsonPrimitive().getAsString());
-                        hashMap.put(entry.getKey(), stringValue);
+                        hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                     }
                     results.add(hashMap);
                 }
@@ -383,7 +378,6 @@ public class TestDSClient extends DB {
 
             transactionHelper.writeUser(Integer.toString(inviterID), inviterObject);
             transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
-
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
@@ -412,7 +406,6 @@ public class TestDSClient extends DB {
             inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
 
             transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
-
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
@@ -442,7 +435,6 @@ public class TestDSClient extends DB {
             inviteeObject.getAsJsonArray(PENDING_FRIENDS).add(new JsonPrimitive(inviterID));
 
             transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
-
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
@@ -469,32 +461,32 @@ public class TestDSClient extends DB {
     @Override
     public int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String, ByteIterator>>
             result) {
-        try {
-            JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
-            if (userObject.has(RESOURCES)) {
-                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
-                int i = 0;
-                for (JsonObject resource : resourceArray) {
-                    i++;
-                    String rid = null;
-                    HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
-                    for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource
-                        // attributes
-                        vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-                        if (entry.getKey() == "rid") { // Every resource will have a rid field
-                            rid = entry.getValue().getAsString();
-                        }
-                    }
-                    result.add(vals);
-                    if (i == k) { //stop after k resources
-                        break;
-                    }
-                }
-            }
-        } catch (ConnectionException | NotFoundException e) {
-            e.printStackTrace();
-            return -1;
-        }
+//        try {
+//            JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+//            if (userObject.has(RESOURCES)) {
+//                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
+//                int i = 0;
+//                for (JsonObject resource : resourceArray) {
+//                    i++;
+//                    String rid = null;
+//                    HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
+//                    for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource
+//                        // attributes
+//                        vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+//                        if (entry.getKey() == "rid") { // Every resource will have a rid field
+//                            rid = entry.getValue().getAsString();
+//                        }
+//                    }
+//                    result.add(vals);
+//                    if (i == k) { //stop after k resources
+//                        break;
+//                    }
+//                }
+//            }
+//        } catch (ConnectionException | NotFoundException e) {
+//            e.printStackTrace();
+//            return -1;
+//        }
         return 0;
     }
 
@@ -517,15 +509,18 @@ public class TestDSClient extends DB {
     public int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
         try {
             JsonObject creatorObject = transactionHelper.readUser(String.valueOf(creatorID));
+
             if (creatorObject.has(CREATED_RESOURCE)) {
                 JsonArray resourceArray = creatorObject.getAsJsonArray(CREATED_RESOURCE);
+
                 for (JsonElement element : resourceArray) {
-                    String resourceId = element.getAsJsonPrimitive().getAsString();
-                    JsonObject resourceObject = transactionHelper.readResource(resourceId);
+                    JsonObject resourceObject = transactionHelper.readResource(element.getAsString());
+
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
                         hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                     }
+
                     result.add(hashMap);
                 }
             }
@@ -558,13 +553,15 @@ public class TestDSClient extends DB {
             ByteIterator>> result) {
         try {
             JsonObject manipulationsObject = transactionHelper.readManipulations(String.valueOf(resourceID));
+
             for (Map.Entry<String, JsonElement> manipulationEntry : manipulationsObject.entrySet()) {
                 JsonObject manipulationObject = manipulationEntry.getValue().getAsJsonObject();
+
                 HashMap<String, ByteIterator> hashMap = new HashMap<>();
-                for (Map.Entry<String, JsonElement> attributeEntry : manipulationObject.entrySet()) {
-                    hashMap.put(attributeEntry.getKey(),
-                            new StringByteIterator(attributeEntry.getValue().getAsJsonPrimitive().getAsString()));
+                for (Map.Entry<String, JsonElement> attrEntry : manipulationObject.entrySet()) {
+                    hashMap.put(attrEntry.getKey(), new StringByteIterator(attrEntry.getValue().getAsString()));
                 }
+
                 result.add(hashMap);
             }
         } catch (ConnectionException | NotFoundException e) {
@@ -593,6 +590,7 @@ public class TestDSClient extends DB {
             ByteIterator> values) {
         JsonObject manipulationObject = new JsonObject();
         String manipulationId = "";
+
         for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
             if (entry.getKey().equals("mid")) {
                 manipulationId = entry.getValue().toString();
@@ -661,19 +659,8 @@ public class TestDSClient extends DB {
             JsonArray friendArray1 = friendObject1.get(CONFIRMED_FRIENDS).getAsJsonArray();
             JsonArray friendArray2 = friendObject2.get(CONFIRMED_FRIENDS).getAsJsonArray();
 
-            for (JsonElement jsonElement : friendArray1) {
-                String friendId = jsonElement.getAsJsonPrimitive().getAsString();
-                if (friendId.equals(strFriendId2)) {
-                    friendArray1.remove(jsonElement);
-                }
-            }
-
-            for (JsonElement jsonElement : friendArray2) {
-                String friendId = jsonElement.getAsJsonPrimitive().getAsString();
-                if (friendId.equals(strFriendId1)) {
-                    friendArray2.remove(jsonElement);
-                }
-            }
+            friendArray1.remove(new JsonPrimitive(strFriendId2));
+            friendArray2.remove(new JsonPrimitive(strFriendId1));
 
             transactionHelper.writeUser(strFriendId1, friendObject1);
             transactionHelper.writeUser(strFriendId2, friendObject2);
@@ -713,16 +700,18 @@ public class TestDSClient extends DB {
             int resourceCount = 0;
             int friendCount = 0;
             int pendingCount = 0;
+
             for (Map.Entry<String, JsonElement> entry : userListObject.entrySet()) {
                 JsonObject userObject = transactionHelper.readUser(entry.getKey());
+
                 if (userObject.has(RESOURCES)) {
-                    resourceCount += userObject.get(RESOURCES).getAsJsonArray().size();
+                    resourceCount += userObject.getAsJsonArray(RESOURCES).size();
                 }
                 if (userObject.has(CONFIRMED_FRIENDS)) {
-                    friendCount += userObject.get(CONFIRMED_FRIENDS).getAsJsonArray().size();
+                    friendCount += userObject.getAsJsonArray(CONFIRMED_FRIENDS).size();
                 }
                 if (userObject.has(PENDING_FRIENDS)) {
-                    pendingCount += userObject.get(PENDING_FRIENDS).getAsJsonArray().size();
+                    pendingCount += userObject.getAsJsonArray(PENDING_FRIENDS).size();
                 }
             }
             hashMap.put(RESOURCES_PER_USER, String.valueOf(resourceCount / (float) userCount));
@@ -763,8 +752,8 @@ public class TestDSClient extends DB {
                 friendObject2.add(CONFIRMED_FRIENDS, new JsonArray());
             }
 
-            JsonArray friendArray1 = friendObject1.get(CONFIRMED_FRIENDS).getAsJsonArray();
-            JsonArray friendArray2 = friendObject2.get(CONFIRMED_FRIENDS).getAsJsonArray();
+            JsonArray friendArray1 = friendObject1.getAsJsonArray(CONFIRMED_FRIENDS);
+            JsonArray friendArray2 = friendObject2.getAsJsonArray(CONFIRMED_FRIENDS);
 
             friendArray1.add(new JsonPrimitive(friendid2));
             friendArray2.add(new JsonPrimitive(friendid1));
@@ -810,9 +799,9 @@ public class TestDSClient extends DB {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(PENDING_FRIENDS)) {
-                JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
+                JsonArray jsonArray = jsonObject.getAsJsonArray(PENDING_FRIENDS);
                 for (JsonElement jsonElement : jsonArray) {
-                    int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                    int friendId = Integer.parseInt(jsonElement.getAsString());
                     pendingIds.add(friendId);
                 }
             }
@@ -838,9 +827,9 @@ public class TestDSClient extends DB {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(CONFIRMED_FRIENDS)) {
-                JsonArray jsonArray = jsonObject.get(CONFIRMED_FRIENDS).getAsJsonArray();
+                JsonArray jsonArray = jsonObject.getAsJsonArray(CONFIRMED_FRIENDS);
                 for (JsonElement jsonElement : jsonArray) {
-                    int friendId = Integer.parseInt(jsonElement.getAsJsonPrimitive().getAsString());
+                    int friendId = Integer.parseInt(jsonElement.getAsString());
                     confirmedIds.add(friendId);
                 }
             }
