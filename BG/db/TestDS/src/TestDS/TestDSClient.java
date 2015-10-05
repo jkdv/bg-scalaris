@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
 import de.zib.scalaris.AbortException;
 import de.zib.scalaris.ConnectionException;
 import de.zib.scalaris.NotFoundException;
@@ -474,7 +475,7 @@ public class TestDSClient extends DB {
             if (userObject.has(RESOURCES)) {
                 JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
                 int i = 0;
-                for(int n = 0; (n < resourceArray.length() && n < k); n++) {
+                for(int n = 0; (n < resourceArray.size() && n < k); n++) {
                 	JsonObject resourceObject = resourceArray.get(n).getAsJsonObject();
                     HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
                     for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) { //iterate over resource
