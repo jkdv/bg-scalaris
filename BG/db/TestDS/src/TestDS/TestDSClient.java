@@ -24,6 +24,7 @@ public class TestDSClient extends DB {
     private static final String AVG_FRIENDS_PER_USER = "avgfriendsperuser";
     private static final String AVG_PENDING_PER_USER = "avgpendingperuser";
     private static final String RESOURCES_PER_USER = "resourcesperuser";
+    private static final String USERS = "users";
     private static final String RESOURCES = "resources";
     private static final String WALL_USER_ID = "walluserid";
 
@@ -92,11 +93,13 @@ public class TestDSClient extends DB {
             }
         }
 
-        try {
-            transactionHelper.writeUser(entityPK, jsonObject);
-        } catch (ConnectionException | AbortException e) {
-            e.printStackTrace();
-            return -1;
+        if (entitySet.equals(USERS)) {
+            try {
+                transactionHelper.writeUser(entityPK, jsonObject);
+            } catch (ConnectionException | AbortException e) {
+                e.printStackTrace();
+                return -1;
+            }
         }
 
         /**
@@ -105,18 +108,19 @@ public class TestDSClient extends DB {
         if (entitySet.equals(RESOURCES)) {
             try {
                 ByteIterator wallUserID = values.get(WALL_USER_ID);
-                jsonObject = transactionHelper.readUser(wallUserID.toString());
+                JsonObject userObject = transactionHelper.readUser(wallUserID.toString());
 
                 JsonArray jsonArray;
-                if (jsonObject.has(RESOURCES)) {
-                    jsonArray = jsonObject.getAsJsonArray(RESOURCES);
+                if (userObject.has(RESOURCES)) {
+                    jsonArray = userObject.getAsJsonArray(RESOURCES);
                 } else {
                     jsonArray = new JsonArray();
                 }
                 jsonArray.add(new JsonPrimitive(entityPK));
-                jsonObject.add(RESOURCES, jsonArray);
+                userObject.add(RESOURCES, jsonArray);
 
-                transactionHelper.writeUser(wallUserID.toString(), jsonObject);
+                transactionHelper.writeUser(wallUserID.toString(), userObject);
+                transactionHelper.writeResource(entityPK, jsonObject);
             } catch (ConnectionException | NotFoundException | AbortException e) {
                 e.printStackTrace();
                 return -1;
@@ -500,6 +504,15 @@ public class TestDSClient extends DB {
     @Override
     public int postCommentOnResource(int commentCreatorID, int resourceCreatorID, int resourceID, HashMap<String,
             ByteIterator> values) {
+        try {
+            JsonObject userObject = transactionHelper.readUser(String.valueOf(commentCreatorID));
+
+            if (userObject.has(RESOURCES)) {
+
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
