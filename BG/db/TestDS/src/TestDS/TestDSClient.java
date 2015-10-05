@@ -11,6 +11,7 @@ import de.zib.scalaris.NotFoundException;
 import edu.usc.bg.base.*;
 
 import java.util.*;
+import javax.xml.bind.DatatypeConverter;
 
 public class TestDSClient extends DB {
     private TransactionHelper transactionHelper;
@@ -96,7 +97,13 @@ public class TestDSClient extends DB {
                 jsonObject.add(entry.getKey(), new JsonPrimitive(entry.getValue().toString()));
             }
         }
-
+        if (entitySet.equals(USERS) && insertImage) {
+			byte[] profileImage = ((ObjectByteIterator) values.get(PIC)).toArray();
+			String profileImageString = DatatypeConverter.printBase64Binary(profileImage);
+			byte[] thumbImage = ((ObjectByteIterator) values.get(TPIC)).toArray();
+			String thumbImageString = DatatypeConverter.printBase64Binary(profileImage);
+			jsonObject.add(PIC, new JsonPrimitive(profileImageString));
+        }
         if (entitySet.equals(USERS)) {
             try {
                 transactionHelper.writeUser(entityPK, jsonObject);
