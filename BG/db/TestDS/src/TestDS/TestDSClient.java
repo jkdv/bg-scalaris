@@ -7,7 +7,6 @@ import com.google.gson.JsonPrimitive;
 import de.zib.scalaris.AbortException;
 import de.zib.scalaris.ConnectionException;
 import de.zib.scalaris.NotFoundException;
-import de.zib.scalaris.TimeoutException;
 import edu.usc.bg.base.*;
 
 import java.util.*;
@@ -27,6 +26,8 @@ public class TestDSClient extends DB {
     private static final String USERS = "users";
     private static final String RESOURCES = "resources";
     private static final String WALL_USER_ID = "walluserid";
+    private static final String CREATOR_ID = "creatorId";
+    private static final String CREATED_RESOURCE = "createdResource";
 
     /**
      * Initialize any state for this DB. Called once per DB instance; there is one DB instance per client thread. This
@@ -107,20 +108,50 @@ public class TestDSClient extends DB {
          */
         if (entitySet.equals(RESOURCES)) {
             try {
-                ByteIterator wallUserID = values.get(WALL_USER_ID);
-                JsonObject userObject = transactionHelper.readUser(wallUserID.toString());
-
-                JsonArray jsonArray;
-                if (userObject.has(RESOURCES)) {
-                    jsonArray = userObject.getAsJsonArray(RESOURCES);
-                } else {
-                    jsonArray = new JsonArray();
-                }
-                jsonArray.add(new JsonPrimitive(entityPK));
-                userObject.add(RESOURCES, jsonArray);
-
-                transactionHelper.writeUser(wallUserID.toString(), userObject);
                 transactionHelper.writeResource(entityPK, jsonObject);
+
+                ByteIterator wallUserId = values.get(WALL_USER_ID);
+                JsonObject userObject = transactionHelper.readUser(wallUserId.toString());
+
+                JsonArray resourceArray;
+                if (userObject.has(RESOURCES)) {
+                    resourceArray = userObject.getAsJsonArray(RESOURCES);
+                } else {
+                    resourceArray = new JsonArray();
+                }
+
+                resourceArray.add(new JsonPrimitive(entityPK));
+                userObject.add(RESOURCES, resourceArray);
+
+                /**
+                 * Update createdResource of User data.
+                 */
+                ByteIterator creatorId = values.get(CREATOR_ID);
+
+                if (wallUserId.equals(creatorId)) {
+                    JsonArray createdResourceArray;
+                    if (userObject.has(CREATED_RESOURCE)) {
+                        createdResourceArray = userObject.getAsJsonArray(CREATED_RESOURCE);
+                    } else {
+                        createdResourceArray = new JsonArray();
+                    }
+
+                    createdResourceArray.add(new JsonPrimitive(entityPK));
+                    userObject.add(CREATED_RESOURCE, createdResourceArray);
+                    transactionHelper.writeUser(wallUserId.toString(), userObject);
+                } else {
+                    JsonArray createdResourceArray;
+                    JsonObject creatorObject = transactionHelper.readUser(creatorId.toString());
+                    if (creatorObject.has(CREATED_RESOURCE)) {
+                        createdResourceArray = creatorObject.getAsJsonArray(CREATED_RESOURCE);
+                    } else {
+                        createdResourceArray = new JsonArray();
+                    }
+
+                    createdResourceArray.add(new JsonPrimitive(entityPK));
+                    creatorObject.add(CREATED_RESOURCE, createdResourceArray);
+                    transactionHelper.writeUser(creatorId.toString(), creatorObject);
+                }
             } catch (ConnectionException | NotFoundException | AbortException e) {
                 e.printStackTrace();
                 return -1;
@@ -301,8 +332,7 @@ public class TestDSClient extends DB {
     @Override
     public int viewFriendReq(int profileOwnerID, Vector<HashMap<String, ByteIterator>> results, boolean insertImage,
                              boolean testMode) {
-    	
-    	try {
+        try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (jsonObject.has(PENDING_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
@@ -342,24 +372,23 @@ public class TestDSClient extends DB {
      */
     @Override
     public int acceptFriend(int inviterID, int inviteeID) {
-    	
-    	try {
-        	JsonObject inviterObject = transactionHelper.readUser(String.valueOf(inviterID));
-        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+        try {
+            JsonObject inviterObject = transactionHelper.readUser(String.valueOf(inviterID));
+            JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
-        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
+            inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
 
-        	inviterObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviteeID));
-        	inviteeObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviterID));
+            inviterObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviteeID));
+            inviteeObject.getAsJsonArray(CONFIRMED_FRIENDS).add(new JsonPrimitive(inviterID));
 
-        	transactionHelper.writeUser(Integer.toString(inviterID), inviterObject);
-        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+            transactionHelper.writeUser(Integer.toString(inviterID), inviterObject);
+            transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
 
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
         }
-    	return 0;
+        return 0;
     }
 
     /**
@@ -377,18 +406,18 @@ public class TestDSClient extends DB {
      */
     @Override
     public int rejectFriend(int inviterID, int inviteeID) {
-    	try {
-        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+        try {
+            JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
-        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
-        	
-        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+            inviteeObject.getAsJsonArray(PENDING_FRIENDS).remove(new JsonPrimitive(inviterID));
+
+            transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
 
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
         }
-    	return 0;
+        return 0;
     }
 
     /**
@@ -407,18 +436,18 @@ public class TestDSClient extends DB {
      */
     @Override
     public int inviteFriend(int inviterID, int inviteeID) {
-    	try {
-        	JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
+        try {
+            JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
-        	inviteeObject.getAsJsonArray(PENDING_FRIENDS).add(new JsonPrimitive(inviterID));
-        	
-        	transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
+            inviteeObject.getAsJsonArray(PENDING_FRIENDS).add(new JsonPrimitive(inviterID));
+
+            transactionHelper.writeUser(Integer.toString(inviteeID), inviteeObject);
 
         } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
         }
-    	return 0;
+        return 0;
     }
 
     /**
@@ -483,6 +512,20 @@ public class TestDSClient extends DB {
     @Override
     public int viewCommentOnResource(int requesterID, int profileOwnerID, int resourceID, Vector<HashMap<String,
             ByteIterator>> result) {
+        try {
+            JsonObject manipulationsObject = transactionHelper.readManipulations(String.valueOf(resourceID));
+            for (Map.Entry<String, JsonElement> manipulationEntry : manipulationsObject.entrySet()) {
+                JsonObject manipulationObject = manipulationEntry.getValue().getAsJsonObject();
+                HashMap<String, ByteIterator> hashMap = new HashMap<>();
+                for (Map.Entry<String, JsonElement> attributeEntry : manipulationObject.entrySet()) {
+                    hashMap.put(attributeEntry.getKey(),
+                            new StringByteIterator(attributeEntry.getValue().getAsJsonPrimitive().getAsString()));
+                }
+                result.add(hashMap);
+            }
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -504,14 +547,20 @@ public class TestDSClient extends DB {
     @Override
     public int postCommentOnResource(int commentCreatorID, int resourceCreatorID, int resourceID, HashMap<String,
             ByteIterator> values) {
-        try {
-            JsonObject userObject = transactionHelper.readUser(String.valueOf(commentCreatorID));
-
-            if (userObject.has(RESOURCES)) {
-
+        JsonObject manipulationObject = new JsonObject();
+        String manipulationId = "";
+        for (Map.Entry<String, ByteIterator> entry : values.entrySet()) {
+            if (entry.getKey().equals("mid")) {
+                manipulationId = entry.getValue().toString();
             }
-        } catch (ConnectionException | NotFoundException e) {
+            manipulationObject.add(entry.getKey(), new JsonPrimitive(entry.getValue().toString()));
+        }
+
+        try {
+            transactionHelper.writeManipulation(String.valueOf(resourceID), manipulationId, manipulationObject);
+        } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
+            return -1;
         }
         return 0;
     }
@@ -530,19 +579,8 @@ public class TestDSClient extends DB {
     @Override
     public int delCommentOnResource(int resourceCreatorID, int resourceID, int manipulationID) {
         try {
-            JsonObject userObject = transactionHelper.readUser(String.valueOf(resourceCreatorID));
-            if (userObject.has(RESOURCES)) {
-                JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray();
-                for (JsonElement resourceElement : resourceArray) {
-                    if (String.valueOf(resourceID).equals(resourceElement.getAsJsonPrimitive().getAsString())) {
-                        resourceArray.remove(resourceElement);
-                    }
-                }
-                userObject.add(RESOURCES, resourceArray);
-            }
-            transactionHelper.writeUser(String.valueOf(resourceCreatorID), userObject);
-            transactionHelper.deleteResource(String.valueOf(resourceCreatorID));
-        } catch (ConnectionException | NotFoundException | AbortException | TimeoutException e) {
+            transactionHelper.deleteManipulation(String.valueOf(resourceID), String.valueOf(manipulationID));
+        } catch (ConnectionException | NotFoundException | AbortException e) {
             e.printStackTrace();
             return -1;
         }
@@ -725,8 +763,8 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryPendingFriendshipIds(int memberID, Vector<Integer> pendingIds) {
-    	try {
-    		JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
+        try {
+            JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(PENDING_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
                 for (JsonElement jsonElement : jsonArray) {
@@ -738,7 +776,7 @@ public class TestDSClient extends DB {
             e.printStackTrace();
             return -1;
         }
-    	return 0;
+        return 0;
     }
 
     /**
@@ -753,7 +791,7 @@ public class TestDSClient extends DB {
      */
     @Override
     public int queryConfirmedFriendshipIds(int memberID, Vector<Integer> confirmedIds) {
-    	try {
+        try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(CONFIRMED_FRIENDS)) {
                 JsonArray jsonArray = jsonObject.get(CONFIRMED_FRIENDS).getAsJsonArray();
@@ -766,6 +804,6 @@ public class TestDSClient extends DB {
             e.printStackTrace();
             return -1;
         }
-    	return 0;
+        return 0;
     }
 }

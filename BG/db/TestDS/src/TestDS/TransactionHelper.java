@@ -15,6 +15,7 @@ public class TransactionHelper {
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
     private static final String USER_LIST = "user_list";
+    private static final String MANIPULATION = "manipulation";
 
     /**
      * Constructor.
@@ -35,7 +36,7 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    public JsonObject readUser(String userId) throws ConnectionException, NotFoundException {
+    public JsonObject readUser(final String userId) throws ConnectionException, NotFoundException {
         return read(String.format("%s%s", USER_ID_PREFIX, userId));
     }
 
@@ -58,7 +59,7 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws AbortException
      */
-    public void writeUser(String userId, JsonObject value) throws ConnectionException, AbortException {
+    public void writeUser(final String userId, final JsonObject value) throws ConnectionException, AbortException {
         write(String.format("%s%s", USER_ID_PREFIX, userId), value);
 
         JsonObject userListObject;
@@ -80,7 +81,7 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    public JsonObject readResource(String resourceId) throws ConnectionException, NotFoundException {
+    public JsonObject readResource(final String resourceId) throws ConnectionException, NotFoundException {
         return read(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
     }
 
@@ -92,19 +93,71 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws AbortException
      */
-    public void writeResource(String resourceId, JsonObject value) throws ConnectionException, AbortException {
+    public void writeResource(final String resourceId, final JsonObject value) throws ConnectionException,
+            AbortException {
         write(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId), value);
     }
 
     /**
-     * Try to delete a resource key and value.
+     * Returns a manipulation value as a JSON object.
      *
      * @param resourceId Resource ID given by BG.
+     * @return JsonObject instance.
      * @throws ConnectionException
-     * @throws TimeoutException
+     * @throws NotFoundException
      */
-    public void deleteResource(String resourceId) throws ConnectionException, TimeoutException {
-        delete(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
+    public JsonObject readManipulations(final String resourceId) throws ConnectionException, NotFoundException {
+        JsonObject manipulationObject;
+        JsonObject resourceObject = readResource(resourceId);
+        if (resourceObject.has(MANIPULATION)) {
+            manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+        } else {
+            manipulationObject = new JsonObject();
+        }
+        return manipulationObject;
+    }
+
+    /**
+     * Add a manipulation value to the resource value.
+     *
+     * @param resourceId     Resource ID given by BG.
+     * @param manipulationId Manipulation ID given by BG.
+     * @param value          JsonObject instance.
+     * @throws ConnectionException
+     * @throws NotFoundException
+     */
+    public void writeManipulation(final String resourceId, final String manipulationId, final JsonObject value) throws
+            ConnectionException, NotFoundException, AbortException {
+        JsonObject manipulationObject;
+        JsonObject resourceObject = readResource(resourceId);
+        if (resourceObject.has(MANIPULATION)) {
+            manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+        } else {
+            manipulationObject = new JsonObject();
+        }
+        manipulationObject.add(manipulationId, value);
+        resourceObject.add(MANIPULATION, manipulationObject);
+        writeResource(resourceId, resourceObject);
+    }
+
+    /**
+     * Delete the manipulation value from the resource.
+     *
+     * @param resourceId     Resource ID given by BG.
+     * @param manipulationId Manipulation ID given by BG.
+     * @throws ConnectionException
+     * @throws NotFoundException
+     * @throws AbortException
+     */
+    public void deleteManipulation(final String resourceId, final String manipulationId) throws ConnectionException,
+            NotFoundException, AbortException {
+        JsonObject resourceObject = readResource(resourceId);
+        if (resourceObject.has(MANIPULATION)) {
+            JsonObject manipulationObject = resourceObject.get(MANIPULATION).getAsJsonObject();
+            manipulationObject.remove(manipulationId);
+            resourceObject.add(MANIPULATION, manipulationObject);
+            writeResource(resourceId, resourceObject);
+        }
     }
 
     /**
@@ -115,7 +168,7 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    private JsonObject read(String key) throws ConnectionException, NotFoundException {
+    private JsonObject read(final String key) throws ConnectionException, NotFoundException {
         ErlangValue erlangValue = transactionSingleOp.read(key);
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
         return jsonElement.getAsJsonObject();
@@ -129,20 +182,7 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws AbortException
      */
-    private void write(String key, JsonObject value) throws ConnectionException, AbortException {
+    private void write(final String key, final JsonObject value) throws ConnectionException, AbortException {
         transactionSingleOp.write(key, value.toString());
-    }
-
-    /**
-     * Try to delete a key and its value.
-     *
-     * @param key Unique key.
-     * @throws ConnectionException
-     * @throws TimeoutException
-     */
-    private void delete(String key) throws ConnectionException, TimeoutException {
-        ReplicatedDHT replicatedDHT = new ReplicatedDHT();
-        replicatedDHT.delete(key);
-        replicatedDHT.closeConnection();
     }
 }
