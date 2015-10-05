@@ -76,11 +76,12 @@ public class TransactionHelper {
      * Read a resource value as a JSON obejct.
      *
      * @param resourceId Resource ID given by BG.
+     * @return JsonObject instance.
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    public void readResource(String resourceId) throws ConnectionException, NotFoundException {
-        transactionSingleOp.read(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
+    public JsonObject readResource(String resourceId) throws ConnectionException, NotFoundException {
+        return read(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
     }
 
     /**
@@ -92,7 +93,7 @@ public class TransactionHelper {
      * @throws AbortException
      */
     public void writeResource(String resourceId, JsonObject value) throws ConnectionException, AbortException {
-        transactionSingleOp.write(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId), value);
+        write(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId), value);
     }
 
     /**
