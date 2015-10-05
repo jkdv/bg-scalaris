@@ -474,21 +474,14 @@ public class TestDSClient extends DB {
             if (userObject.has(RESOURCES)) {
                 JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
                 int i = 0;
-                for (JsonObject resource : resourceArray) {
-                    i++;
-                    String rid = null;
+                for(int n = 0; (n < resourceArray.length() && n < k); n++) {
+                	JsonObject resourceObject = resourceArray.get(n).getAsJsonObject();
                     HashMap<String, ByteIterator> vals = new HashMap<String, ByteIterator>();
-                    for (Map.Entry<String, JsonElement> entry : resource.entrySet()) { //iterate over resource
+                    for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) { //iterate over resource
                         // attributes
                         vals.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-                        if (entry.getKey() == "rid") { // Every resource will have a rid field
-                            rid = entry.getValue().getAsString();
-                        }
                     }
                     result.add(vals);
-                    if (i == k) { //stop after k resources
-                        break;
-                    }
                 }
             }
         } catch (ConnectionException | NotFoundException e) {
