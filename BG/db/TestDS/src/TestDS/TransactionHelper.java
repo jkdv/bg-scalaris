@@ -9,7 +9,6 @@ import de.zib.scalaris.*;
  * Wrapper class of TransactionSingleOp.
  */
 public class TransactionHelper {
-    private final TransactionSingleOp transactionSingleOp;
     private JsonParser jsonParser;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
@@ -22,7 +21,6 @@ public class TransactionHelper {
      * @throws ConnectionException
      */
     public TransactionHelper() throws ConnectionException {
-        transactionSingleOp = new TransactionSingleOp();
         jsonParser = new JsonParser();
     }
 
@@ -167,8 +165,10 @@ public class TransactionHelper {
      * @throws NotFoundException
      */
     private JsonObject read(final String key) throws ConnectionException, NotFoundException {
+        TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
         ErlangValue erlangValue = transactionSingleOp.read(key);
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
+        transactionSingleOp.closeConnection();
         return jsonElement.getAsJsonObject();
     }
 
@@ -181,6 +181,8 @@ public class TransactionHelper {
      * @throws AbortException
      */
     private void write(final String key, final JsonObject value) throws ConnectionException, AbortException {
+        TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
         transactionSingleOp.write(key, value.toString());
+        transactionSingleOp.closeConnection();
     }
 }
