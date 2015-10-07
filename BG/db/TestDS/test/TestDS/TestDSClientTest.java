@@ -98,17 +98,21 @@ public class TestDSClientTest {
     @Test
     public void testJsonArray() throws Exception {
         JsonArray jsonArray = new JsonArray();
-        jsonArray.add(new JsonPrimitive("1"));
-        jsonArray.add(new JsonPrimitive("2"));
-        jsonArray.add(new JsonPrimitive("3"));
+
+        for (int i = 0; i < 1000; i++) {
+            jsonArray.add(new JsonPrimitive(String.valueOf(i)));
+        }
 
         jsonArray.remove(new JsonPrimitive("2"));
+        jsonArray.remove(new JsonPrimitive("20"));
+        jsonArray.remove(new JsonPrimitive("200"));
         
-        assertThat(jsonArray.size(), is(2));
+        assertThat(jsonArray.size(), is(997));
         assertTrue(jsonArray.contains(new JsonPrimitive("1")));
         assertTrue(jsonArray.contains(new JsonPrimitive("3")));
-
         assertFalse(jsonArray.contains(new JsonPrimitive("2")));
+        assertFalse(jsonArray.contains(new JsonPrimitive("20")));
+        assertFalse(jsonArray.contains(new JsonPrimitive("200")));
     }
 
     @Test
