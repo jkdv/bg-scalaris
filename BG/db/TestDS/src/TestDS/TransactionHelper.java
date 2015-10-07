@@ -172,7 +172,6 @@ public class TransactionHelper {
         for (int i = 1; i <= 1024; i *= 2) {
             try {
                 connection = connectionPool.getConnection();
-
                 break;
             } catch (ConnectionException e) {
                 try {
@@ -192,6 +191,7 @@ public class TransactionHelper {
         for (int i = 1; i <= 1024; i *= 2) {
             try {
                 erlangValue = transactionSingleOp.read(key);
+                break;
             } catch (ConnectionException e) {
                 try {
                     Thread.sleep(i);
@@ -224,7 +224,6 @@ public class TransactionHelper {
         for (int i = 1; i <= 10240; i *= 2) {
             try {
                 connection = connectionPool.getConnection();
-
                 break;
             } catch (ConnectionException e) {
                 try {
@@ -243,6 +242,7 @@ public class TransactionHelper {
         for (int i = 1; i <= 10240; i *= 2) {
             try {
                 transactionSingleOp.write(key, value.toString());
+                break;
             } catch (AbortException e) {
                 try {
                     Thread.sleep(i);
