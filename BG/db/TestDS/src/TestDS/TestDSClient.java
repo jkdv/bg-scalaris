@@ -38,8 +38,8 @@ public class TestDSClient extends DB {
      * @return true if the connection to the data store was successful.
      */
     @Override
-    public boolean init() throws DBException {
-        connectionPool = new ConnectionPool(new ConnectionFactory(), 10);
+    public synchronized boolean init() throws DBException {
+        connectionPool = new ConnectionPool(new ConnectionFactory(), 0);
         transactionHelper = new TransactionHelper(connectionPool);
         return super.init();
     }
@@ -56,7 +56,7 @@ public class TestDSClient extends DB {
      *               connection of the thread with the database and clean up the database instance.
      */
     @Override
-    public void cleanup(boolean warmup) throws DBException {
+    public synchronized void cleanup(boolean warmup) throws DBException {
         connectionPool.closeAll();
         super.cleanup(warmup);
     }
@@ -80,8 +80,8 @@ public class TestDSClient extends DB {
      * responsible for inserting the PK and the other attributes in the appropriate order.
      */
     @Override
-    public int insertEntity(String entitySet, String entityPK, HashMap<String, ByteIterator> values, boolean
-            insertImage) {
+    public synchronized int insertEntity(String entitySet, String entityPK, HashMap<String, ByteIterator> values,
+                                         boolean insertImage) {
         /**
          * Insert Users and Resources data using JSON-like data model.
          */
@@ -95,7 +95,7 @@ public class TestDSClient extends DB {
             }
         }
 
-        if (entitySet.equals(USERS)) {
+        if (USERS.equals(entitySet)) {
             try {
                 transactionHelper.writeUser(entityPK, jsonObject);
             } catch (ConnectionException | AbortException e) {
@@ -107,7 +107,7 @@ public class TestDSClient extends DB {
         /**
          * Update Users data after inserting Resources.
          */
-        if (entitySet.equals(RESOURCES)) {
+        if (RESOURCES.equals(entitySet)) {
             try {
                 transactionHelper.writeResource(entityPK, jsonObject);
 
@@ -129,7 +129,8 @@ public class TestDSClient extends DB {
                  */
                 ByteIterator creatorId = values.get(CREATOR_ID);
 
-                if (wallUserId.equals(creatorId)) {
+                if (wallUserId.equals(creatorId) || creatorId == null) {
+
                     JsonArray createdResourceArray;
                     if (userObject.has(CREATED_RESOURCE)) {
                         createdResourceArray = userObject.getAsJsonArray(CREATED_RESOURCE);
@@ -141,8 +142,9 @@ public class TestDSClient extends DB {
                     userObject.add(CREATED_RESOURCE, createdResourceArray);
                     transactionHelper.writeUser(wallUserId.toString(), userObject);
                 } else {
-                    JsonArray createdResourceArray;
                     JsonObject creatorObject = transactionHelper.readUser(creatorId.toString());
+                    JsonArray createdResourceArray;
+
                     if (creatorObject.has(CREATED_RESOURCE)) {
                         createdResourceArray = creatorObject.getAsJsonArray(CREATED_RESOURCE);
                     } else {
@@ -192,8 +194,8 @@ public class TestDSClient extends DB {
      * If images exist for users, they should be converted to bytearrays and added to the result hashmap.
      */
     @Override
-    public int viewProfile(int requesterID, int profileOwnerID, HashMap<String, ByteIterator> result, boolean
-            insertImage, boolean testMode) {
+    public synchronized int viewProfile(int requesterID, int profileOwnerID, HashMap<String, ByteIterator> result,
+                                        boolean insertImage, boolean testMode) {
         JsonObject jsonObject;
         try {
             jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
@@ -206,9 +208,9 @@ public class TestDSClient extends DB {
          * Dump data to result.
          */
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-            if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS)
-                    && !entry.getKey().equals(RESOURCES) && !entry.getKey().equals(CREATED_RESOURCE)
-                    && !entry.getKey().equals(PIC) && !entry.getKey().equals(TPIC)) {
+            if (!entry.getKey().equals(PENDING_FRIENDS) && !entry.getKey().equals(CONFIRMED_FRIENDS) && !entry.getKey
+                    ().equals(RESOURCES) && !entry.getKey().equals(CREATED_RESOURCE) && !entry.getKey().equals(PIC)
+                    && !entry.getKey().equals(TPIC)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
             } else if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
                 result.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
@@ -273,8 +275,9 @@ public class TestDSClient extends DB {
      * key.
      */
     @Override
-    public int listFriends(int requesterID, int profileOwnerID, Set<String> fields, Vector<HashMap<String,
-            ByteIterator>> result, boolean insertImage, boolean testMode) {
+    public synchronized int listFriends(int requesterID, int profileOwnerID, Set<String> fields,
+                                        Vector<HashMap<String, ByteIterator>> result, boolean insertImage, boolean
+                                                    testMode) {
         try {
             JsonObject ownerObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
 
@@ -337,8 +340,8 @@ public class TestDSClient extends DB {
      * into the result hashmap.
      */
     @Override
-    public int viewFriendReq(int profileOwnerID, Vector<HashMap<String, ByteIterator>> results, boolean insertImage,
-                             boolean testMode) {
+    public synchronized int viewFriendReq(int profileOwnerID, Vector<HashMap<String, ByteIterator>> results, boolean
+            insertImage, boolean testMode) {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (jsonObject.has(PENDING_FRIENDS)) {
@@ -379,7 +382,7 @@ public class TestDSClient extends DB {
      * should be friends with A.
      */
     @Override
-    public int acceptFriend(int inviterID, int inviteeID) {
+    public synchronized int acceptFriend(int inviterID, int inviteeID) {
         try {
             JsonObject inviterObject = transactionHelper.readUser(String.valueOf(inviterID));
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
@@ -412,7 +415,7 @@ public class TestDSClient extends DB {
      * any friendship relationship between the inviterID and the inviteeID.
      */
     @Override
-    public int rejectFriend(int inviterID, int inviteeID) {
+    public synchronized int rejectFriend(int inviterID, int inviteeID) {
         try {
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
@@ -441,7 +444,7 @@ public class TestDSClient extends DB {
      * to the inviteeID.
      */
     @Override
-    public int inviteFriend(int inviterID, int inviteeID) {
+    public synchronized int inviteFriend(int inviterID, int inviteeID) {
         try {
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
@@ -472,14 +475,14 @@ public class TestDSClient extends DB {
      * codes.
      */
     @Override
-    public int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String, ByteIterator>>
-            result) {
+    public synchronized int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String,
+            ByteIterator>> result) {
         try {
             JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (userObject.has(RESOURCES)) {
                 JsonArray resourceArray = userObject.get(RESOURCES).getAsJsonArray(); //user resources
-                for(int n = 0; (n < resourceArray.size() && n < k); n++) {
-                	JsonObject resourceObject = resourceArray.get(n).getAsJsonObject();
+                for (int n = 0; (n < resourceArray.size() && n < k); n++) {
+                    JsonObject resourceObject = resourceArray.get(n).getAsJsonObject();
                     HashMap<String, ByteIterator> vals = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) { //iterate over resource
                         // attributes
@@ -511,7 +514,7 @@ public class TestDSClient extends DB {
      * codes.
      */
     @Override
-    public int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
+    public synchronized int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
         try {
             JsonObject creatorObject = transactionHelper.readUser(String.valueOf(creatorID));
 
@@ -554,8 +557,8 @@ public class TestDSClient extends DB {
      * resource and their details. This information should be put into the results Vector.
      */
     @Override
-    public int viewCommentOnResource(int requesterID, int profileOwnerID, int resourceID, Vector<HashMap<String,
-            ByteIterator>> result) {
+    public synchronized int viewCommentOnResource(int requesterID, int profileOwnerID, int resourceID,
+                                                  Vector<HashMap<String, ByteIterator>> result) {
         try {
             JsonObject manipulationsObject = transactionHelper.readManipulations(String.valueOf(resourceID));
 
@@ -591,8 +594,8 @@ public class TestDSClient extends DB {
      * created by profileOwnerID.
      */
     @Override
-    public int postCommentOnResource(int commentCreatorID, int resourceCreatorID, int resourceID, HashMap<String,
-            ByteIterator> values) {
+    public synchronized int postCommentOnResource(int commentCreatorID, int resourceCreatorID, int resourceID,
+                                                  HashMap<String, ByteIterator> values) {
         JsonObject manipulationObject = new JsonObject();
         String manipulationId = "";
 
@@ -624,7 +627,7 @@ public class TestDSClient extends DB {
      * identified with resourceID and created by the resourceCreatorID.
      */
     @Override
-    public int delCommentOnResource(int resourceCreatorID, int resourceID, int manipulationID) {
+    public synchronized int delCommentOnResource(int resourceCreatorID, int resourceID, int manipulationID) {
         try {
             transactionHelper.deleteManipulation(String.valueOf(resourceID), String.valueOf(manipulationID));
         } catch (ConnectionException | NotFoundException | AbortException e) {
@@ -649,7 +652,7 @@ public class TestDSClient extends DB {
      * relationship is symmetric so if A is not friends with B, B also will not be friends with A.
      */
     @Override
-    public int thawFriendship(int friendid1, int friendid2) {
+    public synchronized int thawFriendship(int friendid1, int friendid2) {
         try {
             final String strFriendId1 = String.valueOf(friendid1);
             final String strFriendId2 = String.valueOf(friendid2);
@@ -689,7 +692,7 @@ public class TestDSClient extends DB {
      * codes.
      */
     @Override
-    public HashMap<String, String> getInitialStats() {
+    public synchronized HashMap<String, String> getInitialStats() {
         HashMap<String, String> hashMap = new HashMap<>();
         try {
             /**
@@ -742,7 +745,7 @@ public class TestDSClient extends DB {
      * friendship relationship is symmetric, so if A is friends with B, B is also friends with A.
      */
     @Override
-    public int CreateFriendship(int friendid1, int friendid2) {
+    public synchronized int CreateFriendship(int friendid1, int friendid2) {
         try {
             final String strFriendId1 = String.valueOf(friendid1);
             final String strFriendId2 = String.valueOf(friendid2);
@@ -786,7 +789,7 @@ public class TestDSClient extends DB {
      *              3) manipulations (mid, creatorid, rid, modifierid, timestamp, type, content)
      */
     @Override
-    public void createSchema(Properties props) {
+    public synchronized void createSchema(Properties props) {
     }
 
     /**
@@ -800,7 +803,7 @@ public class TestDSClient extends DB {
      * codes.
      */
     @Override
-    public int queryPendingFriendshipIds(int memberID, Vector<Integer> pendingIds) {
+    public synchronized int queryPendingFriendshipIds(int memberID, Vector<Integer> pendingIds) {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(PENDING_FRIENDS)) {
@@ -828,7 +831,7 @@ public class TestDSClient extends DB {
      * codes.
      */
     @Override
-    public int queryConfirmedFriendshipIds(int memberID, Vector<Integer> confirmedIds) {
+    public synchronized int queryConfirmedFriendshipIds(int memberID, Vector<Integer> confirmedIds) {
         try {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(memberID));
             if (jsonObject.has(CONFIRMED_FRIENDS)) {

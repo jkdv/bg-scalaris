@@ -156,7 +156,7 @@ public class TestDSClientTest {
         int result = testDSClient.insertEntity(entitySet, entityPK, values, false);
         assertThat(result, is(0));
 
-        entitySet = "resource";
+        entitySet = "resources";
         values.put("mid", new StringByteIterator("1"));
         values.put("creatorid", new StringByteIterator("1"));
         values.put("rid", new StringByteIterator("1"));

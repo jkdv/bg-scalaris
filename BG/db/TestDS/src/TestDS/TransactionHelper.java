@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.zib.scalaris.*;
 
+import static java.lang.Math.log;
+import static java.lang.Math.log10;
+
 /**
  * Wrapper class of TransactionSingleOp.
  */
@@ -15,6 +18,7 @@ public class TransactionHelper {
     private static final String RESOURCE_ID_PREFIX = "r";
     private static final String USER_LIST = "user_list";
     private static final String MANIPULATION = "manipulation";
+    private static final long WAIT_TIME = 20480;
 
     /**
      * Creates an instance with connection pool.
@@ -166,16 +170,16 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    private JsonObject read(final String key) throws NotFoundException, ConnectionException {
+    private synchronized JsonObject read(final String key) throws NotFoundException, ConnectionException {
         Connection connection = null;
 
-        for (int i = 1; i <= 1024; i *= 2) {
+        for (double i = 10; i <= WAIT_TIME; i = i * log10(i)) {
             try {
                 connection = connectionPool.getConnection();
                 break;
             } catch (ConnectionException e) {
                 try {
-                    Thread.sleep(i);
+                    Thread.sleep((long) i);
                 } catch (InterruptedException ignored) {
                 }
             }
@@ -188,13 +192,13 @@ public class TransactionHelper {
         TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
         ErlangValue erlangValue = null;
 
-        for (int i = 1; i <= 1024; i *= 2) {
+        for (double i = 10; i <= WAIT_TIME; i = i * log10(i)) {
             try {
                 erlangValue = transactionSingleOp.read(key);
                 break;
             } catch (ConnectionException e) {
                 try {
-                    Thread.sleep(i);
+                    Thread.sleep((long) i);
                 } catch (InterruptedException ignored) {
                 }
             }
@@ -216,18 +220,17 @@ public class TransactionHelper {
      * @param key   Unique key.
      * @param value JsonObject instance.
      * @throws ConnectionException
-     * @throws AbortException
      */
-    private void write(final String key, final JsonObject value) throws ConnectionException {
+    private synchronized void write(final String key, final JsonObject value) throws ConnectionException {
         Connection connection = null;
 
-        for (int i = 1; i <= 10240; i *= 2) {
+        for (double i = 10; i <= WAIT_TIME; i = i * log10(i)) {
             try {
                 connection = connectionPool.getConnection();
                 break;
             } catch (ConnectionException e) {
                 try {
-                    Thread.sleep(i);
+                    Thread.sleep((long) i);
                 } catch (InterruptedException ignored) {
                 }
             }
@@ -239,13 +242,13 @@ public class TransactionHelper {
 
         TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
 
-        for (int i = 1; i <= 10240; i *= 2) {
+        for (double i = 10; i <= WAIT_TIME; i = i * log10(i)) {
             try {
                 transactionSingleOp.write(key, value.toString());
                 break;
             } catch (AbortException e) {
                 try {
-                    Thread.sleep(i);
+                    Thread.sleep((long) i);
                 } catch (InterruptedException ignored) {
                 }
             }
