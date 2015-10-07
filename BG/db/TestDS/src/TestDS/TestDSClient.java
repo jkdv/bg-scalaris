@@ -213,7 +213,7 @@ public class TestDSClient extends DB {
                     && !entry.getKey().equals(TPIC)) {
                 result.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
             } else if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
-                result.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
+                result.put(entry.getKey(), ImageUtils.toObejctByteIterator(entry.getValue()));
             }
         }
 
@@ -294,7 +294,7 @@ public class TestDSClient extends DB {
                     if (fields == null) {
                         for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
                             if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
-                                hashMap.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
+                                hashMap.put(entry.getKey(), ImageUtils.toObejctByteIterator(entry.getValue()));
                             } else {
                                 hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                             }
@@ -302,7 +302,7 @@ public class TestDSClient extends DB {
                     } else {
                         for (String field : fields) {
                             if (insertImage && (field.equals(PIC) || field.equals(TPIC))) {
-                                hashMap.put(field, ImageUtils.toByteArrayByteIterator(friendObject.get(field)));
+                                hashMap.put(field, ImageUtils.toObejctByteIterator(friendObject.get(field)));
                             } else {
                                 hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
                             }
@@ -352,7 +352,7 @@ public class TestDSClient extends DB {
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : requesterObject.entrySet()) {
                         if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
-                            hashMap.put(entry.getKey(), ImageUtils.toByteArrayByteIterator(entry.getValue()));
+                            hashMap.put(entry.getKey(), ImageUtils.toObejctByteIterator(entry.getValue()));
                         } else {
                             hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                         }

@@ -3,6 +3,7 @@ package TestDS;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import edu.usc.bg.base.ByteArrayByteIterator;
+import edu.usc.bg.base.ObjectByteIterator;
 
 import java.util.Base64;
 
@@ -12,7 +13,7 @@ public final class ImageUtils {
         return new JsonPrimitive(Base64.getEncoder().encodeToString(bytes));
     }
 
-    public static ByteArrayByteIterator toByteArrayByteIterator(final JsonElement jsonElement) {
-        return new ByteArrayByteIterator(Base64.getDecoder().decode(jsonElement.getAsString()));
+    public static ObjectByteIterator toObejctByteIterator(final JsonElement jsonElement) {
+        return new ObjectByteIterator(Base64.getDecoder().decode(jsonElement.getAsString()));
     }
 }
