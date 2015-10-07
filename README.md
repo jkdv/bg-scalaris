@@ -46,6 +46,9 @@ http://www.bgbenchmark.org/BG/manual.html
 
 ## Up and Running
 
+### Compile
+* ant
+
 ### Checking if everything is ready
 * java -cp ".:./lib/*:./build/*" edu.usc.bg.BGMainClass onetime -schema -db TestDS.TestDSClient
 
