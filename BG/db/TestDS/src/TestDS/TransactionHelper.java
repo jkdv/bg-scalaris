@@ -9,6 +9,7 @@ import de.zib.scalaris.*;
  * Wrapper class of TransactionSingleOp.
  */
 public class TransactionHelper {
+    private ConnectionPool connectionPool;
     private JsonParser jsonParser;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
@@ -16,12 +17,13 @@ public class TransactionHelper {
     private static final String MANIPULATION = "manipulation";
 
     /**
-     * Constructor.
+     * Creates an instance with connection pool.
      *
-     * @throws ConnectionException
+     * @param connectionPool A ConnectionPool instance.
      */
-    public TransactionHelper() throws ConnectionException {
+    public TransactionHelper(ConnectionPool connectionPool) {
         jsonParser = new JsonParser();
+        this.connectionPool = connectionPool;
     }
 
     /**
@@ -164,11 +166,47 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws NotFoundException
      */
-    private JsonObject read(final String key) throws ConnectionException, NotFoundException {
-        TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
-        ErlangValue erlangValue = transactionSingleOp.read(key);
+    private JsonObject read(final String key) throws NotFoundException, ConnectionException {
+        Connection connection = null;
+
+        for (int i = 1; i <= 1024; i *= 2) {
+            try {
+                connection = connectionPool.getConnection();
+
+                break;
+            } catch (ConnectionException e) {
+                try {
+                    Thread.sleep(i);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+
+        if (connection == null) {
+            throw new ConnectionException("Failed to retrieve connection from pool.");
+        }
+
+        TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
+        ErlangValue erlangValue = null;
+
+        for (int i = 1; i <= 1024; i *= 2) {
+            try {
+                erlangValue = transactionSingleOp.read(key);
+            } catch (ConnectionException e) {
+                try {
+                    Thread.sleep(i);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+
+        if (erlangValue == null) {
+            throw new ConnectionException("Failed to retrieve connection from pool.");
+        }
+
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
-        transactionSingleOp.closeConnection();
+        connectionPool.releaseConnection(connection);
+
         return jsonElement.getAsJsonObject();
     }
 
@@ -180,9 +218,39 @@ public class TransactionHelper {
      * @throws ConnectionException
      * @throws AbortException
      */
-    private void write(final String key, final JsonObject value) throws ConnectionException, AbortException {
-        TransactionSingleOp transactionSingleOp = new TransactionSingleOp();
-        transactionSingleOp.write(key, value.toString());
-        transactionSingleOp.closeConnection();
+    private void write(final String key, final JsonObject value) throws ConnectionException {
+        Connection connection = null;
+
+        for (int i = 1; i <= 10240; i *= 2) {
+            try {
+                connection = connectionPool.getConnection();
+
+                break;
+            } catch (ConnectionException e) {
+                try {
+                    Thread.sleep(i);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+
+        if (connection == null) {
+            throw new ConnectionException("Failed to retrieve connection from pool.");
+        }
+
+        TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
+
+        for (int i = 1; i <= 10240; i *= 2) {
+            try {
+                transactionSingleOp.write(key, value.toString());
+            } catch (AbortException e) {
+                try {
+                    Thread.sleep(i);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+
+        connectionPool.releaseConnection(connection);
     }
 }

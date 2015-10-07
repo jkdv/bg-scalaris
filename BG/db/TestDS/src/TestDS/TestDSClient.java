@@ -4,15 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import de.zib.scalaris.AbortException;
-import de.zib.scalaris.ConnectionException;
-import de.zib.scalaris.NotFoundException;
+import de.zib.scalaris.*;
 import edu.usc.bg.base.*;
 
 import java.util.*;
 
 public class TestDSClient extends DB {
     private TransactionHelper transactionHelper;
+    private ConnectionPool connectionPool;
 
     private static final String PENDING_FRIENDS = "pendingFriends";
     private static final String CONFIRMED_FRIENDS = "confirmedFriends";
@@ -40,12 +39,8 @@ public class TestDSClient extends DB {
      */
     @Override
     public boolean init() throws DBException {
-        try {
-            transactionHelper = new TransactionHelper();
-        } catch (ConnectionException e) {
-            e.printStackTrace();
-            return false;
-        }
+        connectionPool = new ConnectionPool(new ConnectionFactory(), 10);
+        transactionHelper = new TransactionHelper(connectionPool);
         return super.init();
     }
 
@@ -62,6 +57,7 @@ public class TestDSClient extends DB {
      */
     @Override
     public void cleanup(boolean warmup) throws DBException {
+        connectionPool.closeAll();
         super.cleanup(warmup);
     }
 
