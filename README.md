@@ -47,6 +47,7 @@ http://www.bgbenchmark.org/BG/manual.html
 ## Up and Running
 
 ### Compile
+* ant dbcompile-testds
 * ant
 
 ### Checking if everything is ready
