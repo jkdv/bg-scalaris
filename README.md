@@ -44,20 +44,29 @@ http://www.bgbenchmark.org/BG/manual.html
     }
   }
 
-## Up and Running
+## Preparation
 
 ### Compile
+* git clone https://github.com/jkdv/bg-scalaris.git
+* cd bg-scalaris/BG
 * ant dbcompile-testds
 * ant
+
+### Edit Scalaris property file
+* vi ./scalaris.properties
 
 ### Checking if everything is ready
 * java -cp ".:./lib/\*:./build/\*" edu.usc.bg.BGMainClass onetime -schema -db TestDS.TestDSClient
 
 ### Populating data
-* java -cp ".:./lib/\*:./build/\*" edu.usc.bg.BGMainClass onetime -load -db TestDS.TestDSClient -P ./workloads/populateDB -p insertimage=true -p imagesize=2 -p threadcount=3 -p usercount=150
+* java -cp ".:./lib/\*:./build/\*" edu.usc.bg.BGMainClass onetime -load -db TestDS.TestDSClient -P ./workloads/populateDB -p insertimage=true -p imagesize=12 -p threadcount=8 -p usercount=1000
 
 ### Testing CLI for each action
 * java -cp ".:./lib/\*:./build/\*" edu.usc.bg.FunctionCommandLine -db TestDS.TestDSClient
 
-### Running benchmark
-* java -cp ".:./lib/\*:./build/\*" edu.usc.bg.BGMainClass onetime -t -db TestDS.TestDSClient -P ./workloads/RealisticActions -p maxexecutiontime=30 -p usercount=150 -p initapproach=querydata -p insertimage=true
+## Running benchmark using BGClient
+* java -cp ".:./lib/\*:./build/\*" edu.usc.bg.BGMainClass onetime -t -db TestDS.TestDSClient -P ./workloads/RealisticActions -p maxexecutiontime=30 -p usercount=1000 -p initapproach=querydata -p insertimage=true
+
+## Running Benchmark using BGCoordinator and BGListener
+* java -cp ".:./lib/\*:./build/\*:./bin/\*" BGListener ./bin/listenerConfig.txt
+* java -cp ".:./lib/\*:./build/\*:./bin/\*" Coordinator ./bin/coordinatorConfig.txt
