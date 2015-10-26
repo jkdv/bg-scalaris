@@ -98,6 +98,7 @@ public class TestDSClient extends DB {
         if (USERS.equals(entitySet)) {
             try {
                 transactionHelper.writeUser(entityPK, jsonObject);
+                //transactionHelper.writeUserList(entityPK);
             } catch (ConnectionException | AbortException e) {
                 e.printStackTrace();
                 return -1;
@@ -107,7 +108,7 @@ public class TestDSClient extends DB {
         /**
          * Update Users data after inserting Resources.
          */
-        if (RESOURCES.equals(entitySet)) {
+        else if (RESOURCES.equals(entitySet)) {
             try {
                 transactionHelper.writeResource(entityPK, jsonObject);
 
@@ -739,18 +740,15 @@ public class TestDSClient extends DB {
      */
     @Override
     public synchronized HashMap<String, String> getInitialStats() {
+        /*
         HashMap<String, String> hashMap = new HashMap<>();
         try {
-            /**
-             * Provide user count.
-             */
+            // Provide user count.
             JsonObject userListObject = transactionHelper.readUserList();
             int userCount = userListObject.entrySet().size();
             hashMap.put(USER_COUNT, String.valueOf(userCount));
 
-            /**
-             * Provide resources per user, average friends per user, average pending friends per user.
-             */
+            // Provide resources per user, average friends per user, average pending friends per user.
             int resourceCount = 0;
             int friendCount = 0;
             int pendingCount = 0;
@@ -771,6 +769,35 @@ public class TestDSClient extends DB {
             hashMap.put(RESOURCES_PER_USER, String.valueOf(resourceCount / (float) userCount));
             hashMap.put(AVG_FRIENDS_PER_USER, String.valueOf(friendCount / (float) userCount));
             hashMap.put(AVG_PENDING_PER_USER, String.valueOf(pendingCount / (float) userCount));
+        } catch (ConnectionException | NotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return hashMap;
+        */
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(USER_COUNT, String.valueOf(100000));
+
+        try {
+                JsonObject userObject = transactionHelper.readUser("0");
+
+                int resourceCount = 0;
+                int friendCount = 0;
+                int pendingCount = 0;
+
+                if (userObject.has(RESOURCES)) {
+                    resourceCount += userObject.getAsJsonArray(RESOURCES).size();
+                }
+                if (userObject.has(CONFIRMED_FRIENDS)) {
+                    friendCount += userObject.getAsJsonArray(CONFIRMED_FRIENDS).size();
+                }
+                if (userObject.has(PENDING_FRIENDS)) {
+                    pendingCount += userObject.getAsJsonArray(PENDING_FRIENDS).size();
+                }
+
+                hashMap.put(RESOURCES_PER_USER, String.valueOf(resourceCount));
+                hashMap.put(AVG_FRIENDS_PER_USER, String.valueOf(friendCount));
+                hashMap.put(AVG_PENDING_PER_USER, String.valueOf(pendingCount));
         } catch (ConnectionException | NotFoundException e) {
             e.printStackTrace();
             return null;
@@ -812,8 +839,8 @@ public class TestDSClient extends DB {
             friendArray1.add(new JsonPrimitive(strFriendId2));
             friendArray2.add(new JsonPrimitive(strFriendId1));
 
-            friendObject1.add(CONFIRMED_FRIENDS, friendArray1);
-            friendObject2.add(CONFIRMED_FRIENDS, friendArray2);
+            //friendObject1.add(CONFIRMED_FRIENDS, friendArray1);
+            //friendObject2.add(CONFIRMED_FRIENDS, friendArray2);
 
             transactionHelper.writeUser(strFriendId1, friendObject1);
             transactionHelper.writeUser(strFriendId2, friendObject2);

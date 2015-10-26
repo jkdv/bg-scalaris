@@ -62,7 +62,9 @@ public class TransactionHelper {
      */
     public void writeUser(final String userId, final JsonObject value) throws ConnectionException, AbortException {
         write(String.format("%s%s", USER_ID_PREFIX, userId), value);
+    }
 
+    public void writeUserList(final String userId) throws ConnectionException, AbortException {
         JsonObject userListObject;
         try {
             userListObject = read(USER_LIST);
