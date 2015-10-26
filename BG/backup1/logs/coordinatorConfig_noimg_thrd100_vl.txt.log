@@ -1,0 +1,151 @@
+Loading round 0
+Creating schema for the datastore using the following command:java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -schema -p ratingmode=false  -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p workloadfile=./workloads/VeryLowUpdateActions -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian
+Stdout: BGClient is in onetime mode.
+Stdout: *****max execution time specified : 0
+Stdout: BG Client: ThreadCount =1
+Stdout: 
+Stdout: Loading workload...
+Stdout: Connected
+Stdout: EXECUTIONDONE
+Stdout: Creating data store schema...
+Stdout: Schema creation was successful
+Stdout: EXECUTIONDONE
+Thread 0: trying to connect to the BG client's Listener port for loading on port: 12510.
+Thread 0: connection socket created to BG client's listener for machine 127.0.0.1 on port 12510.
+Thread 0: sending load msg to BG client's listener... MSG:java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass  onetime  -loadindex  -P ./workloads/populateDB -p machineid=0 -p ratingmode=false -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p usercount=100000 -p probs=1.0@ -p numclients=1 -p threadcount=12 -p useroffset=0 #  .
+Thread 0: sent the java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass  onetime  -loadindex  -P ./workloads/populateDB -p machineid=0 -p ratingmode=false -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p usercount=100000 -p probs=1.0@ -p numclients=1 -p threadcount=12 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: Loading completed.
+The population of the social graph by all the BGClients is completed.
+Loading time = 822555
+starting 127.0.0.1 12510 with 100
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=100 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=100 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 100 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):4983.900804959752
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):4981.8009099545025
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.89157170824757
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):5595.410114747131
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):5592.985175370615
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9503668826378
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):5848.452525791237
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):5845.9025682905285
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.96806942619048
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):5987.387815304618
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):5984.637884052899
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.97660735656864
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):6069.208615827683
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):6066.2486750265
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98153749783643
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):6125.213536328259
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):6122.263610076415
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98475543359902
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):6158.196610072641
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):6155.196674356978
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98700302527796
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):6183.949351899304
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):6180.943214629451
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98867524651561
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):6210.401759921781
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):6207.357450779966
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98997644464491
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180085
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1117956
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):6207.935141738623
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1117408
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):6204.892134269928
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):17.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):559167.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):7941.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):885.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180062.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):551226.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1117899.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10018.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):6208.411547133765
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):6205.368150970221
+127.0.0.1:12510 ***Thread 0: READ(OPS):559167.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):17.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):3.0402366377128835E-5
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.98997673169858
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+####### First Round Succeeded! total threads=100
+starting 127.0.0.1 12510 with 200
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=200 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=200 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+
+
+
+#######Attempt for 200 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+0Experiment done!
+starting 127.0.0.1 12510 with 100
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=100 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -t  -P ./workloads/VeryLowUpdateActions -s -p machineid=0 -p threadcount=100 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=onetime -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+
+
+
+#######Attempt for 100 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+0Experiment done!
+starting 127.0.0.1 12510 with 50
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at BGRaterThread.initThread(Coordinator.java:307)
+	at BGStarterThread.run(Coordinator.java:40)

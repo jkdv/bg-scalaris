@@ -1,6 +1,6 @@
 numclients=1
 ratingtype=1
-loadbetweenrounds=true
+loadbetweenrounds=false
 bgmode=onetime
 datastore=TestDS.TestDSClient
 exe=java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass
