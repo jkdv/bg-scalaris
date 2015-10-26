@@ -740,43 +740,17 @@ public class TestDSClient extends DB {
      */
     @Override
     public synchronized HashMap<String, String> getInitialStats() {
-        /*
-        HashMap<String, String> hashMap = new HashMap<>();
-        try {
-            // Provide user count.
-            JsonObject userListObject = transactionHelper.readUserList();
-            int userCount = userListObject.entrySet().size();
-            hashMap.put(USER_COUNT, String.valueOf(userCount));
-
-            // Provide resources per user, average friends per user, average pending friends per user.
-            int resourceCount = 0;
-            int friendCount = 0;
-            int pendingCount = 0;
-
-            for (Map.Entry<String, JsonElement> entry : userListObject.entrySet()) {
-                JsonObject userObject = transactionHelper.readUser(entry.getKey());
-
-                if (userObject.has(RESOURCES)) {
-                    resourceCount += userObject.getAsJsonArray(RESOURCES).size();
-                }
-                if (userObject.has(CONFIRMED_FRIENDS)) {
-                    friendCount += userObject.getAsJsonArray(CONFIRMED_FRIENDS).size();
-                }
-                if (userObject.has(PENDING_FRIENDS)) {
-                    pendingCount += userObject.getAsJsonArray(PENDING_FRIENDS).size();
-                }
+        int userCount = 0;
+        while (true) {
+            try {
+                JsonObject userObject = transactionHelper.readUser(String.valueOf(userCount));
+                userCount++;
+            } catch (ConnectionException | NotFoundException e) {
+                break;
             }
-            hashMap.put(RESOURCES_PER_USER, String.valueOf(resourceCount / (float) userCount));
-            hashMap.put(AVG_FRIENDS_PER_USER, String.valueOf(friendCount / (float) userCount));
-            hashMap.put(AVG_PENDING_PER_USER, String.valueOf(pendingCount / (float) userCount));
-        } catch (ConnectionException | NotFoundException e) {
-            e.printStackTrace();
-            return null;
         }
-        return hashMap;
-        */
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(USER_COUNT, String.valueOf(100000));
+        hashMap.put(USER_COUNT, String.valueOf(userCount));
 
         try {
                 JsonObject userObject = transactionHelper.readUser("0");

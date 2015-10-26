@@ -1,10 +1,11 @@
 numclients=1
 ratingtype=1
-loadbetweenrounds=false
-bgmode=repeated
+loadbetweenrounds=true
+bgmode=onetime
 datastore=TestDS.TestDSClient
 exe=java -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass
 loadworkloadfile=./workloads/populateDB
+usercount=10000
 workloadfile=./workloads/VeryLowUpdateActions
 interarrivaltime=0
 thinktime=0
@@ -29,7 +30,7 @@ zipfianmean=0.27
 warmup=100000
 warmupthreads=100
 #clientinfo
-ip=192.168.0.16
+ip=127.0.0.1
 port=12510
-usercount=1000
+usercount=10000
 useroffset=0
