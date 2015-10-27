@@ -13,9 +13,9 @@ import static java.lang.Math.log10;
 public class TransactionHelper {
     private ConnectionPool connectionPool;
     private JsonParser jsonParser;
+    private Transaction transaction;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
-    private static final String USER_LIST = "user_list";
     private static final String MANIPULATION = "manipulation";
     private static final long MAX_WAIT_TIME = 10240;
 
@@ -27,6 +27,61 @@ public class TransactionHelper {
     public TransactionHelper(ConnectionPool connectionPool) {
         jsonParser = new JsonParser();
         this.connectionPool = connectionPool;
+        transaction = null;
+    }
+
+    /**
+     * Begin a transaction.
+     */
+    public void beginTransaction() {
+        transaction = new Transaction(getConnection());
+    }
+
+    /**
+     * End a transaction.
+     */
+    public void endTransaction() {
+        double i = 10;
+        while (true) {
+            try {
+                transaction.commit();
+                transaction.closeConnection();
+                break;
+            } catch (ConnectionException | AbortException e) {
+                try {
+                    Thread.sleep((long) i);
+                    if (i <= MAX_WAIT_TIME) {
+                        i = i * log10(i);
+                    }
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns a connection from the given connection pool.
+     *
+     * @return An instance of Connection.
+     */
+    private Connection getConnection() {
+        Connection connection;
+        double i = 10;
+        while (true) {
+            try {
+                connection = connectionPool.getConnection();
+                if (connection != null) break;
+            } catch (ConnectionException e) {
+                try {
+                    Thread.sleep((long) i);
+                    if (i <= MAX_WAIT_TIME) {
+                        i = i * log10(i);
+                    }
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+        return connection;
     }
 
     /**
@@ -34,10 +89,9 @@ public class TransactionHelper {
      *
      * @param userId User ID given by BG.
      * @return JsonObject instance.
-     * @throws ConnectionException
      * @throws NotFoundException
      */
-    public JsonObject readUser(final String userId) throws ConnectionException, NotFoundException {
+    public JsonObject readUser(final String userId) throws NotFoundException {
         return read(String.format("%s%s", USER_ID_PREFIX, userId));
     }
 
@@ -46,10 +100,8 @@ public class TransactionHelper {
      *
      * @param userId User ID given by BG.
      * @param value  JsonObject instance.
-     * @throws ConnectionException
-     * @throws AbortException
      */
-    public void writeUser(final String userId, final JsonObject value) throws ConnectionException, AbortException {
+    public void writeUser(final String userId, final JsonObject value) {
         write(String.format("%s%s", USER_ID_PREFIX, userId), value);
     }
 
@@ -58,10 +110,9 @@ public class TransactionHelper {
      *
      * @param resourceId Resource ID given by BG.
      * @return JsonObject instance.
-     * @throws ConnectionException
      * @throws NotFoundException
      */
-    public JsonObject readResource(final String resourceId) throws ConnectionException, NotFoundException {
+    public JsonObject readResource(final String resourceId) throws NotFoundException {
         return read(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId));
     }
 
@@ -70,11 +121,8 @@ public class TransactionHelper {
      *
      * @param resourceId Resource ID given by BG.
      * @param value      JsonObject instance.
-     * @throws ConnectionException
-     * @throws AbortException
      */
-    public void writeResource(final String resourceId, final JsonObject value) throws ConnectionException,
-            AbortException {
+    public void writeResource(final String resourceId, final JsonObject value) {
         write(String.format("%s%s", RESOURCE_ID_PREFIX, resourceId), value);
     }
 
@@ -83,10 +131,9 @@ public class TransactionHelper {
      *
      * @param resourceId Resource ID given by BG.
      * @return JsonObject instance.
-     * @throws ConnectionException
      * @throws NotFoundException
      */
-    public JsonObject readManipulations(final String resourceId) throws ConnectionException, NotFoundException {
+    public JsonObject readManipulations(final String resourceId) throws NotFoundException {
         JsonObject manipulationObject;
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
@@ -103,11 +150,10 @@ public class TransactionHelper {
      * @param resourceId     Resource ID given by BG.
      * @param manipulationId Manipulation ID given by BG.
      * @param value          JsonObject instance.
-     * @throws ConnectionException
      * @throws NotFoundException
      */
-    public void writeManipulation(final String resourceId, final String manipulationId, final JsonObject value) throws
-            ConnectionException, NotFoundException, AbortException {
+    public void writeManipulation(final String resourceId, final String manipulationId, final JsonObject value)
+            throws NotFoundException {
         JsonObject manipulationObject;
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
@@ -125,12 +171,9 @@ public class TransactionHelper {
      *
      * @param resourceId     Resource ID given by BG.
      * @param manipulationId Manipulation ID given by BG.
-     * @throws ConnectionException
      * @throws NotFoundException
-     * @throws AbortException
      */
-    public void deleteManipulation(final String resourceId, final String manipulationId) throws ConnectionException,
-            NotFoundException, AbortException {
+    public void deleteManipulation(final String resourceId, final String manipulationId) throws NotFoundException {
         JsonObject resourceObject = readResource(resourceId);
         if (resourceObject.has(MANIPULATION)) {
             JsonObject manipulationObject = resourceObject.getAsJsonObject(MANIPULATION);
@@ -148,14 +191,12 @@ public class TransactionHelper {
      * @throws NotFoundException
      */
     private synchronized JsonObject read(final String key) throws NotFoundException {
-        Connection connection;
-
+        ErlangValue erlangValue;
         double i = 10;
         while (true) {
             try {
-                connection = connectionPool.getConnection();
-                if (connection != null)
-                    break;
+                erlangValue = transaction.read(key);
+                if (erlangValue != null) break;
             } catch (ConnectionException e) {
                 try {
                     Thread.sleep((long) i);
@@ -166,30 +207,7 @@ public class TransactionHelper {
                 }
             }
         }
-
-        TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
-        ErlangValue erlangValue;
-
-        i = 10;
-        while (true) {
-            try {
-                erlangValue = transactionSingleOp.read(key);
-                if (erlangValue != null)
-                    break;
-            } catch (ConnectionException e) {
-                try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }
-
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
-        connectionPool.releaseConnection(connection);
-
         return jsonElement.getAsJsonObject();
     }
 
@@ -200,14 +218,11 @@ public class TransactionHelper {
      * @param value JsonObject instance.
      */
     private synchronized void write(final String key, final JsonObject value) {
-        Connection connection;
-
         double i = 10;
         while (true) {
             try {
-                connection = connectionPool.getConnection();
-                if (connection != null)
-                    break;
+                transaction.write(key, value.toString());
+                break;
             } catch (ConnectionException e) {
                 try {
                     Thread.sleep((long) i);
@@ -218,25 +233,5 @@ public class TransactionHelper {
                 }
             }
         }
-
-        TransactionSingleOp transactionSingleOp = new TransactionSingleOp(connection);
-
-        i = 10;
-        while (true) {
-            try {
-                transactionSingleOp.write(key, value.toString());
-                break;
-            } catch (ConnectionException | AbortException e) {
-                try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }
-
-        connectionPool.releaseConnection(connection);
     }
 }
