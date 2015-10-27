@@ -14,6 +14,7 @@ public class TransactionHelper {
     private ConnectionPool connectionPool;
     private JsonParser jsonParser;
     private Transaction transaction;
+    private Connection connection;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
     private static final String MANIPULATION = "manipulation";
@@ -25,16 +26,16 @@ public class TransactionHelper {
      * @param connectionPool A ConnectionPool instance.
      */
     public TransactionHelper(ConnectionPool connectionPool) {
-        jsonParser = new JsonParser();
+        this.jsonParser = new JsonParser();
         this.connectionPool = connectionPool;
-        transaction = null;
     }
 
     /**
      * Begin a transaction.
      */
     public void beginTransaction() {
-        transaction = new Transaction(getConnection());
+        connection = getConnection();
+        transaction = new Transaction(connection);
     }
 
     /**
@@ -45,7 +46,6 @@ public class TransactionHelper {
         while (true) {
             try {
                 transaction.commit();
-                transaction.closeConnection();
                 break;
             } catch (ConnectionException | AbortException e) {
                 try {
@@ -57,6 +57,7 @@ public class TransactionHelper {
                 }
             }
         }
+        connectionPool.releaseConnection(connection);
     }
 
     /**

@@ -31,5 +31,5 @@ warmupthreads=100
 #clientinfo
 ip=127.0.0.1
 port=12510
-usercount=1000
+usercount=100000
 useroffset=0

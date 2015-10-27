@@ -207,6 +207,8 @@ public class TestDSClient extends DB {
             return -1;
         }
 
+        transactionHelper.endTransaction();
+
         /**
          * Dump data to result.
          */
@@ -252,7 +254,6 @@ public class TestDSClient extends DB {
             result.put(PENDING_COUNT, new ObjectByteIterator(String.valueOf(pendingCount).getBytes()));
         }
 
-        transactionHelper.endTransaction();
         return 0;
     }
 
@@ -579,8 +580,8 @@ public class TestDSClient extends DB {
      */
     @Override
     public synchronized int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
+        transactionHelper.beginTransaction();
         try {
-            transactionHelper.beginTransaction();
             JsonObject creatorObject = transactionHelper.readUser(String.valueOf(creatorID));
 
             if (creatorObject.has(CREATED_RESOURCES)) {
@@ -701,8 +702,8 @@ public class TestDSClient extends DB {
      */
     @Override
     public synchronized int delCommentOnResource(int resourceCreatorID, int resourceID, int manipulationID) {
+        transactionHelper.beginTransaction();
         try {
-            transactionHelper.beginTransaction();
             transactionHelper.deleteManipulation(String.valueOf(resourceID), String.valueOf(manipulationID));
         } catch (NotFoundException e) {
             transactionHelper.endTransaction();
