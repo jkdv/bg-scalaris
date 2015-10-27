@@ -1,0 +1,717 @@
+Loading round 0
+Creating schema for the datastore using the following command:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass onetime -schema -p ratingmode=false  -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p workloadfile=./workloads/LowUpdateActions -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian
+Stdout: BGClient is in onetime mode.
+Stdout: *****max execution time specified : 0
+Stdout: BG Client: ThreadCount =1
+Stdout: 
+Stdout: Loading workload...
+Stdout: Connected
+Stdout: EXECUTIONDONE
+Stdout: Creating data store schema...
+Stdout: Schema creation was successful
+Stdout: EXECUTIONDONE
+Thread 0: trying to connect to the BG client's Listener port for loading on port: 12510.
+Thread 0: connection socket created to BG client's listener for machine 127.0.0.1 on port 12510.
+Thread 0: sending load msg to BG client's listener... MSG:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass  onetime  -loadindex  -P ./workloads/populateDB -p machineid=0 -p ratingmode=false -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p usercount=100000 -p probs=1.0@ -p numclients=1 -p threadcount=12 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass  onetime  -loadindex  -P ./workloads/populateDB -p machineid=0 -p ratingmode=false -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p ratingunit=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p usercount=100000 -p probs=1.0@ -p numclients=1 -p threadcount=12 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: Loading completed.
+The population of the social graph by all the BGClients is completed.
+Loading time = 822132
+starting 127.0.0.1 12510 with 10
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=10 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=10 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 10 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8087.35
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8045.6
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99751398384089
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8144.421389465263
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8103.572410689732
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99876600720035
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8157.49737504375
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8117.164713921435
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99917871053448
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8177.472781590231
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8137.448281896477
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99938556539504
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8177.178228217718
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8137.618623813762
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99950846062156
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8192.263462275629
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8152.780786986883
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99959114836204
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8200.561420551136
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8161.269124726789
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99964991939395
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8214.16473441123
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8175.102966819372
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99969419918796
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8221.568529413398
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8182.74695421743
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99972843041607
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180010
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1479907
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8221.248819510027
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1472919
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8182.428753958114
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):740211.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):94452.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):12644.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180009.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):645759.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1479903.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10075.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8221.272269719848
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8182.451988511685
+127.0.0.1:12510 ***Thread 0: READ(OPS):740211.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99972843041607
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+####### First Round Succeeded! total threads=10
+starting 127.0.0.1 12510 with 20
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=20 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=20 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 20 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8471.026448677567
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8433.22833858307
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99229277952013
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8549.386265343366
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8509.787255318617
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9961809747915
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8573.073782103633
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8533.407776537057
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99746100196674
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8607.5223119422
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8567.87330316742
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99810343016539
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8633.357332853344
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8593.44813103738
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99848724984349
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8646.689221846304
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8606.43155947401
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99874127363742
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8655.597777174611
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8615.748346452194
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99892225477566
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8669.272884088949
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8629.523380957737
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99905847657163
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8682.171963800603
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8642.50595823403
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99916435149177
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180008
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1562821
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8681.95302431003
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1555681
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8642.288120527977
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):781075.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):94416.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):13341.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180007.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):686659.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1562820.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10033.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8681.995700167216
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8642.330576033155
+127.0.0.1:12510 ***Thread 0: READ(OPS):781075.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99916435310324
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+starting 127.0.0.1 12510 with 40
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=40 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=40 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 40 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7350.799999999999
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7315.1
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.97675388517787
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7292.55
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7258.3
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98828926883706
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7403.483333333333
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7368.733333333334
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99230986711902
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7459.944250696866
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7425.607179910251
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99427664348707
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7504.974950250497
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7470.465295347046
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99544878951187
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7484.587628436429
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7449.979583503471
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99619689353315
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7462.739551860344
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7428.575510174927
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99673079752195
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7466.175422807215
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7432.025849676879
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99714078841919
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):7491.661203764403
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):7457.4615837601805
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99746714552515
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180023
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1348541
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):7490.937269126723
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1342385
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):7456.7416385684055
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):674019.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):61971.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):11771.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180010.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):612048.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1348522.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10021.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):7491.372701516582
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):7457.174601411033
+127.0.0.1:12510 ***Thread 0: READ(OPS):674019.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99731820602882
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+starting 127.0.0.1 12510 with 30
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=30 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=30 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 30 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8121.14394280286
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8081.49592520374
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98515200633514
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8139.47151321217
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8101.797455063624
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99259442113059
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: 60
+127.0.0.1:12510 ***Thread 0: sec:
+127.0.0.1:12510 ***Thread 0: 485655
+127.0.0.1:12510 ***Thread 0: actions;
+127.0.0.1:12510 ***Thread 0: 8112
+127.0.0.1:12510 ***Thread 0: current
+127.0.0.1:12510 ***Thread 0: acts/sec;
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8130.664488925184
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8094.131764470592
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9950582406925
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8135.56080548993
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8098.836264546692
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99629581040723
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8136.477270454591
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8099.928001439972
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99703706995848
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8142.305961567308
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8105.773237112715
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99753266900446
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8145.576491764404
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8109.327009614148
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9978860641421
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8147.160660491744
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8111.486106423669
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99815079354072
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8151.081654648282
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8115.315385384607
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99835703875404
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180013
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1467233
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8150.705782360163
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1460795
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8114.941698655097
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):178.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):733948.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):81928.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):13434.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180011.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):652020.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1467224.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10020.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8150.746343279022
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8114.981862219531
+127.0.0.1:12510 ***Thread 0: READ(OPS):733948.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):178.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):2.4252399352542688E-4
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99835705899869
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+starting 127.0.0.1 12510 with 25
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=25 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=25 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 25 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8300.7
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8265.650000000001
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98971647722804
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8209.06454677266
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8173.741312934354
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99480068263978
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8254.174860837973
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8217.9094030199
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99655236051763
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8284.180395490113
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8247.381315467113
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9974234928949
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: 100
+127.0.0.1:12510 ***Thread 0: sec:
+127.0.0.1:12510 ***Thread 0: 820512
+127.0.0.1:12510 ***Thread 0: actions;
+127.0.0.1:12510 ***Thread 0: 7980.51
+127.0.0.1:12510 ***Thread 0: current
+127.0.0.1:12510 ***Thread 0: acts/sec;
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8240.965903409658
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8204.299570042995
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9979281305034
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8244.412965586202
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8208.11599033414
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99827421504702
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8214.661705151737
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8178.585968245352
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99851540442567
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8205.342132728376
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8169.482098105755
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99869951736795
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8220.440202657659
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8184.641793698058
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99871037893818
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180012
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1479745
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8220.25753838633
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1473301
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8184.459924893896
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):739936.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):69276.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):13684.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180010.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):670660.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1479738.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10021.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8220.309982778734
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8184.511971557135
+127.0.0.1:12510 ***Thread 0: READ(OPS):739936.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99871037893818
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+starting 127.0.0.1 12510 with 22
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=22 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=22 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 22 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8435.75
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8398.75
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.98987944634618
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8288.449999999999
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8252.599999999999
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9948501078448
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8359.583333333334
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8323.783333333333
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9965961059452
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8430.01962475469
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8393.745078186523
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9974683845911
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8468.005319946802
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8431.395686043139
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99798374901708
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8450.13791551737
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8413.36322197315
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99831618483141
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8405.597102877837
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8369.033078335155
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99854908323398
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8399.878750757807
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8363.322729232943
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99872957986459
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8412.714373809034
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8376.12013266593
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9988724622109
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180014
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1514312
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8412.190162987323
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1507725
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8375.59856455609
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):757493.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):71721.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):13794.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180007.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):685772.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1514305.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10018.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8412.478403617637
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8375.885382235136
+127.0.0.1:12510 ***Thread 0: READ(OPS):757493.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99873982324362
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+starting 127.0.0.1 12510 with 21
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 21 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8744.65
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8705.3
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99138460831558
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: 40
+127.0.0.1:12510 ***Thread 0: sec:
+127.0.0.1:12510 ***Thread 0: 349100
+127.0.0.1:12510 ***Thread 0: actions;
+127.0.0.1:12510 ***Thread 0: 8748
+127.0.0.1:12510 ***Thread 0: current
+127.0.0.1:12510 ***Thread 0: acts/sec;
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8765.725
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8727.5
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99570323689487
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8771.566666666668
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8733.816666666666
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99713756299747
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8757.8
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8719.725
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99784970282893
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8760.342396576034
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8722.29277707223
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99828028588527
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8765.760285330956
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8727.752268731094
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99856780033227
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8771.45163248834
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8733.444761108849
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99877319780714
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8768.24519846751
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8730.226686083211
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99892615143412
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8770.890161721323
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8732.718151565825
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99904573960906
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180008
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1578784
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8770.632416337052
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1571913
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8732.461890582641
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):789812.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):73472.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):14463.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180004.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):716340.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1578770.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10019.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8770.749538899136
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8732.578164929668
+127.0.0.1:12510 ***Thread 0: READ(OPS):789812.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.9990457487151
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+FinalActualRound:600
+starting 127.0.0.1 12510 with 21
+%%%%%%%%%%%%%%%%%%%%20
+Thread 0: trying to connect to the BG client's Listener port 12510 .
+Thread 0 connection socket created to BG client's listener 127.0.0.1 on port 12510 .
+Thread 0: sending msg to BG client's listener... java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  .
+Thread 0: sent the java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t  -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0 #  msg to the BG client.
+127.0.0.1****Thread 0: the connection is established and the BGClient Listener has started the BG client.
+
+
+
+#######Attempt for 21 threads
+
+
+All listeners and their BG client processes have started and created connections. Need to send startSimulation msg.
+Thread 0: sending start message to the BG client Listener which forwards it to the BG client...
+Thread 0: sent the StartSimulation  msg to the BG client Listener which will fwd it to the BG client...
+Thread 0: waiting to get the stats...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8621.2
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8584.300000000001
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99242808133405
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8502.974999999999
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8467.95
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99616199906707
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8516.766666666666
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8481.116666666667
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9974453049618
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8567.005412432345
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8530.443369457882
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99809508179426
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8577.374226257736
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8540.744592554076
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99847789968891
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8575.97853351222
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8539.38717177357
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99873137933221
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: 140
+127.0.0.1:12510 ***Thread 0: sec:
+127.0.0.1:12510 ***Thread 0: 1189243
+127.0.0.1:12510 ***Thread 0: actions;
+127.0.0.1:12510 ***Thread 0: 8185.11
+127.0.0.1:12510 ***Thread 0: current
+127.0.0.1:12510 ***Thread 0: acts/sec;
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8530.547818013
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8493.986143846869
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99890686764606
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8522.86732079245
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8486.207112055496
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.99904262456376
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(SESSIONS/SEC):8528.637297927893
+127.0.0.1:12510 ***Thread 0: MONITOR-THROUGHPUT(ACTIONS/SEC):8491.683795344703
+127.0.0.1:12510 ***Thread 0: MONITOR-SATISFYINGOPS(%):99.9991495419302
+Doing monitoring validation...
+127.0.0.1:12510 ***Thread 0: Initiated
+127.0.0.1:12510 ***Thread 0: StartingValidation
+127.0.0.1:12510 ***Thread 0: UpdatesInDB
+127.0.0.1:12510 ***Thread 0: DoneReadCycles
+127.0.0.1:12510 ***Thread 0: DOneReadValidation
+127.0.0.1:12510 ***Thread 0: PopulateStats
+127.0.0.1:12510 ***Thread 0: OVERALLRUNTIME(ms):180014
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(SESSIONS):1535242
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(SESSIONS/SECS):8528.458897641294
+127.0.0.1:12510 ***Thread 0: OVERALLOPCOUNT(ACTIONS):1528590
+127.0.0.1:12510 ***Thread 0: OVERALLTHROUGHPUT(ACTIONS/SECS):8491.506216183187
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: READ(OPS):767457.0
+127.0.0.1:12510 ***Thread 0: PROCESSED(OPS):69405.0
+127.0.0.1:12510 ***Thread 0: WRITE(OPS):14332.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):180006.0
+127.0.0.1:12510 ***Thread 0: PRUNED(OPS):698052.0
+127.0.0.1:12510 ***Thread 0: RAMPEDRUNTIME(ms):1535230.0
+127.0.0.1:12510 ***Thread 0: VALIDATIONTIME(MS):10020.0
+127.0.0.1:12510 ***Thread 0: FRESHNESSCONF(%):0.0
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(SESSIONS/SECS):8528.771263180117
+127.0.0.1:12510 ***Thread 0: RAMPEDTHROUGHPUT(ACTIONS/SECS):8491.816939435352
+127.0.0.1:12510 ***Thread 0: READ(OPS):767457.0
+127.0.0.1:12510 ***Thread 0: NUMSTALE(OPS):0.0
+127.0.0.1:12510 ***Thread 0: STALENESS(OPS):0.0
+127.0.0.1:12510 ***Thread 0: SATISFYINGOPS(%):99.99901870351108
+127.0.0.1:12510 ***Thread 0: THEEND.
+0Experiment done!
+succeeded!
+succeeded!
+Max Decided ThreadCount:21
+Max Decided ThreadCounts - Throughput(sessions) :8528.771263180117
+Max Decided ThreadCounts - Throughput(actions) :8491.816939435352
+Sending BGClient shutdown message to 127.0.0.1:12510

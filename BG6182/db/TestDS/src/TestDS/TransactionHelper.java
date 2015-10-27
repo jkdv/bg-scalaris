@@ -5,20 +5,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.zib.scalaris.*;
 
-import static java.lang.Math.log10;
-
 /**
  * Wrapper class of TransactionSingleOp.
  */
 public class TransactionHelper {
     private ConnectionPool connectionPool;
     private JsonParser jsonParser;
-    private Transaction transaction;
-    private Connection connection;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
     private static final String MANIPULATION = "manipulation";
-    private static final long MAX_WAIT_TIME = 10240;
+    private static final double INIT_WAIT_TIME = 5;
+    private static final double MAX_WAIT_TIME = 10;
 
     /**
      * Creates an instance with connection pool.
@@ -31,58 +28,27 @@ public class TransactionHelper {
     }
 
     /**
-     * Begin a transaction.
-     */
-    public void beginTransaction() {
-        connection = getConnection();
-        transaction = new Transaction(connection);
-    }
-
-    /**
-     * End a transaction.
-     */
-    public void endTransaction() {
-        double i = 10;
-        while (true) {
-            try {
-                transaction.commit();
-                break;
-            } catch (ConnectionException | AbortException e) {
-                try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }
-        connectionPool.releaseConnection(connection);
-    }
-
-    /**
      * Returns a connection from the given connection pool.
      *
      * @return An instance of Connection.
      */
     private Connection getConnection() {
-        Connection connection;
-        double i = 10;
+        double ms = INIT_WAIT_TIME;
+        Connection conn;
         while (true) {
             try {
-                connection = connectionPool.getConnection();
-                if (connection != null) break;
+                conn = connectionPool.getConnection();
+                if (conn != null) break;
             } catch (ConnectionException e) {
                 try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
+                    Thread.sleep((long) ms);
+                    if (ms < MAX_WAIT_TIME)
+                        ms *= Math.log(ms);
                 } catch (InterruptedException ignored) {
                 }
             }
         }
-        return connection;
+        return conn;
     }
 
     /**
@@ -193,21 +159,24 @@ public class TransactionHelper {
      */
     private synchronized JsonObject read(final String key) throws NotFoundException {
         ErlangValue erlangValue;
-        double i = 10;
+        Connection connection = getConnection();
+        TransactionSingleOp transaction = new TransactionSingleOp(connection);
+
+        double ms = INIT_WAIT_TIME;
         while (true) {
             try {
                 erlangValue = transaction.read(key);
                 if (erlangValue != null) break;
             } catch (ConnectionException e) {
                 try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
+                    Thread.sleep((long) ms);
+                    if (ms < MAX_WAIT_TIME)
+                        ms *= Math.log(ms);
                 } catch (InterruptedException ignored) {
                 }
             }
         }
+        connectionPool.releaseConnection(connection);
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
         return jsonElement.getAsJsonObject();
     }
@@ -219,20 +188,23 @@ public class TransactionHelper {
      * @param value JsonObject instance.
      */
     private synchronized void write(final String key, final JsonObject value) {
-        double i = 10;
+        Connection connection = getConnection();
+        TransactionSingleOp transaction = new TransactionSingleOp(connection);
+
+        double ms = INIT_WAIT_TIME;
         while (true) {
             try {
                 transaction.write(key, value.toString());
                 break;
-            } catch (ConnectionException e) {
+            } catch (ConnectionException | AbortException e) {
                 try {
-                    Thread.sleep((long) i);
-                    if (i <= MAX_WAIT_TIME) {
-                        i = i * log10(i);
-                    }
+                    Thread.sleep((long) ms);
+                    if (ms < MAX_WAIT_TIME)
+                        ms *= Math.log(ms);
                 } catch (InterruptedException ignored) {
                 }
             }
         }
+        connectionPool.releaseConnection(connection);
     }
 }

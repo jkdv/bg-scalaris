@@ -1,0 +1,1465 @@
+BGListener: started and waiting for connection on 12510
+BGListener: Connection received from localhost
+Stdout: BGClient is in onetime mode.
+Stdout: *****max execution time specified : 0
+Stdout: BG Client: ThreadCount =10
+Stdout: 
+Stdout: Loading workload...
+Stdout: Connected
+Stdout: EXECUTIONDONE
+Stdout: Creating the initial zipfian probabilities...
+Stdout: Sum of original probs = 1.00000000000002
+Stdout: Initial Zipfian probabilities are created.
+Stdout: Done creating clusters.
+Stdout: ClusterId0, 100000
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+Stdout: Time to create fragments :164 msecs
+Stdout: Done dividing users
+Stdout: 10 Seconds:  Load is in progress
+Stdout: Done loading users
+Stdout: 20 Seconds:  Load is in progress
+Stdout: 30 Seconds:  Load is in progress
+Stdout: 40 Seconds:  Load is in progress
+Stdout: 50 Seconds:  Load is in progress
+Stdout: 60 Seconds:  Load is in progress
+Stdout: 70 Seconds:  Load is in progress
+Stdout: 80 Seconds:  Load is in progress
+Stdout: 90 Seconds:  Load is in progress
+Stdout: 100 Seconds:  Load is in progress
+Stdout: 110 Seconds:  Load is in progress
+Stdout: 120 Seconds:  Load is in progress
+Stdout: 130 Seconds:  Load is in progress
+Stdout: 140 Seconds:  Load is in progress
+Stdout: 150 Seconds:  Load is in progress
+Stdout: 160 Seconds:  Load is in progress
+Stdout: 170 Seconds:  Load is in progress
+Stdout: 180 Seconds:  Load is in progress
+Stdout: 190 Seconds:  Load is in progress
+Stdout: Done loading friends
+Stdout: 200 Seconds:  Load is in progress
+Stdout: 210 Seconds:  Load is in progress
+Stdout: 220 Seconds:  Load is in progress
+Stdout: 230 Seconds:  Load is in progress
+Stdout: 240 Seconds:  Load is in progress
+Stdout: 250 Seconds:  Load is in progress
+Stdout: 260 Seconds:  Load is in progress
+Stdout: 270 Seconds:  Load is in progress
+Stdout: 280 Seconds:  Load is in progress
+Stdout: 290 Seconds:  Load is in progress
+Stdout: 300 Seconds:  Load is in progress
+Stdout: 310 Seconds:  Load is in progress
+Stdout: 320 Seconds:  Load is in progress
+Stdout: 330 Seconds:  Load is in progress
+Stdout: 340 Seconds:  Load is in progress
+Stdout: 350 Seconds:  Load is in progress
+Stdout: 360 Seconds:  Load is in progress
+Stdout: 370 Seconds:  Load is in progress
+Stdout: 380 Seconds:  Load is in progress
+Stdout: 390 Seconds:  Load is in progress
+Stdout: 400 Seconds:  Load is in progress
+Stdout: 410 Seconds:  Load is in progress
+Stdout: 420 Seconds:  Load is in progress
+Stdout: 430 Seconds:  Load is in progress
+Stdout: 440 Seconds:  Load is in progress
+Stdout: 450 Seconds:  Load is in progress
+Stdout: 460 Seconds:  Load is in progress
+Stdout: 470 Seconds:  Load is in progress
+Stdout: 480 Seconds:  Load is in progress
+Stdout: 490 Seconds:  Load is in progress
+Stdout: 500 Seconds:  Load is in progress
+Stdout: 510 Seconds:  Load is in progress
+Stdout: 520 Seconds:  Load is in progress
+Stdout: 530 Seconds:  Load is in progress
+Stdout: 540 Seconds:  Load is in progress
+Stdout: 550 Seconds:  Load is in progress
+Stdout: 560 Seconds:  Load is in progress
+Stdout: 570 Seconds:  Load is in progress
+Stdout: 580 Seconds:  Load is in progress
+Stdout: 590 Seconds:  Load is in progress
+Stdout: 600 Seconds:  Load is in progress
+Stdout: 610 Seconds:  Load is in progress
+Stdout: 620 Seconds:  Load is in progress
+Stdout: 630 Seconds:  Load is in progress
+Stdout: 640 Seconds:  Load is in progress
+Stdout: 650 Seconds:  Load is in progress
+Stdout: 660 Seconds:  Load is in progress
+Stdout: 670 Seconds:  Load is in progress
+Stdout: 680 Seconds:  Load is in progress
+Stdout: 690 Seconds:  Load is in progress
+Stdout: 700 Seconds:  Load is in progress
+Stdout: 710 Seconds:  Load is in progress
+Stdout: Done loading resources
+Stdout: Done loading manipulation
+Stdout: Done creating indexes and closing db connection
+Stdout: 720 Seconds:  Load is in progress
+Stdout: 730 Seconds:  Load is in progress
+Stdout: 740 Seconds:  Load is in progress
+Stdout: 750 Seconds:  Load is in progress
+Stdout: 760 Seconds:  Load is in progress
+Stdout: 770 Seconds:  Load is in progress
+Stdout: 780 Seconds:  Load is in progress
+Stdout: 790 Seconds:  Load is in progress
+Stdout: 800 Seconds:  Load is in progress
+Stdout: 810 Seconds:  Load is in progress
+Stdout: Done doing load sanity check
+Stdout: 820 Seconds:  Load is in progress
+Stdout: state thread came out of while
+Stdout: load state thread exited
+Stdout: Loading datastore completed.
+Stdout: EXECUTIONDONE
+BGListener: sent loading completed message to localhost
+BGlistener: ended loading data store will go wait for next request.
+BGListener: Connection received from localhost
+BGLlistener: Starting the BGClient using:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated 43930
+Stdout: Started
+Got "started" msg from the BG client so it has started and ready.
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=10 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient: started and Waiting for connection on 43930
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =10
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 171 msec
+stdout: (might take a few minutes for large data sets)
+stdout:
+stdout:After init: Tue Oct 27 08:34:35 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 101073, actions=100000)
+stdout:End warmup. elapsedTime = 17125
+stdout:
+stdout:After warmup: Tue Oct 27 08:34:52 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD CREATED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 79943 actions; 7991.9 current acts/sec;  10 sec: 80345 operations; 8032.09 current ops/sec; [INV AverageResponseTime(us)=1134.38][PROFILE AverageResponseTime(us)=339.1][FRIENDS AverageResponseTime(us)=3485.89][UNFRIEND AverageResponseTime(us)=2439.8][PENDING AverageResponseTime(us)=325.7][GETTOPRES AverageResponseTime(us)=1841.41]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8087.35
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8045.6
+Stdout: MONITOR-SATISFYINGOPS(%):99.99751398384089
+Stdout:  20 sec: 160926 actions; 8097.49 current acts/sec;  20 sec: 161761 operations; 8140.79 current ops/sec; [INV AverageResponseTime(us)=1047.91][ACCEPT AverageResponseTime(us)=2092.75][PROFILE AverageResponseTime(us)=322.43][FRIENDS AverageResponseTime(us)=3450.88][UNFRIEND AverageResponseTime(us)=2129.97][PENDING AverageResponseTime(us)=334.26][GETTOPRES AverageResponseTime(us)=1814.83]
+Stdout:  30 sec: 242509 actions; 8157.48 current acts/sec;  30 sec: 243724 operations; 8195.48 current ops/sec; [INV AverageResponseTime(us)=1185.41][ACCEPT AverageResponseTime(us)=2037.25][PROFILE AverageResponseTime(us)=321.66][FRIENDS AverageResponseTime(us)=3405.33][REJECT AverageResponseTime(us)=1048.57][UNFRIEND AverageResponseTime(us)=2056.87][PENDING AverageResponseTime(us)=347.82][GETTOPRES AverageResponseTime(us)=1811.52]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8144.421389465263
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8103.572410689732
+Stdout: MONITOR-SATISFYINGOPS(%):99.99876600720035
+Stdout:  40 sec: 324169 actions; 8166 current acts/sec;  40 sec: 325803 operations; 8207.9 current ops/sec; [INV AverageResponseTime(us)=1056.28][ACCEPT AverageResponseTime(us)=2049.1][PROFILE AverageResponseTime(us)=322.26][FRIENDS AverageResponseTime(us)=3385.46][REJECT AverageResponseTime(us)=1036.4][UNFRIEND AverageResponseTime(us)=2051.94][PENDING AverageResponseTime(us)=341.58][GETTOPRES AverageResponseTime(us)=1800.84]
+Stdout:  50 sec: 405388 actions; 8121.09 current acts/sec;  50 sec: 407432 operations; 8162.08 current ops/sec; [INV AverageResponseTime(us)=1054.07][ACCEPT AverageResponseTime(us)=2041.88][PROFILE AverageResponseTime(us)=319.44][FRIENDS AverageResponseTime(us)=3340.71][REJECT AverageResponseTime(us)=1088.6][UNFRIEND AverageResponseTime(us)=2058.16][PENDING AverageResponseTime(us)=366.2][GETTOPRES AverageResponseTime(us)=1815.72]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8157.49737504375
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8117.164713921435
+Stdout: MONITOR-SATISFYINGOPS(%):99.99917871053448
+Stdout:  60 sec: 487086 actions; 8168.98 current acts/sec;  60 sec: 489506 operations; 8206.58 current ops/sec; [INV AverageResponseTime(us)=1042.92][ACCEPT AverageResponseTime(us)=2092.56][PROFILE AverageResponseTime(us)=321.72][FRIENDS AverageResponseTime(us)=3324.58][REJECT AverageResponseTime(us)=1020.3][UNFRIEND AverageResponseTime(us)=2084.25][PENDING AverageResponseTime(us)=345.58][GETTOPRES AverageResponseTime(us)=1805.28]
+Stdout:  70 sec: 568917 actions; 8183.1 current acts/sec;  70 sec: 571715 operations; 8220.9 current ops/sec; [INV AverageResponseTime(us)=1047.04][ACCEPT AverageResponseTime(us)=2017.38][PROFILE AverageResponseTime(us)=322.18][FRIENDS AverageResponseTime(us)=3268.17][REJECT AverageResponseTime(us)=1042.6][UNFRIEND AverageResponseTime(us)=2171.59][PENDING AverageResponseTime(us)=366.38][GETTOPRES AverageResponseTime(us)=1808.19]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8177.472781590231
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8137.448281896477
+Stdout: MONITOR-SATISFYINGOPS(%):99.99938556539504
+Stdout:  80 sec: 651061 actions; 8213.58 current acts/sec;  80 sec: 654263 operations; 8253.97 current ops/sec; [INV AverageResponseTime(us)=1048.04][ACCEPT AverageResponseTime(us)=3032.43][PROFILE AverageResponseTime(us)=318.96][FRIENDS AverageResponseTime(us)=3254.45][REJECT AverageResponseTime(us)=1931.77][UNFRIEND AverageResponseTime(us)=2159.71][PENDING AverageResponseTime(us)=344.68][GETTOPRES AverageResponseTime(us)=1808.86]
+Stdout:  90 sec: 732792 actions; 8173.1 current acts/sec;  90 sec: 736370 operations; 8210.7 current ops/sec; [INV AverageResponseTime(us)=1071.87][ACCEPT AverageResponseTime(us)=2053][PROFILE AverageResponseTime(us)=321.72][FRIENDS AverageResponseTime(us)=3228.56][REJECT AverageResponseTime(us)=1055.54][UNFRIEND AverageResponseTime(us)=2078.47][PENDING AverageResponseTime(us)=355.53][GETTOPRES AverageResponseTime(us)=1814.78]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8177.178228217718
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8137.618623813762
+Stdout: MONITOR-SATISFYINGOPS(%):99.99950846062156
+Stdout:  100 sec: 813820 actions; 8101.99 current acts/sec;  100 sec: 817776 operations; 8139.79 current ops/sec; [INV AverageResponseTime(us)=1081.29][ACCEPT AverageResponseTime(us)=2136][PROFILE AverageResponseTime(us)=322.9][FRIENDS AverageResponseTime(us)=3241.83][REJECT AverageResponseTime(us)=1046.77][UNFRIEND AverageResponseTime(us)=2105.63][PENDING AverageResponseTime(us)=362.72][GETTOPRES AverageResponseTime(us)=1830.94]
+Stdout:  110 sec: 896032 actions; 8220.38 current acts/sec;  110 sec: 900377 operations; 8259.27 current ops/sec; [INV AverageResponseTime(us)=1025.24][ACCEPT AverageResponseTime(us)=2022][PROFILE AverageResponseTime(us)=321.59][FRIENDS AverageResponseTime(us)=3166.57][REJECT AverageResponseTime(us)=1046.41][UNFRIEND AverageResponseTime(us)=2118.56][PENDING AverageResponseTime(us)=359.98][GETTOPRES AverageResponseTime(us)=1805.02]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8192.263462275629
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8152.780786986883
+Stdout: MONITOR-SATISFYINGOPS(%):99.99959114836204
+Stdout:  120 sec: 978399 actions; 8236.7 current acts/sec;  120 sec: 983137 operations; 8276 current ops/sec; [INV AverageResponseTime(us)=1046.8][ACCEPT AverageResponseTime(us)=2106.77][PROFILE AverageResponseTime(us)=322.07][FRIENDS AverageResponseTime(us)=3189.71][REJECT AverageResponseTime(us)=1039.1][UNFRIEND AverageResponseTime(us)=2127.09][PENDING AverageResponseTime(us)=363.04][GETTOPRES AverageResponseTime(us)=1809.4]
+Stdout:  130 sec: 1060387 actions; 8197.98 current acts/sec;  130 sec: 1065500 operations; 8235.48 current ops/sec; [INV AverageResponseTime(us)=1169.25][ACCEPT AverageResponseTime(us)=1997.75][PROFILE AverageResponseTime(us)=321.76][FRIENDS AverageResponseTime(us)=3152.74][REJECT AverageResponseTime(us)=1071.62][UNFRIEND AverageResponseTime(us)=2025.02][PENDING AverageResponseTime(us)=358.42][GETTOPRES AverageResponseTime(us)=1813.38]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8200.561420551136
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8161.269124726789
+Stdout: MONITOR-SATISFYINGOPS(%):99.99964991939395
+Stdout:  140 sec: 1142678 actions; 8228.28 current acts/sec;  140 sec: 1148179 operations; 8267.07 current ops/sec; [INV AverageResponseTime(us)=1052.14][ACCEPT AverageResponseTime(us)=1955.65][PROFILE AverageResponseTime(us)=319.87][FRIENDS AverageResponseTime(us)=3184.72][REJECT AverageResponseTime(us)=1136.04][UNFRIEND AverageResponseTime(us)=2146.61][PENDING AverageResponseTime(us)=364.83][GETTOPRES AverageResponseTime(us)=1811.45]
+Stdout:  150 sec: 1225113 actions; 8243.5 current acts/sec;  150 sec: 1231003 operations; 8282.4 current ops/sec; [INV AverageResponseTime(us)=1029.77][ACCEPT AverageResponseTime(us)=2087.26][PROFILE AverageResponseTime(us)=318.33][FRIENDS AverageResponseTime(us)=3149.77][REJECT AverageResponseTime(us)=1058.75][UNFRIEND AverageResponseTime(us)=2151.85][PENDING AverageResponseTime(us)=370.24][GETTOPRES AverageResponseTime(us)=1809.24]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8214.16473441123
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8175.102966819372
+Stdout: MONITOR-SATISFYINGOPS(%):99.99969419918796
+Stdout:  160 sec: 1308117 actions; 8299.57 current acts/sec;  160 sec: 1314367 operations; 8335.57 current ops/sec; [INV AverageResponseTime(us)=1030.22][ACCEPT AverageResponseTime(us)=2075.15][PROFILE AverageResponseTime(us)=321.24][FRIENDS AverageResponseTime(us)=3132.21][REJECT AverageResponseTime(us)=1036.3][UNFRIEND AverageResponseTime(us)=2032.5][PENDING AverageResponseTime(us)=361.21][GETTOPRES AverageResponseTime(us)=1792.62]
+Stdout:  170 sec: 1390473 actions; 8235.6 current acts/sec;  170 sec: 1397099 operations; 8273.2 current ops/sec; [INV AverageResponseTime(us)=1049.94][ACCEPT AverageResponseTime(us)=2015.06][PROFILE AverageResponseTime(us)=320.73][FRIENDS AverageResponseTime(us)=3105.54][REJECT AverageResponseTime(us)=1013.03][UNFRIEND AverageResponseTime(us)=2163.4][PENDING AverageResponseTime(us)=365.66][GETTOPRES AverageResponseTime(us)=1809.12]
+Stdout: Maximum time elapsed. Requesting stop for the workload.10
+Stdout: Stop request is set to :true
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8221.568529413398
+Stdout: statusThread died
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8182.74695421743
+Stdout: MONITOR-SATISFYINGOPS(%):99.99972843041607
+Stdout: 
+Stdout: After workload done: Tue Oct 27 08:37:52 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):73
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:94452
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:645759
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10001
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 740211 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 739974 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10076
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180010
+OVERALLOPCOUNT(SESSIONS):1479907
+OVERALLTHROUGHPUT(SESSIONS/SECS):8221.248819510027
+OVERALLOPCOUNT(ACTIONS):1472919
+OVERALLTHROUGHPUT(ACTIONS/SECS):8182.428753958114
+NUMSTALE(OPS):0.0
+READ(OPS):740211.0
+PROCESSED(OPS):94452.0
+WRITE(OPS):12644.0
+RAMPEDRUNTIME(ms):180009.0
+PRUNED(OPS):645759.0
+RAMPEDRUNTIME(ms):1479903.0
+VALIDATIONTIME(MS):10075.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8221.272269719848
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8182.451988511685
+READ(OPS):740211.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99972843041607
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1479907
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8221.248819510027
+Stdout: OVERALLOPCOUNT(ACTIONS):1472919
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8182.428753958114
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1479903.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8221.272269719848
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1472915.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8182.451988511685
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=20 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =20
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 108 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 08:39:37 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 101011, actions=100000)
+stdout:End warmup. elapsedTime = 16554
+stdout:
+stdout:After warmup: Tue Oct 27 08:39:53 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 83081 actions; 8308.1 current acts/sec;  10 sec: 83461 operations; 8346.1 current ops/sec; [INV AverageResponseTime(us)=1960.75][ACCEPT AverageResponseTime(us)=4018.36][PROFILE AverageResponseTime(us)=678.7][FRIENDS AverageResponseTime(us)=5977.75][REJECT AverageResponseTime(us)=1880][UNFRIEND AverageResponseTime(us)=3929.08][PENDING AverageResponseTime(us)=715.21][GETTOPRES AverageResponseTime(us)=3565.75]
+Stdout:  20 sec: 168667 actions; 8557.74 current acts/sec;  20 sec: 169423 operations; 8595.34 current ops/sec; [INV AverageResponseTime(us)=1904.43][ACCEPT AverageResponseTime(us)=4011.6][PROFILE AverageResponseTime(us)=612.55][FRIENDS AverageResponseTime(us)=5891.25][REJECT AverageResponseTime(us)=2445.85][UNFRIEND AverageResponseTime(us)=4088.02][PENDING AverageResponseTime(us)=693.03][GETTOPRES AverageResponseTime(us)=3486.56]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8471.026448677567
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8433.22833858307
+Stdout: MONITOR-SATISFYINGOPS(%):99.99229277952013
+Stdout:  30 sec: 254954 actions; 8627.84 current acts/sec;  30 sec: 256140 operations; 8670.83 current ops/sec; [INV AverageResponseTime(us)=2020.32][ACCEPT AverageResponseTime(us)=3859.16][PROFILE AverageResponseTime(us)=604.72][FRIENDS AverageResponseTime(us)=5792.53][REJECT AverageResponseTime(us)=1967.9][UNFRIEND AverageResponseTime(us)=3885.99][PENDING AverageResponseTime(us)=709.03][GETTOPRES AverageResponseTime(us)=3474.96]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8549.386265343366
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8509.787255318617
+Stdout: MONITOR-SATISFYINGOPS(%):99.9961809747915
+Stdout:  40 sec: 340402 actions; 8544.8 current acts/sec;  40 sec: 341986 operations; 8584.6 current ops/sec; [INV AverageResponseTime(us)=1950.68][ACCEPT AverageResponseTime(us)=4552.09][PROFILE AverageResponseTime(us)=606.47][FRIENDS AverageResponseTime(us)=5841.62][REJECT AverageResponseTime(us)=1986.74][UNFRIEND AverageResponseTime(us)=4184.7][PENDING AverageResponseTime(us)=697.11][GETTOPRES AverageResponseTime(us)=3509.22]
+Stdout:  50 sec: 426409 actions; 8599.84 current acts/sec;  50 sec: 428403 operations; 8640.84 current ops/sec; [INV AverageResponseTime(us)=1947.79][ACCEPT AverageResponseTime(us)=3852][PROFILE AverageResponseTime(us)=607.55][FRIENDS AverageResponseTime(us)=5811.18][REJECT AverageResponseTime(us)=1909.83][UNFRIEND AverageResponseTime(us)=3891.89][PENDING AverageResponseTime(us)=709.32][GETTOPRES AverageResponseTime(us)=3495.34]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8573.073782103633
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8533.407776537057
+Stdout: MONITOR-SATISFYINGOPS(%):99.99746100196674
+Stdout:  60 sec: 512024 actions; 8561.5 current acts/sec;  60 sec: 514404 operations; 8600.1 current ops/sec; [INV AverageResponseTime(us)=2069.13][ACCEPT AverageResponseTime(us)=4894.28][PROFILE AverageResponseTime(us)=601.55][FRIENDS AverageResponseTime(us)=5785.41][REJECT AverageResponseTime(us)=1964.03][UNFRIEND AverageResponseTime(us)=4097.97][PENDING AverageResponseTime(us)=702.27][GETTOPRES AverageResponseTime(us)=3478.64]
+Stdout:  70 sec: 598661 actions; 8662.83 current acts/sec;  70 sec: 601445 operations; 8703.23 current ops/sec; [INV AverageResponseTime(us)=2029.83][ACCEPT AverageResponseTime(us)=5125.38][PROFILE AverageResponseTime(us)=598.92][FRIENDS AverageResponseTime(us)=5759.19][REJECT AverageResponseTime(us)=1880.47][UNFRIEND AverageResponseTime(us)=3885.23][PENDING AverageResponseTime(us)=701.96][GETTOPRES AverageResponseTime(us)=3480.07]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8607.5223119422
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8567.87330316742
+Stdout: MONITOR-SATISFYINGOPS(%):99.99810343016539
+Stdout:  80 sec: 685468 actions; 8680.7 current acts/sec;  80 sec: 688640 operations; 8719.5 current ops/sec; [INV AverageResponseTime(us)=1887.4][ACCEPT AverageResponseTime(us)=3948.74][PROFILE AverageResponseTime(us)=599.19][FRIENDS AverageResponseTime(us)=5647.52][REJECT AverageResponseTime(us)=1873.43][UNFRIEND AverageResponseTime(us)=4025.89][PENDING AverageResponseTime(us)=703.91][GETTOPRES AverageResponseTime(us)=3462.49]
+Stdout:  90 sec: 772655 actions; 8717.83 current acts/sec;  90 sec: 776242 operations; 8759.32 current ops/sec; [INV AverageResponseTime(us)=1903.94][ACCEPT AverageResponseTime(us)=3952.96][PROFILE AverageResponseTime(us)=596.76][FRIENDS AverageResponseTime(us)=5614.88][REJECT AverageResponseTime(us)=1945.92][UNFRIEND AverageResponseTime(us)=3971.47][PENDING AverageResponseTime(us)=696.66][GETTOPRES AverageResponseTime(us)=3443.76]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8633.357332853344
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8593.44813103738
+Stdout: MONITOR-SATISFYINGOPS(%):99.99848724984349
+Stdout:  100 sec: 859389 actions; 8673.4 current acts/sec;  100 sec: 863380 operations; 8713.8 current ops/sec; [INV AverageResponseTime(us)=1900.23][ACCEPT AverageResponseTime(us)=3778.96][PROFILE AverageResponseTime(us)=603.75][FRIENDS AverageResponseTime(us)=5685.65][REJECT AverageResponseTime(us)=1930.11][UNFRIEND AverageResponseTime(us)=3894.21][PENDING AverageResponseTime(us)=695.29][GETTOPRES AverageResponseTime(us)=3471.44]
+Stdout:  110 sec: 945784 actions; 8638.64 current acts/sec;  110 sec: 950182 operations; 8679.33 current ops/sec; [INV AverageResponseTime(us)=1926.04][ACCEPT AverageResponseTime(us)=4794.95][PROFILE AverageResponseTime(us)=600.97][FRIENDS AverageResponseTime(us)=5615.6][REJECT AverageResponseTime(us)=1909.26][UNFRIEND AverageResponseTime(us)=3932.99][PENDING AverageResponseTime(us)=714.34][GETTOPRES AverageResponseTime(us)=3479.52]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8646.689221846304
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8606.43155947401
+Stdout: MONITOR-SATISFYINGOPS(%):99.99874127363742
+Stdout:  120 sec: 1032823 actions; 8703.03 current acts/sec;  120 sec: 1037654 operations; 8746.33 current ops/sec; [INV AverageResponseTime(us)=1928.52][ACCEPT AverageResponseTime(us)=4122.17][PROFILE AverageResponseTime(us)=595.1][FRIENDS AverageResponseTime(us)=5649.17][REJECT AverageResponseTime(us)=2012.93][UNFRIEND AverageResponseTime(us)=3849.46][PENDING AverageResponseTime(us)=705.32][GETTOPRES AverageResponseTime(us)=3455.5]
+Stdout:  130 sec: 1119422 actions; 8659.9 current acts/sec;  130 sec: 1124628 operations; 8697.4 current ops/sec; [INV AverageResponseTime(us)=1958.15][ACCEPT AverageResponseTime(us)=3941.5][PROFILE AverageResponseTime(us)=603.26][FRIENDS AverageResponseTime(us)=5555.04][REJECT AverageResponseTime(us)=1991.44][UNFRIEND AverageResponseTime(us)=3872.37][PENDING AverageResponseTime(us)=707.89][GETTOPRES AverageResponseTime(us)=3464.07]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8655.597777174611
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8615.748346452194
+Stdout: MONITOR-SATISFYINGOPS(%):99.99892225477566
+Stdout:  140 sec: 1206257 actions; 8682.63 current acts/sec;  140 sec: 1211836 operations; 8719.93 current ops/sec; [INV AverageResponseTime(us)=1940.48][ACCEPT AverageResponseTime(us)=4607.6][PROFILE AverageResponseTime(us)=599.12][FRIENDS AverageResponseTime(us)=5561.92][REJECT AverageResponseTime(us)=1906.22][UNFRIEND AverageResponseTime(us)=4045.08][PENDING AverageResponseTime(us)=726.05][GETTOPRES AverageResponseTime(us)=3467.11]
+Stdout:  150 sec: 1293554 actions; 8729.7 current acts/sec;  150 sec: 1299530 operations; 8769.4 current ops/sec; [INV AverageResponseTime(us)=2016.06][ACCEPT AverageResponseTime(us)=3857.1][PROFILE AverageResponseTime(us)=604.16][FRIENDS AverageResponseTime(us)=5547.66][REJECT AverageResponseTime(us)=1922.95][UNFRIEND AverageResponseTime(us)=4005.25][PENDING AverageResponseTime(us)=687.19][GETTOPRES AverageResponseTime(us)=3446.51]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8669.272884088949
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8629.523380957737
+Stdout: MONITOR-SATISFYINGOPS(%):99.99905847657163
+Stdout:  160 sec: 1380786 actions; 8723.2 current acts/sec;  160 sec: 1387146 operations; 8761.6 current ops/sec; [INV AverageResponseTime(us)=1906.52][ACCEPT AverageResponseTime(us)=3806.8][PROFILE AverageResponseTime(us)=595.93][FRIENDS AverageResponseTime(us)=5610.99][REJECT AverageResponseTime(us)=1844.1][UNFRIEND AverageResponseTime(us)=4019.71][PENDING AverageResponseTime(us)=714.72][GETTOPRES AverageResponseTime(us)=3451.91]
+Stdout:  170 sec: 1468359 actions; 8756.42 current acts/sec;  170 sec: 1475128 operations; 8797.32 current ops/sec; [INV AverageResponseTime(us)=1884.77][ACCEPT AverageResponseTime(us)=3938.83][PROFILE AverageResponseTime(us)=601.89][FRIENDS AverageResponseTime(us)=5538.89][REJECT AverageResponseTime(us)=1920.32][UNFRIEND AverageResponseTime(us)=3779.78][PENDING AverageResponseTime(us)=716.11][GETTOPRES AverageResponseTime(us)=3434.63]
+Stdout: Maximum time elapsed. Requesting stop for the workload.20
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8682.171963800603
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8642.50595823403
+Stdout: MONITOR-SATISFYINGOPS(%):99.99916435149177
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 08:42:53 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):32
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:94416
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:686659
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10001
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 781075 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 780844 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10033
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180008
+OVERALLOPCOUNT(SESSIONS):1562821
+OVERALLTHROUGHPUT(SESSIONS/SECS):8681.95302431003
+OVERALLOPCOUNT(ACTIONS):1555681
+OVERALLTHROUGHPUT(ACTIONS/SECS):8642.288120527977
+NUMSTALE(OPS):0.0
+READ(OPS):781075.0
+PROCESSED(OPS):94416.0
+WRITE(OPS):13341.0
+RAMPEDRUNTIME(ms):180007.0
+PRUNED(OPS):686659.0
+RAMPEDRUNTIME(ms):1562820.0
+VALIDATIONTIME(MS):10033.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8681.995700167216
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8642.330576033155
+READ(OPS):781075.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99916435310324
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1562821
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8681.95302431003
+Stdout: OVERALLOPCOUNT(ACTIONS):1555681
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8642.288120527977
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1562820.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8681.995700167216
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1555680.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8642.330576033155
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=40 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =40
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 75 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 08:44:33 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 101026, actions=100000)
+stdout:End warmup. elapsedTime = 16311
+stdout:
+stdout:After warmup: Tue Oct 27 08:44:50 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 74118 actions; 7411.8 current acts/sec;  10 sec: 74482 operations; 7448.2 current ops/sec; [INV AverageResponseTime(us)=4140.3][PROFILE AverageResponseTime(us)=1543.23][FRIENDS AverageResponseTime(us)=12125.04][REJECT AverageResponseTime(us)=4190][UNFRIEND AverageResponseTime(us)=8616.66][PENDING AverageResponseTime(us)=1660.25][GETTOPRES AverageResponseTime(us)=7624]
+Stdout:  20 sec: 146298 actions; 7217.28 current acts/sec;  20 sec: 147012 operations; 7252.27 current ops/sec; [INV AverageResponseTime(us)=4337.12][PROFILE AverageResponseTime(us)=1353.96][FRIENDS AverageResponseTime(us)=12518.07][REJECT AverageResponseTime(us)=4501.81][UNFRIEND AverageResponseTime(us)=8769.65][PENDING AverageResponseTime(us)=1596.36][GETTOPRES AverageResponseTime(us)=7966.41]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7350.799999999999
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7315.1
+Stdout: MONITOR-SATISFYINGOPS(%):99.97675388517787
+Stdout:  30 sec: 218550 actions; 7225.2 current acts/sec;  30 sec: 219608 operations; 7259.6 current ops/sec; [INV AverageResponseTime(us)=4426.18][ACCEPT AverageResponseTime(us)=8770][PROFILE AverageResponseTime(us)=1366.5][FRIENDS AverageResponseTime(us)=12509.15][REJECT AverageResponseTime(us)=4236.41][UNFRIEND AverageResponseTime(us)=8994.25][PENDING AverageResponseTime(us)=1655.29][GETTOPRES AverageResponseTime(us)=7963.98]
+Stdout:  40 sec: 290328 actions; 7177.08 current acts/sec;  40 sec: 291698 operations; 7208.28 current ops/sec; [INV AverageResponseTime(us)=4568.93][ACCEPT AverageResponseTime(us)=8848.83][PROFILE AverageResponseTime(us)=1362.92][FRIENDS AverageResponseTime(us)=12551.52][REJECT AverageResponseTime(us)=4355.69][UNFRIEND AverageResponseTime(us)=8958.19][PENDING AverageResponseTime(us)=1623.44][GETTOPRES AverageResponseTime(us)=7996.2]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7292.55
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7258.3
+Stdout: MONITOR-SATISFYINGOPS(%):99.98828926883706
+Stdout:  50 sec: 366118 actions; 7579 current acts/sec;  50 sec: 367836 operations; 7613.8 current ops/sec; [INV AverageResponseTime(us)=4496.1][ACCEPT AverageResponseTime(us)=8443.08][PROFILE AverageResponseTime(us)=1301.83][FRIENDS AverageResponseTime(us)=11812.77][REJECT AverageResponseTime(us)=4353.4][UNFRIEND AverageResponseTime(us)=8808.44][PENDING AverageResponseTime(us)=1532.79][GETTOPRES AverageResponseTime(us)=7583.17]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7403.483333333333
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7368.733333333334
+Stdout: MONITOR-SATISFYINGOPS(%):99.99230986711902
+Stdout:  60 sec: 442127 actions; 7600.14 current acts/sec;  60 sec: 444212 operations; 7636.84 current ops/sec; [INV AverageResponseTime(us)=4391.76][ACCEPT AverageResponseTime(us)=8556.08][PROFILE AverageResponseTime(us)=1286.32][FRIENDS AverageResponseTime(us)=11772.39][REJECT AverageResponseTime(us)=4411.46][UNFRIEND AverageResponseTime(us)=8697.91][PENDING AverageResponseTime(us)=1556.67][GETTOPRES AverageResponseTime(us)=7570.09]
+Stdout:  70 sec: 518001 actions; 7587.4 current acts/sec;  70 sec: 520417 operations; 7620.5 current ops/sec; [INV AverageResponseTime(us)=4395.67][ACCEPT AverageResponseTime(us)=8551][PROFILE AverageResponseTime(us)=1295.4][FRIENDS AverageResponseTime(us)=12016.11][REJECT AverageResponseTime(us)=4222.43][UNFRIEND AverageResponseTime(us)=8647.99][PENDING AverageResponseTime(us)=1517.49][GETTOPRES AverageResponseTime(us)=7565.77]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7459.944250696866
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7425.607179910251
+Stdout: MONITOR-SATISFYINGOPS(%):99.99427664348707
+Stdout:  80 sec: 594062 actions; 7605.34 current acts/sec;  80 sec: 596809 operations; 7638.44 current ops/sec; [INV AverageResponseTime(us)=4223.11][ACCEPT AverageResponseTime(us)=8693.14][PROFILE AverageResponseTime(us)=1293.63][FRIENDS AverageResponseTime(us)=11858.64][REJECT AverageResponseTime(us)=4661.22][UNFRIEND AverageResponseTime(us)=8956.77][PENDING AverageResponseTime(us)=1548.42][GETTOPRES AverageResponseTime(us)=7562.5]
+Stdout:  90 sec: 670532 actions; 7647 current acts/sec;  90 sec: 673616 operations; 7680.7 current ops/sec; [INV AverageResponseTime(us)=4254.22][ACCEPT AverageResponseTime(us)=8411.96][PROFILE AverageResponseTime(us)=1294.15][FRIENDS AverageResponseTime(us)=11707.74][REJECT AverageResponseTime(us)=4782.21][UNFRIEND AverageResponseTime(us)=8528.61][PENDING AverageResponseTime(us)=1539.9][GETTOPRES AverageResponseTime(us)=7538.06]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7504.974950250497
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7470.465295347046
+Stdout: MONITOR-SATISFYINGOPS(%):99.99544878951187
+Stdout:  100 sec: 747065 actions; 7652.53 current acts/sec;  100 sec: 750516 operations; 7689.23 current ops/sec; [INV AverageResponseTime(us)=4411.23][ACCEPT AverageResponseTime(us)=8565.55][PROFILE AverageResponseTime(us)=1289.92][FRIENDS AverageResponseTime(us)=11723.81][REJECT AverageResponseTime(us)=4217.83][UNFRIEND AverageResponseTime(us)=8595.54][PENDING AverageResponseTime(us)=1538.17][GETTOPRES AverageResponseTime(us)=7531.51]
+Stdout:  110 sec: 822016 actions; 7495.1 current acts/sec;  110 sec: 825825 operations; 7530.9 current ops/sec; [INV AverageResponseTime(us)=4368.94][ACCEPT AverageResponseTime(us)=7836.42][PROFILE AverageResponseTime(us)=1324.19][FRIENDS AverageResponseTime(us)=12084.87][REJECT AverageResponseTime(us)=4303.85][UNFRIEND AverageResponseTime(us)=8466.56][PENDING AverageResponseTime(us)=1557.18][GETTOPRES AverageResponseTime(us)=7735.75]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7484.587628436429
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7449.979583503471
+Stdout: MONITOR-SATISFYINGOPS(%):99.99619689353315
+Stdout:  120 sec: 894045 actions; 7200.02 current acts/sec;  120 sec: 898198 operations; 7234.41 current ops/sec; [INV AverageResponseTime(us)=4526.09][ACCEPT AverageResponseTime(us)=8313.12][PROFILE AverageResponseTime(us)=1365.99][FRIENDS AverageResponseTime(us)=12341.48][REJECT AverageResponseTime(us)=4129.31][UNFRIEND AverageResponseTime(us)=8777.69][PENDING AverageResponseTime(us)=1623.97][GETTOPRES AverageResponseTime(us)=7987.5]
+Stdout:  130 sec: 966849 actions; 7279.67 current acts/sec;  130 sec: 971329 operations; 7312.37 current ops/sec; [INV AverageResponseTime(us)=4426.07][ACCEPT AverageResponseTime(us)=9908.44][PROFILE AverageResponseTime(us)=1357.43][FRIENDS AverageResponseTime(us)=12240.99][REJECT AverageResponseTime(us)=4354][UNFRIEND AverageResponseTime(us)=8791.84][PENDING AverageResponseTime(us)=1598.5][GETTOPRES AverageResponseTime(us)=7924.5]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7462.739551860344
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7428.575510174927
+Stdout: MONITOR-SATISFYINGOPS(%):99.99673079752195
+Stdout:  140 sec: 1040061 actions; 7320.47 current acts/sec;  140 sec: 1044844 operations; 7350.76 current ops/sec; [INV AverageResponseTime(us)=4658.42][ACCEPT AverageResponseTime(us)=8070.31][PROFILE AverageResponseTime(us)=1339.62][FRIENDS AverageResponseTime(us)=12152.61][REJECT AverageResponseTime(us)=4938.54][UNFRIEND AverageResponseTime(us)=8691.69][PENDING AverageResponseTime(us)=1629.5][GETTOPRES AverageResponseTime(us)=7867.57]
+Stdout:  150 sec: 1115087 actions; 7502.6 current acts/sec;  150 sec: 1120235 operations; 7539.1 current ops/sec; [INV AverageResponseTime(us)=4706.24][ACCEPT AverageResponseTime(us)=8250.61][PROFILE AverageResponseTime(us)=1318.84][FRIENDS AverageResponseTime(us)=11984.11][REJECT AverageResponseTime(us)=4286.52][UNFRIEND AverageResponseTime(us)=8887.73][PENDING AverageResponseTime(us)=1575.58][GETTOPRES AverageResponseTime(us)=7659.91]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7466.175422807215
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7432.025849676879
+Stdout: MONITOR-SATISFYINGOPS(%):99.99714078841919
+Stdout:  160 sec: 1189211 actions; 7412.4 current acts/sec;  160 sec: 1194675 operations; 7444 current ops/sec; [INV AverageResponseTime(us)=4551.74][ACCEPT AverageResponseTime(us)=8505.26][PROFILE AverageResponseTime(us)=1328.69][FRIENDS AverageResponseTime(us)=12004.74][REJECT AverageResponseTime(us)=4256.44][UNFRIEND AverageResponseTime(us)=8851.24][PENDING AverageResponseTime(us)=1654.13][GETTOPRES AverageResponseTime(us)=7771.36]
+Stdout:  170 sec: 1265658 actions; 7643.94 current acts/sec;  170 sec: 1271481 operations; 7679.83 current ops/sec; [INV AverageResponseTime(us)=4379.69][ACCEPT AverageResponseTime(us)=8586.06][PROFILE AverageResponseTime(us)=1292.56][FRIENDS AverageResponseTime(us)=11647.78][REJECT AverageResponseTime(us)=4719.67][UNFRIEND AverageResponseTime(us)=8987.12][PENDING AverageResponseTime(us)=1583.6][GETTOPRES AverageResponseTime(us)=7562.21]
+Stdout: Maximum time elapsed. Requesting stop for the workload.40
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):7491.661203764403
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):7457.4615837601805
+Stdout: MONITOR-SATISFYINGOPS(%):99.99746714552515
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 08:47:50 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):20
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:61971
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:612048
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10001
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 674019 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 673831 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10021
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180023
+OVERALLOPCOUNT(SESSIONS):1348541
+OVERALLTHROUGHPUT(SESSIONS/SECS):7490.937269126723
+OVERALLOPCOUNT(ACTIONS):1342385
+OVERALLTHROUGHPUT(ACTIONS/SECS):7456.7416385684055
+NUMSTALE(OPS):0.0
+READ(OPS):674019.0
+PROCESSED(OPS):61971.0
+WRITE(OPS):11771.0
+RAMPEDRUNTIME(ms):180010.0
+PRUNED(OPS):612048.0
+RAMPEDRUNTIME(ms):1348522.0
+VALIDATIONTIME(MS):10021.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):7491.372701516582
+RAMPEDTHROUGHPUT(ACTIONS/SECS):7457.174601411033
+READ(OPS):674019.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99731820602882
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1348541
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):7490.937269126723
+Stdout: OVERALLOPCOUNT(ACTIONS):1342385
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):7456.7416385684055
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1348522.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):7491.372701516582
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1342366.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):7457.174601411033
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=30 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =30
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 70 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 08:49:28 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 100991, actions=100000)
+stdout:End warmup. elapsedTime = 17293
+stdout:
+stdout:After warmup: Tue Oct 27 08:49:45 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD CREATED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 80017 actions; 8000.9 current acts/sec;  10 sec: 80423 operations; 8041.5 current ops/sec; [INV AverageResponseTime(us)=3315.18][PROFILE AverageResponseTime(us)=1029.44][FRIENDS AverageResponseTime(us)=8564.58][REJECT AverageResponseTime(us)=3134.15][UNFRIEND AverageResponseTime(us)=6198.09][PENDING AverageResponseTime(us)=1317.27][GETTOPRES AverageResponseTime(us)=5660.31]
+Stdout:  20 sec: 161628 actions; 8161.1 current acts/sec;  20 sec: 162421 operations; 8199.8 current ops/sec; [INV AverageResponseTime(us)=3290.78][ACCEPT AverageResponseTime(us)=6155.94][PROFILE AverageResponseTime(us)=958.29][FRIENDS AverageResponseTime(us)=8566.14][REJECT AverageResponseTime(us)=3623.53][UNFRIEND AverageResponseTime(us)=6443.38][PENDING AverageResponseTime(us)=1173.3][GETTOPRES AverageResponseTime(us)=5578.97]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8121.14394280286
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8081.49592520374
+Stdout: MONITOR-SATISFYINGOPS(%):99.98515200633514
+Stdout:  30 sec: 242749 actions; 8111.29 current acts/sec;  30 sec: 243897 operations; 8146.79 current ops/sec; [INV AverageResponseTime(us)=3398.97][ACCEPT AverageResponseTime(us)=6331.33][PROFILE AverageResponseTime(us)=953.98][FRIENDS AverageResponseTime(us)=8659.41][REJECT AverageResponseTime(us)=3219.31][UNFRIEND AverageResponseTime(us)=6315.83][PENDING AverageResponseTime(us)=1157.99][GETTOPRES AverageResponseTime(us)=5604.54]
+Stdout:  40 sec: 324074 actions; 8132.5 current acts/sec;  40 sec: 325581 operations; 8168.4 current ops/sec; [INV AverageResponseTime(us)=3331.56][ACCEPT AverageResponseTime(us)=6452.81][PROFILE AverageResponseTime(us)=966.88][FRIENDS AverageResponseTime(us)=8642.86][REJECT AverageResponseTime(us)=3276.2][UNFRIEND AverageResponseTime(us)=6517.84][PENDING AverageResponseTime(us)=1175.34][GETTOPRES AverageResponseTime(us)=5614.64]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8139.47151321217
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8101.797455063624
+Stdout: MONITOR-SATISFYINGOPS(%):99.99259442113059
+Stdout:  50 sec: 404535 actions; 8045.3 current acts/sec;  50 sec: 406393 operations; 8080.39 current ops/sec; [INV AverageResponseTime(us)=3283.93][ACCEPT AverageResponseTime(us)=6988.4][PROFILE AverageResponseTime(us)=970.56][FRIENDS AverageResponseTime(us)=8601.29][REJECT AverageResponseTime(us)=3110.74][UNFRIEND AverageResponseTime(us)=6486.54][PENDING AverageResponseTime(us)=1171.56][GETTOPRES AverageResponseTime(us)=5638.22]
+Stdout:  60 sec: 485655 actions; 8112 current acts/sec; MONITOR-THROUGHPUT(SESSIONS/SEC):8130.664488925184
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8094.131764470592
+Stdout: MONITOR-SATISFYINGOPS(%):99.9950582406925
+Stdout:  60 sec: 487847 operations; 8145.4 current ops/sec; [INV AverageResponseTime(us)=3154.3][ACCEPT AverageResponseTime(us)=7076.52][PROFILE AverageResponseTime(us)=968.03][FRIENDS AverageResponseTime(us)=8630.61][REJECT AverageResponseTime(us)=3301.5][UNFRIEND AverageResponseTime(us)=6736.88][PENDING AverageResponseTime(us)=1190.11][GETTOPRES AverageResponseTime(us)=5630.45]
+Stdout:  70 sec: 567189 actions; 8152.58 current acts/sec;  70 sec: 569755 operations; 8189.98 current ops/sec; [INV AverageResponseTime(us)=3174.05][ACCEPT AverageResponseTime(us)=6144.73][PROFILE AverageResponseTime(us)=959.24][FRIENDS AverageResponseTime(us)=8451][REJECT AverageResponseTime(us)=3146.81][UNFRIEND AverageResponseTime(us)=6376.24][PENDING AverageResponseTime(us)=1157.29][GETTOPRES AverageResponseTime(us)=5592.59]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8135.56080548993
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8098.836264546692
+Stdout: MONITOR-SATISFYINGOPS(%):99.99629581040723
+Stdout:  80 sec: 647923 actions; 8072.59 current acts/sec;  80 sec: 650861 operations; 8109.79 current ops/sec; [INV AverageResponseTime(us)=3185.09][ACCEPT AverageResponseTime(us)=6474.39][PROFILE AverageResponseTime(us)=974.4][FRIENDS AverageResponseTime(us)=8546.66][REJECT AverageResponseTime(us)=3148.03][UNFRIEND AverageResponseTime(us)=6723.91][PENDING AverageResponseTime(us)=1165.49][GETTOPRES AverageResponseTime(us)=5654.63]
+Stdout:  90 sec: 729007 actions; 8108.4 current acts/sec;  90 sec: 732285 operations; 8142.4 current ops/sec; [INV AverageResponseTime(us)=3293.95][ACCEPT AverageResponseTime(us)=6927.37][PROFILE AverageResponseTime(us)=964.27][FRIENDS AverageResponseTime(us)=8477.87][REJECT AverageResponseTime(us)=3562.72][UNFRIEND AverageResponseTime(us)=6592.33][PENDING AverageResponseTime(us)=1168.14][GETTOPRES AverageResponseTime(us)=5621.34]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8136.477270454591
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8099.928001439972
+Stdout: MONITOR-SATISFYINGOPS(%):99.99703706995848
+Stdout:  100 sec: 810027 actions; 8101.19 current acts/sec;  100 sec: 813682 operations; 8138.89 current ops/sec; [INV AverageResponseTime(us)=3170.86][ACCEPT AverageResponseTime(us)=7878.96][PROFILE AverageResponseTime(us)=967.42][FRIENDS AverageResponseTime(us)=8504.38][REJECT AverageResponseTime(us)=3199.54][UNFRIEND AverageResponseTime(us)=6526.81][PENDING AverageResponseTime(us)=1170.33][GETTOPRES AverageResponseTime(us)=5615.4]
+Stdout:  110 sec: 891417 actions; 8139 current acts/sec;  110 sec: 895447 operations; 8176.5 current ops/sec; [INV AverageResponseTime(us)=3169.05][ACCEPT AverageResponseTime(us)=6383.41][PROFILE AverageResponseTime(us)=962.69][FRIENDS AverageResponseTime(us)=8551.17][REJECT AverageResponseTime(us)=3224.13][UNFRIEND AverageResponseTime(us)=6561.76][PENDING AverageResponseTime(us)=1205.39][GETTOPRES AverageResponseTime(us)=5621.46]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8142.305961567308
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8105.773237112715
+Stdout: MONITOR-SATISFYINGOPS(%):99.99753266900446
+Stdout:  120 sec: 972731 actions; 8131.4 current acts/sec;  120 sec: 977115 operations; 8166.8 current ops/sec; [INV AverageResponseTime(us)=3266.69][ACCEPT AverageResponseTime(us)=6533][PROFILE AverageResponseTime(us)=960.44][FRIENDS AverageResponseTime(us)=8499.4][REJECT AverageResponseTime(us)=3169.7][UNFRIEND AverageResponseTime(us)=6586.77][PENDING AverageResponseTime(us)=1183.41][GETTOPRES AverageResponseTime(us)=5615.43]
+Stdout:  130 sec: 1053614 actions; 8087.49 current acts/sec;  130 sec: 1058326 operations; 8120.29 current ops/sec; [INV AverageResponseTime(us)=3161.8][ACCEPT AverageResponseTime(us)=6302.27][PROFILE AverageResponseTime(us)=972.18][FRIENDS AverageResponseTime(us)=8453.71][REJECT AverageResponseTime(us)=3229.56][UNFRIEND AverageResponseTime(us)=6778.17][PENDING AverageResponseTime(us)=1192.01][GETTOPRES AverageResponseTime(us)=5647.71]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8145.576491764404
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8109.327009614148
+Stdout: MONITOR-SATISFYINGOPS(%):99.9978860641421
+Stdout:  140 sec: 1135348 actions; 8172.58 current acts/sec;  140 sec: 1140423 operations; 8208.88 current ops/sec; [INV AverageResponseTime(us)=3179.14][ACCEPT AverageResponseTime(us)=6279.31][PROFILE AverageResponseTime(us)=965.56][FRIENDS AverageResponseTime(us)=8446.06][REJECT AverageResponseTime(us)=3203.68][UNFRIEND AverageResponseTime(us)=6466.79][PENDING AverageResponseTime(us)=1214.68][GETTOPRES AverageResponseTime(us)=5595.68]
+Stdout:  150 sec: 1216970 actions; 8162.2 current acts/sec;  150 sec: 1222379 operations; 8195.6 current ops/sec; [INV AverageResponseTime(us)=3131.78][ACCEPT AverageResponseTime(us)=6444.82][PROFILE AverageResponseTime(us)=960.56][FRIENDS AverageResponseTime(us)=8396.33][REJECT AverageResponseTime(us)=3191.68][UNFRIEND AverageResponseTime(us)=6469.96][PENDING AverageResponseTime(us)=1190.77][GETTOPRES AverageResponseTime(us)=5621.2]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8147.160660491744
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8111.486106423669
+Stdout: MONITOR-SATISFYINGOPS(%):99.99815079354072
+Stdout:  160 sec: 1297891 actions; 8091.29 current acts/sec;  160 sec: 1303599 operations; 8121.19 current ops/sec; [INV AverageResponseTime(us)=3208.5][ACCEPT AverageResponseTime(us)=6299.39][PROFILE AverageResponseTime(us)=971.48][FRIENDS AverageResponseTime(us)=8438.91][REJECT AverageResponseTime(us)=3161.59][UNFRIEND AverageResponseTime(us)=6450.55][PENDING AverageResponseTime(us)=1198.04][GETTOPRES AverageResponseTime(us)=5651.05]
+Stdout:  170 sec: 1379544 actions; 8165.3 current acts/sec;  170 sec: 1385590 operations; 8199.1 current ops/sec; [INV AverageResponseTime(us)=3202.42][ACCEPT AverageResponseTime(us)=6300.12][PROFILE AverageResponseTime(us)=961.89][FRIENDS AverageResponseTime(us)=8438.64][REJECT AverageResponseTime(us)=3236.15][UNFRIEND AverageResponseTime(us)=6626.51][PENDING AverageResponseTime(us)=1194.65][GETTOPRES AverageResponseTime(us)=5592.73]
+Stdout: Maximum time elapsed. Requesting stop for the workload.30
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8151.081654648282
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8115.315385384607
+Stdout: MONITOR-SATISFYINGOPS(%):99.99835703875404
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 08:52:45 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):19
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:81928
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:652020
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10000
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 733948 ,staleReadOps=178 ,staleness Perc (gran:user)=2.4252399352542688E-4
+Stdout: 	 TotalSeqRead = 733743 ,staleSeqRead=178 ,staleness Perc (gran:user)=2.425917521530018E-4
+Stdout: ******* Discrading, dumping and validation is done.10021
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180013
+OVERALLOPCOUNT(SESSIONS):1467233
+OVERALLTHROUGHPUT(SESSIONS/SECS):8150.705782360163
+OVERALLOPCOUNT(ACTIONS):1460795
+OVERALLTHROUGHPUT(ACTIONS/SECS):8114.941698655097
+NUMSTALE(OPS):178.0
+READ(OPS):733948.0
+PROCESSED(OPS):81928.0
+WRITE(OPS):13434.0
+RAMPEDRUNTIME(ms):180011.0
+PRUNED(OPS):652020.0
+RAMPEDRUNTIME(ms):1467224.0
+VALIDATIONTIME(MS):10020.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8150.746343279022
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8114.981862219531
+READ(OPS):733948.0
+NUMSTALE(OPS):178.0
+STALENESS(OPS):2.4252399352542688E-4
+SATISFYINGOPS(%):99.99835705899869
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1467233
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8150.705782360163
+Stdout: OVERALLOPCOUNT(ACTIONS):1460795
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8114.941698655097
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1467224.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8150.746343279022
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1460786.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8114.981862219531
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=25 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =25
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 70 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 08:54:19 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 101037, actions=100000)
+stdout:End warmup. elapsedTime = 15770
+stdout:
+stdout:After warmup: Tue Oct 27 08:54:35 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 82159 actions; 8214.26 current acts/sec;  10 sec: 82511 operations; 8249.45 current ops/sec; [INV AverageResponseTime(us)=2384.92][ACCEPT AverageResponseTime(us)=4695.04][PROFILE AverageResponseTime(us)=758.58][FRIENDS AverageResponseTime(us)=6260][REJECT AverageResponseTime(us)=2362.51][UNFRIEND AverageResponseTime(us)=4689.2][PENDING AverageResponseTime(us)=1087.76][GETTOPRES AverageResponseTime(us)=4211.22]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8300.7
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8265.650000000001
+Stdout: MONITOR-SATISFYINGOPS(%):99.98971647722804
+Stdout:  20 sec: 165322 actions; 8316.3 current acts/sec;  20 sec: 166023 operations; 8351.2 current ops/sec; [INV AverageResponseTime(us)=2344.72][ACCEPT AverageResponseTime(us)=5247.24][PROFILE AverageResponseTime(us)=729.52][FRIENDS AverageResponseTime(us)=6319.28][REJECT AverageResponseTime(us)=2414.6][UNFRIEND AverageResponseTime(us)=4759.38][PENDING AverageResponseTime(us)=909.9][GETTOPRES AverageResponseTime(us)=4200.22]
+Stdout:  30 sec: 247994 actions; 8266.37 current acts/sec;  30 sec: 249078 operations; 8304.67 current ops/sec; [INV AverageResponseTime(us)=2334.59][ACCEPT AverageResponseTime(us)=5390.48][PROFILE AverageResponseTime(us)=727.7][FRIENDS AverageResponseTime(us)=6366.48][REJECT AverageResponseTime(us)=2983.37][UNFRIEND AverageResponseTime(us)=4804.25][PENDING AverageResponseTime(us)=923.09][GETTOPRES AverageResponseTime(us)=4223.51]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8209.06454677266
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8173.741312934354
+Stdout: MONITOR-SATISFYINGOPS(%):99.99480068263978
+Stdout:  40 sec: 326970 actions; 7897.6 current acts/sec;  40 sec: 328383 operations; 7930.5 current ops/sec; [INV AverageResponseTime(us)=2293.32][ACCEPT AverageResponseTime(us)=5018.58][PROFILE AverageResponseTime(us)=768.09][FRIENDS AverageResponseTime(us)=6710.7][REJECT AverageResponseTime(us)=2609.93][UNFRIEND AverageResponseTime(us)=4908.12][PENDING AverageResponseTime(us)=983.09][GETTOPRES AverageResponseTime(us)=4384.43]
+Stdout:  50 sec: 410132 actions; 8316.2 current acts/sec;  50 sec: 411972 operations; 8358.9 current ops/sec; [INV AverageResponseTime(us)=2296.49][ACCEPT AverageResponseTime(us)=4640.65][PROFILE AverageResponseTime(us)=724.69][FRIENDS AverageResponseTime(us)=6246.02][REJECT AverageResponseTime(us)=2424.21][UNFRIEND AverageResponseTime(us)=5027.9][PENDING AverageResponseTime(us)=915.61][GETTOPRES AverageResponseTime(us)=4179.48]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8254.174860837973
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8217.9094030199
+Stdout: MONITOR-SATISFYINGOPS(%):99.99655236051763
+Stdout:  60 sec: 493094 actions; 8296.2 current acts/sec;  60 sec: 495270 operations; 8329.8 current ops/sec; [INV AverageResponseTime(us)=2420.79][ACCEPT AverageResponseTime(us)=5349.53][PROFILE AverageResponseTime(us)=728.36][FRIENDS AverageResponseTime(us)=6335.4][REJECT AverageResponseTime(us)=2386.89][UNFRIEND AverageResponseTime(us)=4627.64][PENDING AverageResponseTime(us)=924.22][GETTOPRES AverageResponseTime(us)=4192.96]
+Stdout:  70 sec: 576751 actions; 8364.86 current acts/sec;  70 sec: 579331 operations; 8405.26 current ops/sec; [INV AverageResponseTime(us)=2336.72][ACCEPT AverageResponseTime(us)=5510.54][PROFILE AverageResponseTime(us)=720.29][FRIENDS AverageResponseTime(us)=6258.26][REJECT AverageResponseTime(us)=2340.77][UNFRIEND AverageResponseTime(us)=4651.9][PENDING AverageResponseTime(us)=900.3][GETTOPRES AverageResponseTime(us)=4179.23]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8284.180395490113
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8247.381315467113
+Stdout: MONITOR-SATISFYINGOPS(%):99.9974234928949
+Stdout:  80 sec: 659844 actions; 8305.98 current acts/sec;  80 sec: 662788 operations; 8342.36 current ops/sec; [INV AverageResponseTime(us)=2344.29][ACCEPT AverageResponseTime(us)=4727.64][PROFILE AverageResponseTime(us)=720.68][FRIENDS AverageResponseTime(us)=6267.58][REJECT AverageResponseTime(us)=2380.83][UNFRIEND AverageResponseTime(us)=4924.32][PENDING AverageResponseTime(us)=883.26][GETTOPRES AverageResponseTime(us)=4198]
+Stdout:  90 sec: 740683 actions; 8083.9 current acts/sec;  90 sec: 744002 operations; 8121.4 current ops/sec; [INV AverageResponseTime(us)=2401.66][ACCEPT AverageResponseTime(us)=4846.03][PROFILE AverageResponseTime(us)=742.11][FRIENDS AverageResponseTime(us)=6365.49][REJECT AverageResponseTime(us)=2428.17][UNFRIEND AverageResponseTime(us)=4822.84][PENDING AverageResponseTime(us)=948.12][GETTOPRES AverageResponseTime(us)=4328.32]
+Stdout:  100 sec: 820512 actions; 7980.51 current acts/sec; MONITOR-THROUGHPUT(SESSIONS/SEC):8240.965903409658
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8204.299570042995
+Stdout: MONITOR-SATISFYINGOPS(%):99.9979281305034
+Stdout:  100 sec: 824179 operations; 8015.3 current ops/sec; [INV AverageResponseTime(us)=2687.69][ACCEPT AverageResponseTime(us)=4706.47][PROFILE AverageResponseTime(us)=756.54][FRIENDS AverageResponseTime(us)=6448.21][REJECT AverageResponseTime(us)=2720.13][UNFRIEND AverageResponseTime(us)=4746.64][PENDING AverageResponseTime(us)=930.44][GETTOPRES AverageResponseTime(us)=4354.09]
+Stdout:  110 sec: 903384 actions; 8287.2 current acts/sec;  110 sec: 907416 operations; 8323.7 current ops/sec; [INV AverageResponseTime(us)=2291.81][ACCEPT AverageResponseTime(us)=4681.21][PROFILE AverageResponseTime(us)=732.92][FRIENDS AverageResponseTime(us)=6187.14][REJECT AverageResponseTime(us)=2249.72][UNFRIEND AverageResponseTime(us)=4766.44][PENDING AverageResponseTime(us)=911.22][GETTOPRES AverageResponseTime(us)=4223.74]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8244.412965586202
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8208.11599033414
+Stdout: MONITOR-SATISFYINGOPS(%):99.99827421504702
+Stdout:  120 sec: 985060 actions; 8166.78 current acts/sec;  120 sec: 989416 operations; 8199.18 current ops/sec; [INV AverageResponseTime(us)=2466.91][ACCEPT AverageResponseTime(us)=4422][PROFILE AverageResponseTime(us)=739.75][FRIENDS AverageResponseTime(us)=6317.96][REJECT AverageResponseTime(us)=2170.07][UNFRIEND AverageResponseTime(us)=4876.18][PENDING AverageResponseTime(us)=928.44][GETTOPRES AverageResponseTime(us)=4287.82]
+Stdout:  130 sec: 1065264 actions; 8020.4 current acts/sec;  130 sec: 1069972 operations; 8055.6 current ops/sec; [INV AverageResponseTime(us)=2403.69][ACCEPT AverageResponseTime(us)=4764.23][PROFILE AverageResponseTime(us)=749.62][FRIENDS AverageResponseTime(us)=6381.54][REJECT AverageResponseTime(us)=2664.74][UNFRIEND AverageResponseTime(us)=5021.37][PENDING AverageResponseTime(us)=937.79][GETTOPRES AverageResponseTime(us)=4357.06]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8214.661705151737
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8178.585968245352
+Stdout: MONITOR-SATISFYINGOPS(%):99.99851540442567
+Stdout:  140 sec: 1145096 actions; 7983.2 current acts/sec;  140 sec: 1150147 operations; 8017.5 current ops/sec; [INV AverageResponseTime(us)=2647.14][ACCEPT AverageResponseTime(us)=5093.25][PROFILE AverageResponseTime(us)=749.27][FRIENDS AverageResponseTime(us)=6501.45][REJECT AverageResponseTime(us)=2435.11][UNFRIEND AverageResponseTime(us)=4915.51][PENDING AverageResponseTime(us)=949.08][GETTOPRES AverageResponseTime(us)=4345.63]
+Stdout:  150 sec: 1226163 actions; 8105.89 current acts/sec;  150 sec: 1231535 operations; 8137.99 current ops/sec; [INV AverageResponseTime(us)=2434.76][ACCEPT AverageResponseTime(us)=4455.37][PROFILE AverageResponseTime(us)=736.96][FRIENDS AverageResponseTime(us)=6381.92][REJECT AverageResponseTime(us)=2226.73][UNFRIEND AverageResponseTime(us)=4600.71][PENDING AverageResponseTime(us)=924.48][GETTOPRES AverageResponseTime(us)=4302.9]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8205.342132728376
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8169.482098105755
+Stdout: MONITOR-SATISFYINGOPS(%):99.99869951736795
+Stdout:  160 sec: 1307211 actions; 8104.8 current acts/sec;  160 sec: 1312949 operations; 8141.4 current ops/sec; [INV AverageResponseTime(us)=2399.77][ACCEPT AverageResponseTime(us)=4900.33][PROFILE AverageResponseTime(us)=742.24][FRIENDS AverageResponseTime(us)=6350.9][REJECT AverageResponseTime(us)=2364.19][UNFRIEND AverageResponseTime(us)=4695.7][PENDING AverageResponseTime(us)=927.02][GETTOPRES AverageResponseTime(us)=4313.5]
+Stdout:  170 sec: 1389928 actions; 8271.7 current acts/sec;  170 sec: 1396024 operations; 8307.5 current ops/sec; [INV AverageResponseTime(us)=2482.98][ACCEPT AverageResponseTime(us)=4655.89][PROFILE AverageResponseTime(us)=726.03][FRIENDS AverageResponseTime(us)=6204.62][REJECT AverageResponseTime(us)=2310.45][UNFRIEND AverageResponseTime(us)=4768.19][PENDING AverageResponseTime(us)=915.92][GETTOPRES AverageResponseTime(us)=4207.97]
+Stdout: Maximum time elapsed. Requesting stop for the workload.25
+Stdout: Stop request is set to :true
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 08:57:35 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8220.440202657659
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8184.641793698058
+Stdout: MONITOR-SATISFYINGOPS(%):99.99871037893818
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):21
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:69276
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:670660
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10000
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 739936 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 739690 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10022
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180012
+OVERALLOPCOUNT(SESSIONS):1479745
+OVERALLTHROUGHPUT(SESSIONS/SECS):8220.25753838633
+OVERALLOPCOUNT(ACTIONS):1473301
+OVERALLTHROUGHPUT(ACTIONS/SECS):8184.459924893896
+NUMSTALE(OPS):0.0
+READ(OPS):739936.0
+PROCESSED(OPS):69276.0
+WRITE(OPS):13684.0
+RAMPEDRUNTIME(ms):180010.0
+PRUNED(OPS):670660.0
+RAMPEDRUNTIME(ms):1479738.0
+VALIDATIONTIME(MS):10021.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8220.309982778734
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8184.511971557135
+READ(OPS):739936.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99871037893818
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1479745
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8220.25753838633
+Stdout: OVERALLOPCOUNT(ACTIONS):1473301
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8184.459924893896
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1479738.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8220.309982778734
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1473294.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8184.511971557135
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=22 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =22
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 64 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 08:59:15 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 100980, actions=100000)
+stdout:End warmup. elapsedTime = 15965
+stdout:
+stdout:After warmup: Tue Oct 27 08:59:31 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 84723 actions; 8472.3 current acts/sec;  10 sec: 85102 operations; 8510.2 current ops/sec; [INV AverageResponseTime(us)=1965.9][ACCEPT AverageResponseTime(us)=4294.94][PROFILE AverageResponseTime(us)=701.92][FRIENDS AverageResponseTime(us)=5053.06][REJECT AverageResponseTime(us)=1911.72][UNFRIEND AverageResponseTime(us)=3977.9][PENDING AverageResponseTime(us)=984.16][GETTOPRES AverageResponseTime(us)=3517.88]
+Stdout:  20 sec: 167968 actions; 8324.5 current acts/sec;  20 sec: 168707 operations; 8360.5 current ops/sec; [INV AverageResponseTime(us)=1932.74][ACCEPT AverageResponseTime(us)=3989.79][PROFILE AverageResponseTime(us)=631.45][FRIENDS AverageResponseTime(us)=5376.38][REJECT AverageResponseTime(us)=2000.51][UNFRIEND AverageResponseTime(us)=4189.59][PENDING AverageResponseTime(us)=809.18][GETTOPRES AverageResponseTime(us)=3620.06]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8435.75
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8398.75
+Stdout: MONITOR-SATISFYINGOPS(%):99.98987944634618
+Stdout:  30 sec: 249235 actions; 8125.89 current acts/sec;  30 sec: 250321 operations; 8160.58 current ops/sec; [INV AverageResponseTime(us)=1995.45][ACCEPT AverageResponseTime(us)=3882.71][PROFILE AverageResponseTime(us)=652.6][FRIENDS AverageResponseTime(us)=5408.21][REJECT AverageResponseTime(us)=2235.5][UNFRIEND AverageResponseTime(us)=4216.05][PENDING AverageResponseTime(us)=823.76][GETTOPRES AverageResponseTime(us)=3748.4]
+Stdout:  40 sec: 330101 actions; 8086.6 current acts/sec;  40 sec: 331535 operations; 8121.4 current ops/sec; [INV AverageResponseTime(us)=2112.68][ACCEPT AverageResponseTime(us)=4182.3][PROFILE AverageResponseTime(us)=654.71][FRIENDS AverageResponseTime(us)=5469.72][REJECT AverageResponseTime(us)=2061.96][UNFRIEND AverageResponseTime(us)=4232.08][PENDING AverageResponseTime(us)=815.58][GETTOPRES AverageResponseTime(us)=3750.59]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8288.449999999999
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8252.599999999999
+Stdout: MONITOR-SATISFYINGOPS(%):99.9948501078448
+Stdout:  50 sec: 413740 actions; 8363.06 current acts/sec;  50 sec: 415534 operations; 8399.06 current ops/sec; [INV AverageResponseTime(us)=2177.12][ACCEPT AverageResponseTime(us)=4303.25][PROFILE AverageResponseTime(us)=632.53][FRIENDS AverageResponseTime(us)=5280.8][REJECT AverageResponseTime(us)=1989.22][UNFRIEND AverageResponseTime(us)=4170.14][PENDING AverageResponseTime(us)=807.04][GETTOPRES AverageResponseTime(us)=3638.1]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8359.583333333334
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8323.783333333333
+Stdout: MONITOR-SATISFYINGOPS(%):99.9965961059452
+Stdout:  60 sec: 499429 actions; 8568.9 current acts/sec;  60 sec: 501577 operations; 8604.3 current ops/sec; [INV AverageResponseTime(us)=1966.44][ACCEPT AverageResponseTime(us)=3843.4][PROFILE AverageResponseTime(us)=613.59][FRIENDS AverageResponseTime(us)=5221.07][REJECT AverageResponseTime(us)=1982.31][UNFRIEND AverageResponseTime(us)=4048.51][PENDING AverageResponseTime(us)=769.08][GETTOPRES AverageResponseTime(us)=3541.94]
+Stdout:  70 sec: 585778 actions; 8634.9 current acts/sec;  70 sec: 588302 operations; 8672.5 current ops/sec; [INV AverageResponseTime(us)=1981.84][ACCEPT AverageResponseTime(us)=3837.87][PROFILE AverageResponseTime(us)=615.92][FRIENDS AverageResponseTime(us)=5091.18][REJECT AverageResponseTime(us)=2435.68][UNFRIEND AverageResponseTime(us)=4140.12][PENDING AverageResponseTime(us)=797.39][GETTOPRES AverageResponseTime(us)=3530.3]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8430.01962475469
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8393.745078186523
+Stdout: MONITOR-SATISFYINGOPS(%):99.9974683845911
+Stdout:  80 sec: 671510 actions; 8573.2 current acts/sec;  80 sec: 674412 operations; 8611 current ops/sec; [INV AverageResponseTime(us)=1941.02][ACCEPT AverageResponseTime(us)=3931.1][PROFILE AverageResponseTime(us)=620.1][FRIENDS AverageResponseTime(us)=5167.07][REJECT AverageResponseTime(us)=1973.09][UNFRIEND AverageResponseTime(us)=3991.94][PENDING AverageResponseTime(us)=798.91][GETTOPRES AverageResponseTime(us)=3528.11]
+Stdout:  90 sec: 757420 actions; 8590.14 current acts/sec;  90 sec: 760712 operations; 8629.14 current ops/sec; [INV AverageResponseTime(us)=1942.76][ACCEPT AverageResponseTime(us)=3813.48][PROFILE AverageResponseTime(us)=615.29][FRIENDS AverageResponseTime(us)=5115.28][REJECT AverageResponseTime(us)=1996.44][UNFRIEND AverageResponseTime(us)=3861.31][PENDING AverageResponseTime(us)=811.49][GETTOPRES AverageResponseTime(us)=3528.23]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8468.005319946802
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8431.395686043139
+Stdout: MONITOR-SATISFYINGOPS(%):99.99798374901708
+Stdout:  100 sec: 843167 actions; 8574.7 current acts/sec;  100 sec: 846828 operations; 8611.6 current ops/sec; [INV AverageResponseTime(us)=2054.94][ACCEPT AverageResponseTime(us)=3993.65][PROFILE AverageResponseTime(us)=610.25][FRIENDS AverageResponseTime(us)=5066.81][REJECT AverageResponseTime(us)=1978.53][UNFRIEND AverageResponseTime(us)=4047.88][PENDING AverageResponseTime(us)=813.27][GETTOPRES AverageResponseTime(us)=3548.99]
+Stdout:  110 sec: 928300 actions; 8513.3 current acts/sec;  110 sec: 932334 operations; 8550.6 current ops/sec; [INV AverageResponseTime(us)=2035.59][ACCEPT AverageResponseTime(us)=3820.91][PROFILE AverageResponseTime(us)=620.47][FRIENDS AverageResponseTime(us)=5144.01][REJECT AverageResponseTime(us)=1967.9][UNFRIEND AverageResponseTime(us)=3918.17][PENDING AverageResponseTime(us)=798.83][GETTOPRES AverageResponseTime(us)=3566.87]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8450.13791551737
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8413.36322197315
+Stdout: MONITOR-SATISFYINGOPS(%):99.99831618483141
+Stdout:  120 sec: 1009623 actions; 8131.49 current acts/sec;  120 sec: 1014036 operations; 8169.38 current ops/sec; [INV AverageResponseTime(us)=2101.92][ACCEPT AverageResponseTime(us)=3691.67][PROFILE AverageResponseTime(us)=653.56][FRIENDS AverageResponseTime(us)=5343.35][REJECT AverageResponseTime(us)=2191.19][UNFRIEND AverageResponseTime(us)=4088.92][PENDING AverageResponseTime(us)=856.17][GETTOPRES AverageResponseTime(us)=3730.33]
+Stdout:  130 sec: 1090712 actions; 8108.9 current acts/sec;  130 sec: 1095477 operations; 8144.1 current ops/sec; [INV AverageResponseTime(us)=1925.75][ACCEPT AverageResponseTime(us)=4256.03][PROFILE AverageResponseTime(us)=651.53][FRIENDS AverageResponseTime(us)=5372.04][REJECT AverageResponseTime(us)=1903.64][UNFRIEND AverageResponseTime(us)=4009.57][PENDING AverageResponseTime(us)=834.01][GETTOPRES AverageResponseTime(us)=3737.39]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8405.597102877837
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8369.033078335155
+Stdout: MONITOR-SATISFYINGOPS(%):99.99854908323398
+Stdout:  140 sec: 1171690 actions; 8096.99 current acts/sec;  140 sec: 1176809 operations; 8132.39 current ops/sec; [INV AverageResponseTime(us)=2085.5][ACCEPT AverageResponseTime(us)=4292.08][PROFILE AverageResponseTime(us)=645.63][FRIENDS AverageResponseTime(us)=5445.63][REJECT AverageResponseTime(us)=2063.98][UNFRIEND AverageResponseTime(us)=4301.65][PENDING AverageResponseTime(us)=814.59][GETTOPRES AverageResponseTime(us)=3746.83]
+Stdout:  150 sec: 1253159 actions; 8146.9 current acts/sec;  150 sec: 1258635 operations; 8182.6 current ops/sec; [INV AverageResponseTime(us)=2015.96][ACCEPT AverageResponseTime(us)=3845.14][PROFILE AverageResponseTime(us)=649.57][FRIENDS AverageResponseTime(us)=5330.26][REJECT AverageResponseTime(us)=2014.74][UNFRIEND AverageResponseTime(us)=4165.79][PENDING AverageResponseTime(us)=813.15][GETTOPRES AverageResponseTime(us)=3731.16]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8399.878750757807
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8363.322729232943
+Stdout: MONITOR-SATISFYINGOPS(%):99.99872957986459
+Stdout:  160 sec: 1338170 actions; 8501.1 current acts/sec;  160 sec: 1344019 operations; 8538.4 current ops/sec; [INV AverageResponseTime(us)=1950.26][ACCEPT AverageResponseTime(us)=3896.27][PROFILE AverageResponseTime(us)=622.35][FRIENDS AverageResponseTime(us)=5129.02][REJECT AverageResponseTime(us)=1965.15][UNFRIEND AverageResponseTime(us)=4028.42][PENDING AverageResponseTime(us)=796.87][GETTOPRES AverageResponseTime(us)=3573.46]
+Stdout:  170 sec: 1421759 actions; 8358.06 current acts/sec;  170 sec: 1427981 operations; 8395.36 current ops/sec; [INV AverageResponseTime(us)=1959.25][ACCEPT AverageResponseTime(us)=3965.26][PROFILE AverageResponseTime(us)=630.63][FRIENDS AverageResponseTime(us)=5311.69][REJECT AverageResponseTime(us)=2091.64][UNFRIEND AverageResponseTime(us)=4134.63][PENDING AverageResponseTime(us)=825.55][GETTOPRES AverageResponseTime(us)=3628.67]
+Stdout: Maximum time elapsed. Requesting stop for the workload.22
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8412.714373809034
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8376.12013266593
+Stdout: MONITOR-SATISFYINGOPS(%):99.9988724622109
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 09:02:31 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):17
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:71721
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:685772
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10000
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 757493 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 757256 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10018
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180014
+OVERALLOPCOUNT(SESSIONS):1514312
+OVERALLTHROUGHPUT(SESSIONS/SECS):8412.190162987323
+OVERALLOPCOUNT(ACTIONS):1507725
+OVERALLTHROUGHPUT(ACTIONS/SECS):8375.59856455609
+NUMSTALE(OPS):0.0
+READ(OPS):757493.0
+PROCESSED(OPS):71721.0
+WRITE(OPS):13794.0
+RAMPEDRUNTIME(ms):180007.0
+PRUNED(OPS):685772.0
+RAMPEDRUNTIME(ms):1514305.0
+VALIDATIONTIME(MS):10018.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8412.478403617637
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8375.885382235136
+READ(OPS):757493.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99873982324362
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1514312
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8412.190162987323
+Stdout: OVERALLOPCOUNT(ACTIONS):1507725
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8375.59856455609
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1514305.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8412.478403617637
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1507718.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8375.885382235136
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =21
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 62 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 09:04:03 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 101017, actions=100000)
+stdout:End warmup. elapsedTime = 15997
+stdout:
+stdout:After warmup: Tue Oct 27 09:04:19 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 86692 actions; 8669.2 current acts/sec;  10 sec: 87072 operations; 8707.2 current ops/sec; [INV AverageResponseTime(us)=2068.11][ACCEPT AverageResponseTime(us)=4246.5][PROFILE AverageResponseTime(us)=691.55][FRIENDS AverageResponseTime(us)=5299.19][REJECT AverageResponseTime(us)=2150.37][UNFRIEND AverageResponseTime(us)=4101.43][PENDING AverageResponseTime(us)=801.83][GETTOPRES AverageResponseTime(us)=3662.18]
+Stdout:  20 sec: 174104 actions; 8740.33 current acts/sec;  20 sec: 174891 operations; 8781.02 current ops/sec; [INV AverageResponseTime(us)=2125.92][ACCEPT AverageResponseTime(us)=4006.9][PROFILE AverageResponseTime(us)=633.09][FRIENDS AverageResponseTime(us)=5215.52][REJECT AverageResponseTime(us)=2079.07][UNFRIEND AverageResponseTime(us)=4124.7][PENDING AverageResponseTime(us)=834.15][GETTOPRES AverageResponseTime(us)=3668.97]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8744.65
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8705.3
+Stdout: MONITOR-SATISFYINGOPS(%):99.99138460831558
+Stdout:  30 sec: 261620 actions; 8751.6 current acts/sec;  30 sec: 262786 operations; 8789.5 current ops/sec; [INV AverageResponseTime(us)=2015.98][ACCEPT AverageResponseTime(us)=4150.44][PROFILE AverageResponseTime(us)=634.64][FRIENDS AverageResponseTime(us)=5189.92][REJECT AverageResponseTime(us)=2049.38][UNFRIEND AverageResponseTime(us)=4161.48][PENDING AverageResponseTime(us)=817.07][GETTOPRES AverageResponseTime(us)=3665.67]
+Stdout:  40 sec: 349100 actions; 8748 current acts/sec; MONITOR-THROUGHPUT(SESSIONS/SEC):8765.725
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8727.5
+Stdout: MONITOR-SATISFYINGOPS(%):99.99570323689487
+Stdout:  40 sec: 350629 operations; 8784.3 current ops/sec; [INV AverageResponseTime(us)=2078.49][ACCEPT AverageResponseTime(us)=4612.28][PROFILE AverageResponseTime(us)=630.64][FRIENDS AverageResponseTime(us)=5258.15][REJECT AverageResponseTime(us)=1993.63][UNFRIEND AverageResponseTime(us)=4240.7][PENDING AverageResponseTime(us)=804.41][GETTOPRES AverageResponseTime(us)=3650.51]
+Stdout:  50 sec: 436619 actions; 8751.9 current acts/sec;  50 sec: 438496 operations; 8786.7 current ops/sec; [INV AverageResponseTime(us)=2030.69][ACCEPT AverageResponseTime(us)=4040.03][PROFILE AverageResponseTime(us)=634.87][FRIENDS AverageResponseTime(us)=5193.33][REJECT AverageResponseTime(us)=2005.94][UNFRIEND AverageResponseTime(us)=4161.47][PENDING AverageResponseTime(us)=825.34][GETTOPRES AverageResponseTime(us)=3660.13]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8771.566666666668
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8733.816666666666
+Stdout: MONITOR-SATISFYINGOPS(%):99.99713756299747
+Stdout:  60 sec: 524031 actions; 8740.33 current acts/sec;  60 sec: 526296 operations; 8779.12 current ops/sec; [INV AverageResponseTime(us)=2016.01][ACCEPT AverageResponseTime(us)=4090.32][PROFILE AverageResponseTime(us)=636.99][FRIENDS AverageResponseTime(us)=5184.62][REJECT AverageResponseTime(us)=2077.21][UNFRIEND AverageResponseTime(us)=4094.43][PENDING AverageResponseTime(us)=826.94][GETTOPRES AverageResponseTime(us)=3674.06]
+Stdout:  70 sec: 610472 actions; 8644.1 current acts/sec;  70 sec: 613135 operations; 8683.9 current ops/sec; [INV AverageResponseTime(us)=2077.61][ACCEPT AverageResponseTime(us)=4746.2][PROFILE AverageResponseTime(us)=638.75][FRIENDS AverageResponseTime(us)=5330.66][REJECT AverageResponseTime(us)=2001.08][UNFRIEND AverageResponseTime(us)=4199.21][PENDING AverageResponseTime(us)=856.1][GETTOPRES AverageResponseTime(us)=3684.29]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8757.8
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8719.725
+Stdout: MONITOR-SATISFYINGOPS(%):99.99784970282893
+Stdout:  80 sec: 697585 actions; 8711.3 current acts/sec;  80 sec: 700631 operations; 8749.6 current ops/sec; [INV AverageResponseTime(us)=2172.98][ACCEPT AverageResponseTime(us)=4049.06][PROFILE AverageResponseTime(us)=635.93][FRIENDS AverageResponseTime(us)=5243.16][REJECT AverageResponseTime(us)=1969.4][UNFRIEND AverageResponseTime(us)=4212.54][PENDING AverageResponseTime(us)=799.89][GETTOPRES AverageResponseTime(us)=3670.49]
+Stdout:  90 sec: 785064 actions; 8747.9 current acts/sec;  90 sec: 788513 operations; 8788.2 current ops/sec; [INV AverageResponseTime(us)=2030.01][ACCEPT AverageResponseTime(us)=4838.9][PROFILE AverageResponseTime(us)=639.66][FRIENDS AverageResponseTime(us)=5172.52][REJECT AverageResponseTime(us)=2028.96][UNFRIEND AverageResponseTime(us)=4342.48][PENDING AverageResponseTime(us)=817.02][GETTOPRES AverageResponseTime(us)=3673.6]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8760.342396576034
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8722.29277707223
+Stdout: MONITOR-SATISFYINGOPS(%):99.99828028588527
+Stdout:  100 sec: 872248 actions; 8718.4 current acts/sec;  100 sec: 876053 operations; 8754 current ops/sec; [INV AverageResponseTime(us)=2061.25][ACCEPT AverageResponseTime(us)=4146.34][PROFILE AverageResponseTime(us)=640.02][FRIENDS AverageResponseTime(us)=5121.99][REJECT AverageResponseTime(us)=2041.31][UNFRIEND AverageResponseTime(us)=4132.51][PENDING AverageResponseTime(us)=845.43][GETTOPRES AverageResponseTime(us)=3672.13]
+Stdout:  110 sec: 959943 actions; 8768.62 current acts/sec;  110 sec: 964128 operations; 8806.62 current ops/sec; [INV AverageResponseTime(us)=2066.4][ACCEPT AverageResponseTime(us)=4029.38][PROFILE AverageResponseTime(us)=634.34][FRIENDS AverageResponseTime(us)=5127.03][REJECT AverageResponseTime(us)=2060.73][UNFRIEND AverageResponseTime(us)=4056.81][PENDING AverageResponseTime(us)=810.71][GETTOPRES AverageResponseTime(us)=3672.7]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8765.760285330956
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8727.752268731094
+Stdout: MONITOR-SATISFYINGOPS(%):99.99856780033227
+Stdout:  120 sec: 1047348 actions; 8740.5 current acts/sec;  120 sec: 1051909 operations; 8778.1 current ops/sec; [INV AverageResponseTime(us)=2043.29][ACCEPT AverageResponseTime(us)=4017.06][PROFILE AverageResponseTime(us)=635.51][FRIENDS AverageResponseTime(us)=5153.45][REJECT AverageResponseTime(us)=2007.19][UNFRIEND AverageResponseTime(us)=4310.21][PENDING AverageResponseTime(us)=824.33][GETTOPRES AverageResponseTime(us)=3675.16]
+Stdout:  130 sec: 1134854 actions; 8750.6 current acts/sec;  130 sec: 1139811 operations; 8790.2 current ops/sec; [INV AverageResponseTime(us)=2144.75][ACCEPT AverageResponseTime(us)=4164.63][PROFILE AverageResponseTime(us)=637.8][FRIENDS AverageResponseTime(us)=5168.05][REJECT AverageResponseTime(us)=1992.9][UNFRIEND AverageResponseTime(us)=4187.97][PENDING AverageResponseTime(us)=804.39][GETTOPRES AverageResponseTime(us)=3673.69]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8771.45163248834
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8733.444761108849
+Stdout: MONITOR-SATISFYINGOPS(%):99.99877319780714
+Stdout:  140 sec: 1222705 actions; 8785.1 current acts/sec;  140 sec: 1228026 operations; 8821.5 current ops/sec; [INV AverageResponseTime(us)=2148.33][ACCEPT AverageResponseTime(us)=4077.42][PROFILE AverageResponseTime(us)=632.67][FRIENDS AverageResponseTime(us)=5044.93][REJECT AverageResponseTime(us)=2048.54][UNFRIEND AverageResponseTime(us)=4023.43][PENDING AverageResponseTime(us)=797.33][GETTOPRES AverageResponseTime(us)=3646.93]
+Stdout:  150 sec: 1309363 actions; 8664.93 current acts/sec;  150 sec: 1315051 operations; 8701.63 current ops/sec; [INV AverageResponseTime(us)=2120.45][ACCEPT AverageResponseTime(us)=4044.26][PROFILE AverageResponseTime(us)=635.1][FRIENDS AverageResponseTime(us)=5192.09][REJECT AverageResponseTime(us)=1978.83][UNFRIEND AverageResponseTime(us)=4160.32][PENDING AverageResponseTime(us)=823.55][GETTOPRES AverageResponseTime(us)=3681.63]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8768.24519846751
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8730.226686083211
+Stdout: MONITOR-SATISFYINGOPS(%):99.99892615143412
+Stdout:  160 sec: 1396859 actions; 8749.6 current acts/sec;  160 sec: 1402942 operations; 8789.1 current ops/sec; [INV AverageResponseTime(us)=2069.42][ACCEPT AverageResponseTime(us)=4179.4][PROFILE AverageResponseTime(us)=632.84][FRIENDS AverageResponseTime(us)=5158.2][REJECT AverageResponseTime(us)=2019.13][UNFRIEND AverageResponseTime(us)=4188.58][PENDING AverageResponseTime(us)=823.27][GETTOPRES AverageResponseTime(us)=3672.15]
+Stdout:  170 sec: 1484922 actions; 8806.3 current acts/sec;  170 sec: 1491401 operations; 8845.9 current ops/sec; [INV AverageResponseTime(us)=2017.09][ACCEPT AverageResponseTime(us)=4244.75][PROFILE AverageResponseTime(us)=635.47][FRIENDS AverageResponseTime(us)=5046.91][REJECT AverageResponseTime(us)=1922.64][UNFRIEND AverageResponseTime(us)=4126.15][PENDING AverageResponseTime(us)=826.24][GETTOPRES AverageResponseTime(us)=3659.04]
+Stdout: Maximum time elapsed. Requesting stop for the workload.21
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8770.890161721323
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8732.718151565825
+Stdout: MONITOR-SATISFYINGOPS(%):99.99904573960906
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 09:07:19 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):18
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:73472
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:716340
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10001
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 789812 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 789558 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10019
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180008
+OVERALLOPCOUNT(SESSIONS):1578784
+OVERALLTHROUGHPUT(SESSIONS/SECS):8770.632416337052
+OVERALLOPCOUNT(ACTIONS):1571913
+OVERALLTHROUGHPUT(ACTIONS/SECS):8732.461890582641
+NUMSTALE(OPS):0.0
+READ(OPS):789812.0
+PROCESSED(OPS):73472.0
+WRITE(OPS):14463.0
+RAMPEDRUNTIME(ms):180004.0
+PRUNED(OPS):716340.0
+RAMPEDRUNTIME(ms):1578770.0
+VALIDATIONTIME(MS):10019.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8770.749538899136
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8732.578164929668
+READ(OPS):789812.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.9990457487151
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1578784
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8770.632416337052
+Stdout: OVERALLOPCOUNT(ACTIONS):1571913
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8732.461890582641
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1578770.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8770.749538899136
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1571899.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8732.578164929668
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:java -Xmx2G -cp ".:./lib/*:./build/*:./bin/*" edu.usc.bg.BGMainClass repeated -t -P ./workloads/LowUpdateActions -s -p machineid=0 -p threadcount=21 -p friendcountperuser=10 -p thinktime=0 -db TestDS.TestDSClient -p interarrivaltime=0 -p expectedconfidence=95 -p initapproach=deterministic -p maxexecutiontime=180 -p expectedlatency=0.1 -p warmupthreads=100 -p insertimage=false -p confperc=1 -p imagesize=12 -p monitor=20 -p zipfianmean=0.27 -p exportfile=DistrStats -p bgmode=repeated -p expectedstaleness=1 -p numloadthreads=12 -p resourcecountperuser=10 -p validationapproach=INTERVAL -p warmup=100000 -p requestdistribution=dzipfian -p ratingmode=true -p usercount=100000 -p probs=1.0@ -p numclients=1 -p useroffset=0  -p port=43930  # 
+stdout:BGClient is in repeated mode.
+stdout:BGClient: Connection received from localhost
+stdout:Initiated
+BGListener:The connection initiation between listener and BGClient is established
+stdout:BGClient: SENT initiation message to localhost
+stdout:*****max execution time specified : 180
+stdout:BG Client: ThreadCount =21
+stdout:
+stdout:Loading workload...
+stdout:0
+stdout:Create fragments in workload init phase
+stdout:Creating the initial zipfian probabilities...
+stdout:Sum of original probs = 1.00000000000002
+stdout:Initial Zipfian probabilities are created.
+stdout:Done creating clusters.
+stdout:ClusterId0, 100000
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+stdout:ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+stdout:Time to create fragments : 63 msec
+stdout:Internal structures are set up
+stdout: (might take a few minutes for large data sets)
+stdout:Stop requested for workload. Now Joining!
+stdout:
+stdout:After init: Tue Oct 27 09:09:03 PDT 2015
+stdout:Starting warmup with 100 threads and 100000 operations.
+stdout:num warmup Ops done (sessions=: 100958, actions=100000)
+stdout:End warmup. elapsedTime = 15558
+stdout:
+stdout:After warmup: Tue Oct 27 09:09:19 PDT 2015
+stdout:Connected
+BGListener: sent connected message to localhost
+BGListener:Listener receieved the start simulation msg from the coordinator and needs to fwd it to the BGClient.
+BGListener: sent StartSimulation message to BG Client on 43930
+BGListener:Waiting for stats from the BG client...
+Stdout: BGCLient: Received start simulation msg and will run benchmark
+Stdout: Starting benchmark.
+Stdout:  0 sec: 0 actions;  0 sec: 0 operations; 
+Stdout: Maximum execution time specified as: 180 secs
+Stdout: creating the kill thread which waits for kill msg and once received one it kills the BG client
+Stdout: KILL THREAD CREATED
+Stdout: creating monitoring thread to monitor the performance of the BGClient
+Stdout: MONITORING THREAD CREATED
+Stdout: KILL THREAD STARTED
+Stdout: MONITORING THREAD STARTED
+Stdout:  10 sec: 85506 actions; 8550.6 current acts/sec;  10 sec: 85864 operations; 8586.4 current ops/sec; [INV AverageResponseTime(us)=1965.54][PROFILE AverageResponseTime(us)=626.03][FRIENDS AverageResponseTime(us)=4625.44][REJECT AverageResponseTime(us)=1876.59][UNFRIEND AverageResponseTime(us)=3906.65][PENDING AverageResponseTime(us)=768.69][GETTOPRES AverageResponseTime(us)=3373.06]
+Stdout:  20 sec: 171683 actions; 8616.84 current acts/sec;  20 sec: 172421 operations; 8654.83 current ops/sec; [INV AverageResponseTime(us)=1827.49][ACCEPT AverageResponseTime(us)=3859.57][PROFILE AverageResponseTime(us)=581.66][FRIENDS AverageResponseTime(us)=4690.08][REJECT AverageResponseTime(us)=1910.32][UNFRIEND AverageResponseTime(us)=3829.29][PENDING AverageResponseTime(us)=765.42][GETTOPRES AverageResponseTime(us)=3362.27]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8621.2
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8584.300000000001
+Stdout: MONITOR-SATISFYINGOPS(%):99.99242808133405
+Stdout:  30 sec: 255328 actions; 8364.5 current acts/sec;  30 sec: 256412 operations; 8399.1 current ops/sec; [INV AverageResponseTime(us)=1998.35][ACCEPT AverageResponseTime(us)=3905.33][PROFILE AverageResponseTime(us)=598.57][FRIENDS AverageResponseTime(us)=4842.19][REJECT AverageResponseTime(us)=1810.1][UNFRIEND AverageResponseTime(us)=3663.76][PENDING AverageResponseTime(us)=805.95][GETTOPRES AverageResponseTime(us)=3457.6]
+Stdout:  40 sec: 338718 actions; 8339 current acts/sec;  40 sec: 340119 operations; 8370.7 current ops/sec; [INV AverageResponseTime(us)=1922.45][ACCEPT AverageResponseTime(us)=3959.16][PROFILE AverageResponseTime(us)=610.68][FRIENDS AverageResponseTime(us)=4891.72][REJECT AverageResponseTime(us)=1691.87][UNFRIEND AverageResponseTime(us)=3791.61][PENDING AverageResponseTime(us)=787.74][GETTOPRES AverageResponseTime(us)=3463.53]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8502.974999999999
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8467.95
+Stdout: MONITOR-SATISFYINGOPS(%):99.99616199906707
+Stdout:  50 sec: 423165 actions; 8443.01 current acts/sec;  50 sec: 424941 operations; 8480.5 current ops/sec; [INV AverageResponseTime(us)=1899.29][ACCEPT AverageResponseTime(us)=3615.59][PROFILE AverageResponseTime(us)=595.19][FRIENDS AverageResponseTime(us)=4802.01][REJECT AverageResponseTime(us)=1869.02][UNFRIEND AverageResponseTime(us)=3769.02][PENDING AverageResponseTime(us)=758.12][GETTOPRES AverageResponseTime(us)=3418.24]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8516.766666666666
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8481.116666666667
+Stdout: MONITOR-SATISFYINGOPS(%):99.9974453049618
+Stdout:  60 sec: 508887 actions; 8572.2 current acts/sec;  60 sec: 511026 operations; 8608.5 current ops/sec; [INV AverageResponseTime(us)=1859.4][ACCEPT AverageResponseTime(us)=3677.05][PROFILE AverageResponseTime(us)=589.74][FRIENDS AverageResponseTime(us)=4706.68][REJECT AverageResponseTime(us)=1788.51][UNFRIEND AverageResponseTime(us)=3833.46][PENDING AverageResponseTime(us)=777.38][GETTOPRES AverageResponseTime(us)=3384.18]
+Stdout:  70 sec: 595925 actions; 8702.93 current acts/sec;  70 sec: 598469 operations; 8743.43 current ops/sec; [INV AverageResponseTime(us)=1822.6][ACCEPT AverageResponseTime(us)=3703.64][PROFILE AverageResponseTime(us)=579.58][FRIENDS AverageResponseTime(us)=4653.49][REJECT AverageResponseTime(us)=2366.36][UNFRIEND AverageResponseTime(us)=3702.16][PENDING AverageResponseTime(us)=742.87][GETTOPRES AverageResponseTime(us)=3325.23]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8567.005412432345
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8530.443369457882
+Stdout: MONITOR-SATISFYINGOPS(%):99.99809508179426
+Stdout:  80 sec: 682467 actions; 8654.2 current acts/sec;  80 sec: 685392 operations; 8692.3 current ops/sec; [INV AverageResponseTime(us)=1835.87][ACCEPT AverageResponseTime(us)=3576][PROFILE AverageResponseTime(us)=581.97][FRIENDS AverageResponseTime(us)=4659.16][REJECT AverageResponseTime(us)=1776.43][UNFRIEND AverageResponseTime(us)=3739.24][PENDING AverageResponseTime(us)=741.87][GETTOPRES AverageResponseTime(us)=3342.14]
+Stdout:  90 sec: 769733 actions; 8726.6 current acts/sec;  90 sec: 773018 operations; 8762.6 current ops/sec; [INV AverageResponseTime(us)=1843.34][ACCEPT AverageResponseTime(us)=4089.96][PROFILE AverageResponseTime(us)=578.49][FRIENDS AverageResponseTime(us)=4601.78][REJECT AverageResponseTime(us)=1783.64][UNFRIEND AverageResponseTime(us)=3660.6][PENDING AverageResponseTime(us)=731.57][GETTOPRES AverageResponseTime(us)=3328.9]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8577.374226257736
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8540.744592554076
+Stdout: MONITOR-SATISFYINGOPS(%):99.99847789968891
+Stdout:  100 sec: 854110 actions; 8437.7 current acts/sec;  100 sec: 857773 operations; 8475.5 current ops/sec; [INV AverageResponseTime(us)=1796.52][ACCEPT AverageResponseTime(us)=3732.43][PROFILE AverageResponseTime(us)=597.99][FRIENDS AverageResponseTime(us)=4773.09][REJECT AverageResponseTime(us)=1946.13][UNFRIEND AverageResponseTime(us)=3779.9][PENDING AverageResponseTime(us)=783.68][GETTOPRES AverageResponseTime(us)=3433.72]
+Stdout:  110 sec: 938749 actions; 8463.05 current acts/sec;  110 sec: 942773 operations; 8499.15 current ops/sec; [INV AverageResponseTime(us)=2093.65][ACCEPT AverageResponseTime(us)=3724.15][PROFILE AverageResponseTime(us)=591.36][FRIENDS AverageResponseTime(us)=4738.12][REJECT AverageResponseTime(us)=1797.21][UNFRIEND AverageResponseTime(us)=4011.04][PENDING AverageResponseTime(us)=791.69][GETTOPRES AverageResponseTime(us)=3426.99]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8575.97853351222
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8539.38717177357
+Stdout: MONITOR-SATISFYINGOPS(%):99.99873137933221
+Stdout:  120 sec: 1024764 actions; 8600.64 current acts/sec;  120 sec: 1029155 operations; 8637.34 current ops/sec; [INV AverageResponseTime(us)=2003.67][ACCEPT AverageResponseTime(us)=3657.62][PROFILE AverageResponseTime(us)=585.07][FRIENDS AverageResponseTime(us)=4754.89][REJECT AverageResponseTime(us)=1861.41][UNFRIEND AverageResponseTime(us)=3677.16][PENDING AverageResponseTime(us)=764.92][GETTOPRES AverageResponseTime(us)=3374.7]
+Stdout:  130 sec: 1107351 actions; 8258.7 current acts/sec;  130 sec: 1112112 operations; 8295.7 current ops/sec; [INV AverageResponseTime(us)=1812.02][ACCEPT AverageResponseTime(us)=4585.32][PROFILE AverageResponseTime(us)=607.36][FRIENDS AverageResponseTime(us)=4883.01][REJECT AverageResponseTime(us)=1812.29][UNFRIEND AverageResponseTime(us)=3944.16][PENDING AverageResponseTime(us)=788.22][GETTOPRES AverageResponseTime(us)=3498.17]
+Stdout:  140 sec: 1189243 actions; 8185.11 current acts/sec; MONITOR-THROUGHPUT(SESSIONS/SEC):8530.547818013
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8493.986143846869
+Stdout: MONITOR-SATISFYINGOPS(%):99.99890686764606
+Stdout:  140 sec: 1194362 operations; 8220.89 current ops/sec; [INV AverageResponseTime(us)=1857.12][ACCEPT AverageResponseTime(us)=3474][PROFILE AverageResponseTime(us)=610.85][FRIENDS AverageResponseTime(us)=4870.64][REJECT AverageResponseTime(us)=1978.8][UNFRIEND AverageResponseTime(us)=4069.79][PENDING AverageResponseTime(us)=821.72][GETTOPRES AverageResponseTime(us)=3530.5]
+Stdout:  150 sec: 1274874 actions; 8563.1 current acts/sec;  150 sec: 1280385 operations; 8602.3 current ops/sec; [INV AverageResponseTime(us)=1844.1][ACCEPT AverageResponseTime(us)=3739.15][PROFILE AverageResponseTime(us)=586.45][FRIENDS AverageResponseTime(us)=4681.84][REJECT AverageResponseTime(us)=1834.56][UNFRIEND AverageResponseTime(us)=3975.36][PENDING AverageResponseTime(us)=786.08][GETTOPRES AverageResponseTime(us)=3394.9]
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8522.86732079245
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8486.207112055496
+Stdout: MONITOR-SATISFYINGOPS(%):99.99904262456376
+Stdout:  160 sec: 1357879 actions; 8300.5 current acts/sec;  160 sec: 1363745 operations; 8336 current ops/sec; [INV AverageResponseTime(us)=1879.48][ACCEPT AverageResponseTime(us)=3602.32][PROFILE AverageResponseTime(us)=603.59][FRIENDS AverageResponseTime(us)=4713.91][REJECT AverageResponseTime(us)=1973.76][UNFRIEND AverageResponseTime(us)=3955.54][PENDING AverageResponseTime(us)=805.04][GETTOPRES AverageResponseTime(us)=3488.44]
+Stdout:  170 sec: 1442944 actions; 8504.8 current acts/sec;  170 sec: 1449221 operations; 8545.89 current ops/sec; [INV AverageResponseTime(us)=1976.98][ACCEPT AverageResponseTime(us)=3632.11][PROFILE AverageResponseTime(us)=596.05][FRIENDS AverageResponseTime(us)=4681.83][REJECT AverageResponseTime(us)=1819.97][UNFRIEND AverageResponseTime(us)=3841.28][PENDING AverageResponseTime(us)=764.76][GETTOPRES AverageResponseTime(us)=3412.38]
+Stdout: Maximum time elapsed. Requesting stop for the workload.21
+Stdout: Stop request is set to :true
+Stdout: MONITOR-THROUGHPUT(SESSIONS/SEC):8528.637297927893
+Stdout: MONITOR-THROUGHPUT(ACTIONS/SEC):8491.683795344703
+Stdout: MONITOR-SATISFYINGOPS(%):99.9991495419302
+Stdout: killerThread died
+Stdout: monitoringThread died
+Stdout: statusThread died
+Stdout: 
+Stdout: After workload done: Tue Oct 27 09:12:19 PDT 2015
+Stdout: --Discarding, dumping and validation starting.
+Stdout: 	-- Starting to read update files...
+Stdout: 	-- Done reading update files..
+Stdout: 	-- UpdateProcessingDuration(ms):20
+Stdout: 	-- Starting to read the read files...
+Stdout: 	-- Created the validation status thread
+Stdout: 	-- 10 secs: Reads are still being validated... NumReadOpsProcessed till now:69405
+Stdout: 	-- 10 secs: Reads are still being validated... NumPruned till now:698052
+Stdout: 	-- Done reading read files...
+Stdout: 	-- ReadValidationDuration(ms):10000
+Stdout: [0, 18000] =100.0%
+Stdout: [18000, 36000] =100.0%
+Stdout: [36000, 54000] =100.0%
+Stdout: [54000, 72000] =100.0%
+Stdout: [72000, 90000] =100.0%
+Stdout: [90000, 108000] =100.0%
+Stdout: [108000, 126000] =100.0%
+Stdout: [126000, 144000] =100.0%
+Stdout: [144000, 162000] =100.0%
+Stdout: [162000, 180000] =100.0%
+Stdout: 0.0% of reads observed the value of updates before 1300.0 milliseconds from the completion of the update
+Stdout: 	 TotalReadOps = 767457 ,staleReadOps=0 ,staleness Perc (gran:user)=0.0
+Stdout: 	 TotalSeqRead = 767216 ,staleSeqRead=0 ,staleness Perc (gran:user)=0.0
+Stdout: ******* Discrading, dumping and validation is done.10020
+Stdout: DONE
+Initiated
+StartingValidation
+UpdatesInDB
+DoneReadCycles
+DOneReadValidation
+PopulateStats
+OVERALLRUNTIME(ms):180014
+OVERALLOPCOUNT(SESSIONS):1535242
+OVERALLTHROUGHPUT(SESSIONS/SECS):8528.458897641294
+OVERALLOPCOUNT(ACTIONS):1528590
+OVERALLTHROUGHPUT(ACTIONS/SECS):8491.506216183187
+NUMSTALE(OPS):0.0
+READ(OPS):767457.0
+PROCESSED(OPS):69405.0
+WRITE(OPS):14332.0
+RAMPEDRUNTIME(ms):180006.0
+PRUNED(OPS):698052.0
+RAMPEDRUNTIME(ms):1535230.0
+VALIDATIONTIME(MS):10020.0
+FRESHNESSCONF(%):0.0
+RAMPEDTHROUGHPUT(SESSIONS/SECS):8528.771263180117
+RAMPEDTHROUGHPUT(ACTIONS/SECS):8491.816939435352
+READ(OPS):767457.0
+NUMSTALE(OPS):0.0
+STALENESS(OPS):0.0
+SATISFYINGOPS(%):99.99901870351108
+THEEND.
+Stdout: OVERALLOPCOUNT(SESSIONS):1535242
+Stdout: OVERALLTHROUGHPUT(SESSIONS/SECS):8528.458897641294
+Stdout: OVERALLOPCOUNT(ACTIONS):1528590
+Stdout: OVERALLTHROUGHPUT(ACTIONS/SECS):8491.506216183187
+Stdout: RAMPEDOVERALLOPCOUNT(SESSIONS):1535230.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(SESSIONS/SECS):8528.771263180117
+Stdout: RAMPEDOVERALLOPCOUNT(ACTIONS):1528578.0
+Stdout: RAMPEDOVERALLTHROUGHPUT(ACTIONS/SECS):8491.816939435352
+Stdout: Executing benchmark is completed.
+Stdout: EXECUTIONDONE
+BGListener: sent stats to coordinator ....
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+BGListener:Listener connection socket created to BGClient on port 43930
+****Msg fwded to BGClient:shutdown BGClient  -p port=43930  # 
+Stdout: BGClient is in repeated mode.
+Stdout: BGClient: Connection received from localhost
+Stdout: BGClient is shutting down!Bye!
+BGListener: BGClient shutdown gracefully...
+BGListener: waiting for new round....
+BGListener: Connection received from localhost
+Stdout: BGClient is in onetime mode.
+Stdout: *****max execution time specified : 0
+Stdout: BG Client: ThreadCount =10
+Stdout: 
+Stdout: Loading workload...
+Stdout: Connected
+Stdout: EXECUTIONDONE
+Stdout: Creating the initial zipfian probabilities...
+Stdout: Sum of original probs = 1.00000000000002
+Stdout: Initial Zipfian probabilities are created.
+Stdout: Done creating clusters.
+Stdout: ClusterId0, 100000
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+Stdout: Time to create fragments :179 msecs
+Stdout: Done dividing users
+Stdout: 10 Seconds:  Load is in progress
+Stdout: Done loading users
+Stdout: 20 Seconds:  Load is in progress
+BGListener: started and waiting for connection on 12510
+BGListener: Connection received from localhost
+Stdout: BGClient is in onetime mode.
+Stdout: *****max execution time specified : 0
+Stdout: BG Client: ThreadCount =10
+Stdout: 
+Stdout: Loading workload...
+Stdout: Connected
+Stdout: EXECUTIONDONE
+Stdout: Creating the initial zipfian probabilities...
+Stdout: Sum of original probs = 1.00000000000002
+Stdout: Initial Zipfian probabilities are created.
+Stdout: Done creating clusters.
+Stdout: ClusterId0, 100000
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732366, initial probability.
+Stdout: ZipfianMean=0.27 Usercount=100000 numMaxClusters=1; 20.0% of members have, 0.6336586807732238 clustering(new)probability.
+Stdout: Time to create fragments :176 msecs
+Stdout: Done dividing users
+Stdout: 10 Seconds:  Load is in progress
+Stdout: Done loading users
+Stdout: 20 Seconds:  Load is in progress
+Stdout: 30 Seconds:  Load is in progress
+Stdout: 40 Seconds:  Load is in progress
+Stdout: 50 Seconds:  Load is in progress
+Stdout: 60 Seconds:  Load is in progress
+Stdout: 70 Seconds:  Load is in progress
+Stdout: 80 Seconds:  Load is in progress
