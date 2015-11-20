@@ -11,6 +11,9 @@ import de.zib.scalaris.*;
 public class TransactionHelper {
     private ConnectionPool connectionPool;
     private JsonParser jsonParser;
+    private boolean isTransaction = false;
+    private Transaction transaction;
+    private Connection connection;
     private static final String USER_ID_PREFIX = "u";
     private static final String RESOURCE_ID_PREFIX = "r";
     private static final String MANIPULATION = "manipulation";
@@ -49,6 +52,23 @@ public class TransactionHelper {
             }
         }
         return conn;
+    }
+
+    /**
+     * Begins a transaction.
+     */
+    public void beginTransaction() {
+        //isTransaction = true;
+        //connection = getConnection();
+        //transaction = new Transaction(connection);
+    }
+
+    /**
+     * Ends a current transaction.
+     */
+    public void endTransaction() {
+        //isTransaction = false;
+        //connectionPool.releaseConnection(connection);
     }
 
     /**
@@ -157,11 +177,30 @@ public class TransactionHelper {
      * @return JsonObject instance.
      * @throws NotFoundException
      */
-    private synchronized JsonObject read(final String key) throws NotFoundException {
-        ErlangValue erlangValue;
-        Connection connection = getConnection();
-        TransactionSingleOp transaction = new TransactionSingleOp(connection);
+    private JsonObject read(final String key) throws NotFoundException {
+        if (isTransaction) {
+            return read(key, transaction);
+        } else {
+            Connection connection = getConnection();
+            TransactionSingleOp transaction = new TransactionSingleOp(connection);
 
+            JsonObject json = read(key, transaction);
+            connectionPool.releaseConnection(connection);
+            return json;
+        }
+    }
+
+    /**
+     * Read a value with the key.
+     *
+     * @param key Unique key.
+     * @return JsonObject instance.
+     * @throws NotFoundException
+     */
+    private JsonObject read(final String key,
+                            AbstractTransaction<? extends RequestList, ? extends ResultList> transaction)
+            throws NotFoundException {
+        ErlangValue erlangValue;
         double ms = INIT_WAIT_TIME;
         while (true) {
             try {
@@ -176,21 +215,35 @@ public class TransactionHelper {
                 }
             }
         }
-        connectionPool.releaseConnection(connection);
         JsonElement jsonElement = jsonParser.parse(erlangValue.stringValue());
         return jsonElement.getAsJsonObject();
     }
 
     /**
-     * Write a value with they key.
+     * Write a value with the key.
      *
      * @param key   Unique key.
      * @param value JsonObject instance.
      */
-    private synchronized void write(final String key, final JsonObject value) {
-        Connection connection = getConnection();
-        TransactionSingleOp transaction = new TransactionSingleOp(connection);
+    private void write(final String key, final JsonObject value) {
+        if (isTransaction) {
+            write(key, value, transaction);
+        } else {
+            Connection connection = getConnection();
+            TransactionSingleOp transaction = new TransactionSingleOp(connection);
+            write(key, value, transaction);
+            connectionPool.releaseConnection(connection);
+        }
+    }
 
+    /**
+     * Write a value with the key.
+     *
+     * @param key   Unique key.
+     * @param value JsonObject instance.
+     */
+    private void write(final String key, final JsonObject value,
+                       AbstractTransaction<? extends RequestList, ? extends ResultList> transaction) {
         double ms = INIT_WAIT_TIME;
         while (true) {
             try {
@@ -205,6 +258,5 @@ public class TransactionHelper {
                 }
             }
         }
-        connectionPool.releaseConnection(connection);
     }
 }

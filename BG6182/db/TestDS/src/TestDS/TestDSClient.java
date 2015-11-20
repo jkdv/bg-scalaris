@@ -279,8 +279,10 @@ public class TestDSClient extends DB {
                                         Vector<HashMap<String, ByteIterator>> result, boolean insertImage, boolean
                                                     testMode) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject ownerObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
 
+            List<JsonObject> friendList = new ArrayList<>();
             if (ownerObject.has(CONFIRMED_FRIENDS)) {
                 JsonArray friendArray = ownerObject.getAsJsonArray(CONFIRMED_FRIENDS);
 
@@ -289,30 +291,36 @@ public class TestDSClient extends DB {
                  */
                 for (JsonElement element : friendArray) {
                     JsonObject friendObject = transactionHelper.readUser(element.getAsString());
-                    HashMap<String, ByteIterator> hashMap = new HashMap<>();
+                    friendList.add(friendObject);
+                }
+            }
+            transactionHelper.endTransaction();
 
-                    if (fields == null) {
-                        for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
-                            if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
-                                hashMap.put(entry.getKey(), ImageUtils.toObejctByteIterator(entry.getValue()));
-                            } else if (!entry.getValue().isJsonArray()) {
-                                hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-                            }
-                        }
-                    } else {
-                        for (String field : fields) {
-                            if (insertImage && (field.equals(PIC) || field.equals(TPIC))) {
-                                hashMap.put(field, ImageUtils.toObejctByteIterator(friendObject.get(field)));
-                            } else {
-                                hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
-                            }
+            for (JsonObject friendObject : friendList) {
+                HashMap<String, ByteIterator> hashMap = new HashMap<>();
+
+                if (fields == null) {
+                    for (Map.Entry<String, JsonElement> entry : friendObject.entrySet()) {
+                        if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
+                            hashMap.put(entry.getKey(), ImageUtils.toObejctByteIterator(entry.getValue()));
+                        } else if (!entry.getValue().isJsonArray()) {
+                            hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
                         }
                     }
-                    result.add(hashMap);
+                } else {
+                    for (String field : fields) {
+                        if (insertImage && (field.equals(PIC) || field.equals(TPIC))) {
+                            hashMap.put(field, ImageUtils.toObejctByteIterator(friendObject.get(field)));
+                        } else {
+                            hashMap.put(field, new StringByteIterator(friendObject.get(field).getAsString()));
+                        }
+                    }
                 }
+                result.add(hashMap);
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
         return 0;
@@ -345,9 +353,14 @@ public class TestDSClient extends DB {
             JsonObject jsonObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
             if (jsonObject.has(PENDING_FRIENDS)) {
                 JsonArray friendArray = jsonObject.get(PENDING_FRIENDS).getAsJsonArray();
+
+                List<JsonObject> requesterList = new ArrayList<>();
                 for (JsonElement element : friendArray) {
                     JsonObject requesterObject = transactionHelper.readUser(element.getAsString());
+                    requesterList.add(requesterObject);
+                }
 
+                for (JsonObject requesterObject : requesterList) {
                     HashMap<String, ByteIterator> hashMap = new HashMap<>();
                     for (Map.Entry<String, JsonElement> entry : requesterObject.entrySet()) {
                         if (insertImage && (entry.getKey().equals(PIC) || entry.getKey().equals(TPIC))) {
@@ -383,6 +396,7 @@ public class TestDSClient extends DB {
     @Override
     public synchronized int acceptFriend(int inviterID, int inviteeID) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject inviterObject = transactionHelper.readUser(String.valueOf(inviterID));
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
@@ -425,8 +439,10 @@ public class TestDSClient extends DB {
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
+        transactionHelper.endTransaction();
         return 0;
     }
 
@@ -446,6 +462,7 @@ public class TestDSClient extends DB {
     @Override
     public synchronized int rejectFriend(int inviterID, int inviteeID) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
             JsonArray pendingFriends;
@@ -456,8 +473,10 @@ public class TestDSClient extends DB {
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
+        transactionHelper.endTransaction();
         return 0;
     }
 
@@ -478,6 +497,7 @@ public class TestDSClient extends DB {
     @Override
     public synchronized int inviteFriend(int inviterID, int inviteeID) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject inviteeObject = transactionHelper.readUser(String.valueOf(inviteeID));
 
             JsonArray pendingFriends;
@@ -492,8 +512,10 @@ public class TestDSClient extends DB {
             transactionHelper.writeUser(String.valueOf(inviteeID), inviteeObject);
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
+        transactionHelper.endTransaction();
         return 0;
     }
 
@@ -517,23 +539,31 @@ public class TestDSClient extends DB {
     public synchronized int viewTopKResources(int requesterID, int profileOwnerID, int k, Vector<HashMap<String,
             ByteIterator>> result) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject userObject = transactionHelper.readUser(String.valueOf(profileOwnerID));
+
+            List<JsonObject> resourceList = new ArrayList<>();
             if (userObject.has(RESOURCES)) {
                 JsonArray resourceArray = userObject.getAsJsonArray(RESOURCES);
                 for (int i = 0; i < resourceArray.size() && i < k; i++) {
                     JsonObject resourceObject = transactionHelper.readResource(resourceArray.get(i).getAsString());
-
-                    HashMap<String, ByteIterator> values = new HashMap<>();
-                    for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
-                        if (entry.getValue().isJsonPrimitive()) {
-                            values.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-                        }
-                    }
-                    result.add(values);
+                    resourceList.add(resourceObject);
                 }
+            }
+            transactionHelper.endTransaction();
+
+            for (JsonObject resourceObject : resourceList) {
+                HashMap<String, ByteIterator> values = new HashMap<>();
+                for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
+                    if (entry.getValue().isJsonPrimitive()) {
+                        values.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                    }
+                }
+                result.add(values);
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
         return 0;
@@ -557,24 +587,30 @@ public class TestDSClient extends DB {
     @Override
     public synchronized int getCreatedResources(int creatorID, Vector<HashMap<String, ByteIterator>> result) {
         try {
+            transactionHelper.beginTransaction();
             JsonObject creatorObject = transactionHelper.readUser(String.valueOf(creatorID));
 
+            List<JsonObject> resourceList = new ArrayList<>();
             if (creatorObject.has(CREATED_RESOURCES)) {
                 JsonArray resourceArray = creatorObject.getAsJsonArray(CREATED_RESOURCES);
 
                 for (JsonElement element : resourceArray) {
                     JsonObject resourceObject = transactionHelper.readResource(element.getAsString());
-
-                    HashMap<String, ByteIterator> hashMap = new HashMap<>();
-                    for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
-                        hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
-                    }
-
-                    result.add(hashMap);
+                    resourceList.add(resourceObject);
                 }
+            }
+            transactionHelper.endTransaction();
+
+            for (JsonObject resourceObject : resourceList) {
+                HashMap<String, ByteIterator> hashMap = new HashMap<>();
+                for (Map.Entry<String, JsonElement> entry : resourceObject.entrySet()) {
+                    hashMap.put(entry.getKey(), new StringByteIterator(entry.getValue().getAsString()));
+                }
+                result.add(hashMap);
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
         return 0;
@@ -695,6 +731,7 @@ public class TestDSClient extends DB {
     @Override
     public synchronized int thawFriendship(int friendid1, int friendid2) {
         try {
+            transactionHelper.beginTransaction();
             final String strFriendId1 = String.valueOf(friendid1);
             final String strFriendId2 = String.valueOf(friendid2);
 
@@ -708,16 +745,15 @@ public class TestDSClient extends DB {
                 friendArray1.remove(new JsonPrimitive(strFriendId2));
                 friendArray2.remove(new JsonPrimitive(strFriendId1));
 
-                // friendObject1.add(CONFIRMED_FRIENDS, friendArray1);
-                // friendObject2.add(CONFIRMED_FRIENDS, friendArray2);
-
                 transactionHelper.writeUser(strFriendId1, friendObject1);
                 transactionHelper.writeUser(strFriendId2, friendObject2);
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            transactionHelper.endTransaction();
             return -1;
         }
+        transactionHelper.endTransaction();
         return 0;
     }
 
@@ -807,9 +843,6 @@ public class TestDSClient extends DB {
 
             friendArray1.add(new JsonPrimitive(strFriendId2));
             friendArray2.add(new JsonPrimitive(strFriendId1));
-
-            // friendObject1.add(CONFIRMED_FRIENDS, friendArray1);
-            // friendObject2.add(CONFIRMED_FRIENDS, friendArray2);
 
             transactionHelper.writeUser(strFriendId1, friendObject1);
             transactionHelper.writeUser(strFriendId2, friendObject2);
